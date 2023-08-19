@@ -25,7 +25,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         /** First Configurations*/
-        // Set UI with fragments
+        // Set UI with fragment
         setUIWithFragments()
         getArguments()
         setNav()
