@@ -1,11 +1,11 @@
 package com.liftechnology.planalimenticio.data.network.models.response
 
-class VegetableResponse (
+class FoodResponse (
     val alimento : String,
     val cantidad_sugerida : Float,
     val unidad : String,
+    val peso_neto_g: String,
     val peso_bruto_redondeado_g : Int,
-    val peso_neto_g : Int,
     val energia_kcal : Int,
     val proteina_g : Float?,
     val lipidos_g :Float?,
@@ -18,5 +18,18 @@ class VegetableResponse (
     val potasio_mg : Float?,
     val indice_glicemico : Float?,
     val carga_glicemica :Float?,
-    val categoria : String
+    val azucar_por_equivalente_g : Float?,
+    val calcio_mg: Float?,
+    val hierro_mg :Float?,
+    val sodio_mg :Float?,
+    val colesterol_mg :Float?,
+    val selenio_mg :Float?,
+    val selenio_ug :Float?,
+    val fosforo_mg :Float?,
+    val azucar_equivalente_g :Float?,
+    val azucares_por_equivalente_g :Float?,
+    val ag_saturados_g :Float?,
+    val ag_monoinsaturados_g :Float?,
+    val ag_poliinsaturados_g :Float?,
+    val categoria : String,
 )

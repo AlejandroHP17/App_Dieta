@@ -35,8 +35,6 @@ class AllViewModel : ViewModel(){
             if (response.isSuccessful){
                 /** Observes */
                 if (response.body() != null) {
-                    response.body()
-
                     listener?.onSuccessPrincipal(response.body())
                 } else {
                     listener?.onError(0)

@@ -1,18 +1,16 @@
 package com.liftechnology.planalimenticio.ui.view.category
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
-import com.liftechnology.planalimenticio.data.network.models.response.PrincipalResponse
-import com.liftechnology.planalimenticio.data.network.models.response.VegetableResponse
+import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
 import com.liftechnology.planalimenticio.databinding.FragmentCategoryBinding
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesAdapter
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesClickedListener
@@ -30,6 +28,7 @@ class CategoryFragment : Fragment() {
     private lateinit var adapterCategory: CategoriesAdapter
     private var listCategory: MutableList<CategoryResponse>? = mutableListOf()
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,22 +43,26 @@ class CategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initView()
         initObservers()
         initListeners()
     }
 
+    private fun initView(){
+        binding.toolbarCategory.btnReturn.visibility = View.GONE
+        binding.toolbarCategory.btnSearchBar.visibility = View.GONE
+        binding.toolbarCategory.tvNameCategory.text = "Categorias"
+    }
     private fun initListeners() {
         adapterCategory = CategoriesAdapter(CategoriesClickedListener {
-            toastFragment(it.url)
             vmCategory.getItemVegetable(it.url)
-            navigate(Pair(it.startColor, it.endColor),it.url)
+            navigate(Pair(it.startColor, it.endColor),it.url,it.category)
         })
     }
 
-    private fun navigate(color: Pair<String, String>, url:String) {
+    private fun navigate(color: Pair<String, String>, url:String, category:String) {
 
-        val data = arrayOf<String>(color.first, color.second, url)
+        val data = arrayOf<String>(color.first, color.second, url, category)
         val directions = CategoryFragmentDirections.actionNavigationCategoryToDetailsCategoryFragment(data)
         findNavController().navigate(directions)
     }
@@ -70,7 +73,7 @@ class CategoryFragment : Fragment() {
     }
 
 
-    private fun handlerVegetable(): (List<VegetableResponse>) -> Unit = { items ->
+    private fun handlerVegetable(): (List<FoodResponse>) -> Unit = { items ->
 
         items.forEach {
             println(it.alimento)
@@ -80,7 +83,7 @@ class CategoryFragment : Fragment() {
 
     private fun handlerChange(): (List<CategoryResponse>) -> Unit = { items ->
         // Call the method to modify the view
-
+        listCategory = mutableListOf()
         val list: MutableList<CategoryResponse> = mutableListOf()
         items?.forEach { it ->
             list.add(it)
@@ -93,6 +96,8 @@ class CategoryFragment : Fragment() {
         // Build the adapter
         binding.recyclerCards.adapter = adapterCategory
     }
+
+
 
 
 }

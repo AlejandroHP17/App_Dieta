@@ -6,6 +6,6 @@ package com.liftechnology.planalimenticio.data.network.enviroment
  * */
 object Environment {
     /** The first */
-    const val URL_BASE = "https://liftechnology.com.mx/api/"
-    const val END_POINT = "food/"
+    const val URL_BASE = "https://liftechnology.com.mx/"
+    const val END_POINT = "api/food/"
 }

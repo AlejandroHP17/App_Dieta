@@ -1,6 +1,7 @@
 package com.liftechnology.planalimenticio.ui.view.activities
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -47,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setNav(){
+
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         val appBarConfiguration = AppBarConfiguration(
@@ -54,8 +56,9 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_category, R.id.navigation_table, R.id.navigation_generator
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
     }
+
 }

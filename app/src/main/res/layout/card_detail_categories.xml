@@ -35,11 +35,11 @@
                 android:id="@+id/text_letter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen_titles_18sp"
+                android:textSize="@dimen/size_title_card"
                 android:layout_weight="10"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/margin_16dp"
-                tools:text="@{item.name}"/>
+                tools:text="@{item.alimento}"/>
 
             <LinearLayout
                 android:id="@+id/linear_data"
@@ -55,19 +55,19 @@
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/text_quantity"
-                        android:textSize="@dimen/dimen_text_14sp"
+                        android:textSize="@dimen/size_text_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/padding_8dp"
                         android:layout_marginEnd="@dimen/margin_4dp"
-                        tools:text="@{String.valueOf(item.quantity)}"/>
+                        tools:text="@{String.valueOf(item.cantidad_sugerida)}"/>
                     <TextView
                         android:id="@+id/text_unit"
-                        android:textSize="@dimen/dimen_text_14sp"
+                        android:textSize="@dimen/size_text_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/padding_8dp"
-                        tools:text="@{item.unit}"/>
+                        tools:text="@{item.unidad}"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -76,11 +76,11 @@
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/text_weight"
-                        android:textSize="@dimen/dimen_text_14sp"
+                        android:textSize="@dimen/size_text_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="@dimen/padding_8dp"
-                        tools:text="@{item.weight}"/>
+                        tools:text="@{item.peso_neto_g}"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

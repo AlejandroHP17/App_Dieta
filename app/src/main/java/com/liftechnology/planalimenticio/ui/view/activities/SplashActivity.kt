@@ -3,6 +3,7 @@ package com.liftechnology.planalimenticio.ui.view.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.liftechnology.planalimenticio.R
@@ -27,7 +28,11 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
         viewModel = ViewModelProvider(this)[AllViewModel::class.java]
         binding.vm = viewModel
         viewModel.listener = this
+
+        val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
+
         viewModel.getFirstService()
+        binding.imageRotate.startAnimation(rotateAnimation)
 
     }
 

@@ -1,7 +1,7 @@
 package com.liftechnology.planalimenticio.data.network.service
 
 import com.liftechnology.planalimenticio.data.network.models.response.GenericResponse
-import com.liftechnology.planalimenticio.data.network.models.response.VegetableResponse
+import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
 import com.liftechnology.planalimenticio.data.network.repository.ApiClient
 import com.liftechnology.planalimenticio.data.network.retrofit.RetrofitHelper
 import com.liftechnology.planalimenticio.ui.utils.ErrorCode
@@ -15,7 +15,7 @@ class SecondaryRetofitService {
 
     suspend fun getItemsVegetable(
         next: String,
-        callback: (success: GenericResponse<VegetableResponse>?, error: String?) -> Unit
+        callback: (success: GenericResponse<FoodResponse>?, error: String?) -> Unit
     ) {
         return withContext(Dispatchers.IO) {
             // Response of service from people

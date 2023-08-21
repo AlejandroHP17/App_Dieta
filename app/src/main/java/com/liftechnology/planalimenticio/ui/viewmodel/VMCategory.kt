@@ -3,15 +3,15 @@ package com.liftechnology.planalimenticio.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.liftechnology.planalimenticio.data.network.models.response.VegetableResponse
+import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
 import com.liftechnology.planalimenticio.data.network.service.SecondaryRetofitService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class VMCategory : ViewModel() {
-    private val _getVegetable = MutableLiveData<List<VegetableResponse>>()
-    val getVegetable: LiveData<List<VegetableResponse>> = _getVegetable
+    private val _getVegetable = MutableLiveData<List<FoodResponse>>()
+    val getVegetable: LiveData<List<FoodResponse>> = _getVegetable
 
     fun getItemVegetable(url:String){
         CoroutineScope(Dispatchers.IO).launch {

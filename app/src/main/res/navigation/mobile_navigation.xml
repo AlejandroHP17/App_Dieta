@@ -34,7 +34,7 @@
         android:label="DetailsCategoryFragment" >
 
         <argument
-            android:name="color"
+            android:name="data"
             app:argType="string[]" />
     </fragment>
 </navigation>
