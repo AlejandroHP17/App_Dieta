@@ -8,7 +8,7 @@ import com.liftechnology.planalimenticio.ui.utils.ErrorCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class SecondaryRetofitService {
+class SecondaryRetrofitService {
 
     // Variable of retrofit, is generic
     private val retrofit = RetrofitHelper.getRetrofit()

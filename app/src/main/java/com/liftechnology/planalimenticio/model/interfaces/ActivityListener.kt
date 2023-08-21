@@ -7,6 +7,6 @@ interface ActivityListener {
     /** Success api*/
     fun onSuccessPrincipal(items: PrincipalResponse?)
     /** error api*/
-    fun onError(errorCode:Int)
+    fun onError(errorCode:String)
 
 }

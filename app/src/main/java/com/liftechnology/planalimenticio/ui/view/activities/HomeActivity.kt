@@ -1,15 +1,13 @@
 package com.liftechnology.planalimenticio.ui.view.activities
 
 import android.os.Bundle
-import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.data.network.models.response.PrincipalResponse
 import com.liftechnology.planalimenticio.databinding.ActivityHomeBinding
@@ -43,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
     /** Declare and link up the view with the view-model */
     private fun setUIWithFragments() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-        viewModel = ViewModelProvider(this)[AllViewModel::class.java]
+        viewModel = ViewModelProvider(this).get()
         binding.vm = viewModel
     }
 
@@ -51,12 +49,6 @@ class HomeActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_category, R.id.navigation_table, R.id.navigation_generator
-            )
-        )
-        //setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
     }
