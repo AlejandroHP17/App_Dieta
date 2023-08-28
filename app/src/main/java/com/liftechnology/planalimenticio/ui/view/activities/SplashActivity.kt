@@ -6,12 +6,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.liftechnology.planalimenticio.R
+import com.liftechnology.planalimenticio.clase.MainViewModel
 import com.liftechnology.planalimenticio.data.network.models.response.PrincipalResponse
 import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
+import com.liftechnology.planalimenticio.model.di.homeModule
 import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.startKoin
 
 /**
  * @author pelkidev
@@ -22,6 +28,7 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
     /* Variables iniciales */
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModel: AllViewModel
+    private val viewModelMain by viewModel<MainViewModel> ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +50,17 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
         viewModel = ViewModelProvider(this)[AllViewModel::class.java]
         binding.vm = viewModel
 
+        startKoin {
+            androidLogger()
+            androidContext(this@SplashActivity)
+            modules(homeModule)
+        }
+
+        //viewModelMain.doNetworkCall()
+
         // Se vincula del viewmodel el listener
         viewModel.listener = this
+        viewModelMain.doNetworkCall()
     }
 
 

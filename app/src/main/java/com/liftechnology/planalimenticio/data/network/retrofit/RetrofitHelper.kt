@@ -12,4 +12,6 @@ object RetrofitHelper {
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .build()
     }
+
+
 }
