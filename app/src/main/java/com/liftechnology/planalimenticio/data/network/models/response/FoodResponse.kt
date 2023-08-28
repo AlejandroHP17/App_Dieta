@@ -26,8 +26,6 @@ class FoodResponse (
     val selenio_mg :Float?,
     val selenio_ug :Float?,
     val fosforo_mg :Float?,
-    val azucar_equivalente_g :Float?,
-    val azucares_por_equivalente_g :Float?,
     val ag_saturados_g :Float?,
     val ag_monoinsaturados_g :Float?,
     val ag_poliinsaturados_g :Float?,

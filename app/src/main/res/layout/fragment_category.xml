@@ -7,7 +7,9 @@
         <variable
             name="vmList"
             type="com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel" />
+
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

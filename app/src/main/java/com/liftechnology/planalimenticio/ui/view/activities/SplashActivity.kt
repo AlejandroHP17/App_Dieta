@@ -2,8 +2,6 @@ package com.liftechnology.planalimenticio.ui.view.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.animation.AnimationUtils
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +9,7 @@ import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.data.network.models.response.PrincipalResponse
 import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
 import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
+import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 
@@ -20,13 +19,25 @@ import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
  * */
 class SplashActivity : AppCompatActivity(), ActivityListener {
 
+    /* Variables iniciales */
     private lateinit var binding: ActivitySplashBinding
-
     private lateinit var viewModel: AllViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Inicializa la vista con binding y viewmodel
+        initUI()
+
+        // Inicializa la animacion del splash
+        initAnimation()
+    }
+
+    /** Inicializa la vista con binding y viewmodel, ademas vincula el listener
+     * @author pelkidev
+     * @date 20/08/2023
+     * */
+    private fun initUI() {
         // Se vincula la vista y el viewmodel para utilizar databinding
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         viewModel = ViewModelProvider(this)[AllViewModel::class.java]
@@ -34,19 +45,17 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
 
         // Se vincula del viewmodel el listener
         viewModel.listener = this
-
-        // Inicializa la animacion del splash
-        initAnimation()
     }
+
 
     /** Inicia la animacion de carga del splas, se muestra mientras carga el servicio
      * @author pelkidev
      * @date 20/08/2023
      * */
     private fun initAnimation() {
-        val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate)
-        binding.imageRotate.startAnimation(rotateAnimation)
+        binding.imageRotate.initAnim(this)
     }
+
 
     /** Listener que indica que el servicio cargó correctament y navega los datos del response
      * @author pelkidev
@@ -57,7 +66,8 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
         intent.putExtra("data", items)
         startActivity(intent)
 
-        // Destruye el activity después de navegar
+        /* Destruye componentes para limpiar memoria */
+        binding.imageRotate.clearAnimation()
         finish()
     }
 

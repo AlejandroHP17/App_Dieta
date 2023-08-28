@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="@dimen/padding_8dp"
-                        tools:text="@{item.peso_neto_g}"/>
+                        tools:text="@{item.peso_neto_g+ ` g`}"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

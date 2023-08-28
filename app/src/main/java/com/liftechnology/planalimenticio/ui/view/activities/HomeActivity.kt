@@ -13,44 +13,60 @@ import com.liftechnology.planalimenticio.data.network.models.response.PrincipalR
 import com.liftechnology.planalimenticio.databinding.ActivityHomeBinding
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 
+/**
+ * @author pelkidev
+ * @date 21/08/2023
+ * */
 class HomeActivity : AppCompatActivity() {
 
+    /* Variables iniciales */
     private lateinit var binding:ActivityHomeBinding
-    //private val viewModel: AllViewModel by viewModels()
     private lateinit var viewModel: AllViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /** First Configurations*/
-        // Set UI with fragment
-        setUIWithFragments()
+        // Inicializa la vista con binding y viewmodel
+        initUI()
+
+        // Obtiene argumentos de navegacion
         getArguments()
+
+        // Gestiona la navegacion de fragmentos
         setNav()
-
     }
 
-    private fun getArguments() {
-        val items = intent.getSerializableExtra("data") as? PrincipalResponse
-        if (items != null) {
-            viewModel.argumentValue.value = items.result
-        }
-    }
-
-    /** Declare and link up the view with the view-model */
-    private fun setUIWithFragments() {
+    /** Inicializa la vista con binding y viewmodel, ademas vincula el listener
+     * @author pelkidev
+     * @date 20/08/2023
+     * */
+    private fun initUI() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         viewModel = ViewModelProvider(this).get()
         binding.vm = viewModel
     }
 
-    private fun setNav(){
+    /** Obtiene los argumentos enviados del SplashActivity
+     * @author pelkidev
+     * @date 20/08/2023
+     * @receiver [PrincipalResponse] Es el modelo de la respuesta del primer servicio
+     * */
+    private fun getArguments() {
+        /* Postea el resultado en una variable en el viewmodel para comunicarla con los fragmentos*/
+        val items = intent.getSerializableExtra("data") as? PrincipalResponse
+        if (items != null) {
+            viewModel.buildListCategory(items.result)
+            //viewModel.argumentValue.value = items.result
+        }
+    }
 
+    /** Inicializa la navegacion con el navView
+     * @author pelkidev
+     * @date 20/08/2023
+     * */
+    private fun setNav(){
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
-
     }
-
 }
