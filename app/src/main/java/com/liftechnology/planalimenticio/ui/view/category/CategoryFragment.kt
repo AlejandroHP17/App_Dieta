@@ -7,13 +7,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.FragmentCategoryBinding
+import com.liftechnology.planalimenticio.model.di.homeModule
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesAdapter
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesClickedListener
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import kotlinx.coroutines.launch
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.startKoin
 
 /**
  * @author pelkidev
@@ -21,9 +31,11 @@ import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
  * */
 class CategoryFragment : Fragment() {
 
+
     /* Variables iniciales */
     private lateinit var binding: FragmentCategoryBinding
-    private val viewModelList: AllViewModel by activityViewModels()
+    //private val viewModelMain: AllViewModel by activityViewModels()
+    private val viewModelMain: AllViewModel by sharedViewModel()
 
 
     /* Variable para el recycler */
@@ -35,10 +47,11 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         /* Inicializa la vista con binding y viewmodel */
-        binding = FragmentCategoryBinding.inflate(inflater)
-        binding.lifecycleOwner = this
-        binding.vmList = viewModelList
+        binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.vmList = viewModelMain
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,7 +84,24 @@ class CategoryFragment : Fragment() {
      * */
     private fun initObservers() {
         // Observador del servicio de categorias
-        viewModelList.listCategories.observe(viewLifecycleOwner, handlerCategories())
+       // viewModelMain.listCategories.observe(viewLifecycleOwner, handlerCategories())
+        /*viewModelMain.listCategories.observe(viewLifecycleOwner) { categories ->
+            adapterCategory.submitList(categories)
+            // Construye el recycler con el adaptador
+            binding.recyclerCards.adapter = adapterCategory
+        }*/
+        viewLifecycleOwner.lifecycleScope.launch{
+
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModelMain.dataFlow.collect{
+                    adapterCategory.submitList(it)
+                    // Construye el recycler con el adaptador
+                    binding.recyclerCards.adapter = adapterCategory
+
+                }
+            }
+
+        }
     }
 
     /** Inicializa los listeners

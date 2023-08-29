@@ -44,7 +44,7 @@ class DetailsCategoryFragment : Fragment() {
     ): View {
         /* Inicializa la vista con binding y viewmodel */
         binding = FragmentDetailsCategoryBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.vmList = vmCategory
         // Inicializa el AlertDialog
         bindingDialog = DialogCustomDetailBinding.inflate(inflater)

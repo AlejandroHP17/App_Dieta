@@ -1,78 +1,62 @@
-@file:Suppress("UNCHECKED_CAST")
-
 package com.liftechnology.planalimenticio.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
-import com.liftechnology.planalimenticio.data.network.repository.PrincipalRepository
 import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
-import com.liftechnology.planalimenticio.ui.utils.ErrorCode.ERROR_APP
-import com.liftechnology.planalimenticio.ui.utils.ErrorCode.ERROR_SERVICE
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.liftechnology.planalimenticio.model.usecase.MainUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class AllViewModel () : ViewModel(){
+class AllViewModel(
+    private val useCase: MainUseCase
+) : ViewModel() {
 
+    // Variable que inicializa el listener con el SplashActivity
     var listener: ActivityListener? = null
 
+    /* Variables para live data */
+    private val _dataFlow = MutableStateFlow<List<CategoryResponse>>(emptyList())
+    val dataFlow: StateFlow<List<CategoryResponse>> = _dataFlow
 
-    private val _listCategories = MutableLiveData<List<CategoryResponse>>()
-    val listCategories: LiveData<List<CategoryResponse>> = _listCategories
+    /** Apenas inicia el viewmodel sale por el servicio para obtener las categorias
+     * @author pelkidev
+     * @date 28/08/2023
+     * */
+    init {
+        viewModelScope.launch {
+            /** Manda a llamar el usecase
+             * success -> Obtiene la respuesta del listado correctamente
+             * error -> Nos devuelve el tipo de error producido
+             * */
+            useCase.getCategory() { success, error ->
+                if (error.isNullOrEmpty()) {
+                    listener?.onSuccessPrincipal(success!!)
+                } else {
+                    listener?.onError(error)
+                }
+            }
+        }
+    }
 
 
-
+    /** Método para mandar a llamar el listado de alimentos por categoria
+     * @author pelkidev
+     * @date 20/08/2023
+     * @param [items] lista de categorias
+     * */
     fun buildListCategory(items: List<CategoryResponse>) {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             val list: MutableList<CategoryResponse> = mutableListOf()
             items.forEach {
                 list.add(it)
             }
             val listCategory: MutableList<CategoryResponse> = mutableListOf()
             listCategory.addAll(list)
-            _listCategories.postValue(listCategory)
+            _dataFlow.value = listCategory
         }
     }
 
 
-
-/*    private val _state = MutableStateFlow (UiState())
-    val state: StateFlow<UiState> = _state*/
-
-
-
-    init{
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = PrincipalRepository().getCategories()
-            // Ask if the response is successful
-            if (response.isSuccessful){
-                /** Observes */
-                if (response.body() != null) {
-                    listener?.onSuccessPrincipal(response.body())
-                } else {
-                    listener?.onError(ERROR_APP)
-                }
-            }else{
-                /** Observes */
-                listener?.onError(ERROR_SERVICE)
-            }
-        }
-    }
-
-/*
-    data class UiState(
-        val getCategories: PrincipalResponse? = null
-    )
-*/
-
 }
-/*
-class AllViewModelFactory(private val getItemsUseCase: GetItemsUseCase): ViewModelProvider.Factory{
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AllViewModel(getItemsUseCase) as T
-    }
-}
-
-*/

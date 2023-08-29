@@ -1,16 +1,21 @@
 package com.liftechnology.planalimenticio.model.di
 
-import com.google.gson.GsonBuilder
-import com.liftechnology.planalimenticio.clase.MainRepository
-import com.liftechnology.planalimenticio.clase.MainRepositoryImpl
-import com.liftechnology.planalimenticio.clase.MainViewModel
-import com.liftechnology.planalimenticio.clase.MyApi
 import com.liftechnology.planalimenticio.data.network.enviroment.Environment
-import com.liftechnology.planalimenticio.data.network.service.PrincipalApi
+import com.liftechnology.planalimenticio.data.network.repository.MainRepository
+import com.liftechnology.planalimenticio.data.network.repository.MainRepositoryImpl
+import com.liftechnology.planalimenticio.data.network.service.MyApi
+import com.liftechnology.planalimenticio.model.usecase.MainUseCase
+import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
+/**
+ * single -> Crea una sola instancia, por lo que la usara una vez y se utiliza para un solo modelo
+ * factory -> Crea varias instancias, por lo que se crea cada vez que se manda llamar
+ * */
+
 
 val homeModule = module{
     single{
@@ -21,13 +26,15 @@ val homeModule = module{
             .create(MyApi::class.java)
     }
 
-    /**
-     * single -> Crea una sola instancia, por lo que la usara una vez y se utiliza para un solo modelo
-     * factory -> Crea varias instancias, por lo que se crea cada vez que se manda llamar */
     single<MainRepository> {
         MainRepositoryImpl(get()) }
 
+    single{
+        MainUseCase(get())
+
+    }
+
     viewModel{
-        MainViewModel(get())
+        AllViewModel(get())
     }
 }

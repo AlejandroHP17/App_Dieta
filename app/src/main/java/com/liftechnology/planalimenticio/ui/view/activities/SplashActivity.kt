@@ -3,21 +3,14 @@ package com.liftechnology.planalimenticio.ui.view.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import com.liftechnology.planalimenticio.R
-import com.liftechnology.planalimenticio.clase.MainViewModel
-import com.liftechnology.planalimenticio.data.network.models.response.PrincipalResponse
+import com.google.gson.Gson
+import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
-import com.liftechnology.planalimenticio.model.di.homeModule
 import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.context.startKoin
 
 /**
  * @author pelkidev
@@ -27,15 +20,13 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
 
     /* Variables iniciales */
     private lateinit var binding: ActivitySplashBinding
-    private lateinit var viewModel: AllViewModel
-    private val viewModelMain by viewModel<MainViewModel> ()
+    private val viewModel: AllViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Inicializa la vista con binding y viewmodel
         initUI()
-
         // Inicializa la animacion del splash
         initAnimation()
     }
@@ -45,22 +36,12 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
      * @date 20/08/2023
      * */
     private fun initUI() {
-        // Se vincula la vista y el viewmodel para utilizar databinding
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
-        viewModel = ViewModelProvider(this)[AllViewModel::class.java]
+        /* Se vincula la vista y el viewmodel para utilizar databinding */
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        binding.lifecycleOwner = this
         binding.vm = viewModel
-
-        startKoin {
-            androidLogger()
-            androidContext(this@SplashActivity)
-            modules(homeModule)
-        }
-
-        //viewModelMain.doNetworkCall()
-
-        // Se vincula del viewmodel el listener
         viewModel.listener = this
-        viewModelMain.doNetworkCall()
+        setContentView(binding.root)
     }
 
 
@@ -77,9 +58,13 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
      * @author pelkidev
      * @date 20/08/2023
      * */
-    override fun onSuccessPrincipal(items: PrincipalResponse?) {
+    override fun onSuccessPrincipal(items: List<CategoryResponse?>) {
+        // Convertir la lista a un JSON usando Gson
+        val gson = Gson()
+        val itemsJson = gson.toJson(items)
+
         val intent = Intent(this, HomeActivity::class.java)
-        intent.putExtra("data", items)
+        intent.putExtra("data", itemsJson)
         startActivity(intent)
 
         /* Destruye componentes para limpiar memoria */
