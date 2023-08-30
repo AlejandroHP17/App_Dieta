@@ -1,5 +1,7 @@
 package com.liftechnology.planalimenticio.model.di
 
+import com.liftechnology.planalimenticio.data.local.db.CategoryRoomDataBase
+import com.liftechnology.planalimenticio.data.local.repository.CategoryLocalRepository
 import com.liftechnology.planalimenticio.data.network.enviroment.Environment
 import com.liftechnology.planalimenticio.data.network.repository.CategoryRepository
 import com.liftechnology.planalimenticio.data.network.repository.CategoryRepositoryImpl
@@ -26,11 +28,22 @@ val homeModule = module{
             .create(CategoryApi::class.java)
     }
 
+    single{
+        CategoryLocalRepository(get())
+    }
+
+    // Registrar CategoryDao como una dependencia
+    single{
+        // Aquí deberías crear e inicializar tu CategoryDao
+        // y retornarlo, por ejemplo:
+        CategoryRoomDataBase.getDataBase(context = get()).CategoryDao()
+    }
+
     single<CategoryRepository> {
-        CategoryRepositoryImpl(get()) }
+        CategoryRepositoryImpl(get(),get()) }
 
     single{
-        CategoryUseCase(get())
+        CategoryUseCase(get(),get())
 
     }
 

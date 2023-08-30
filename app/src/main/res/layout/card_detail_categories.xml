@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.liftechnology.planalimenticio.data.local.ModelCardList" />
+            type="com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList" />
 
         <variable
             name="clickListener"

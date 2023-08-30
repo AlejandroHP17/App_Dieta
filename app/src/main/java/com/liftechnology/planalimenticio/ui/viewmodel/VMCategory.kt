@@ -3,7 +3,7 @@ package com.liftechnology.planalimenticio.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.liftechnology.planalimenticio.data.local.ModelCardList
+import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
 import com.liftechnology.planalimenticio.model.usecase.ListFoodUseCase
 import com.liftechnology.planalimenticio.ui.utils.ErrorCode
@@ -40,7 +40,8 @@ class VMCategory (
     private fun buildListFood(items: List<FoodResponse>?,startColor: String, endColor:String) {
         val list: MutableList<ModelCardList> = mutableListOf()
         items?.forEach {
-            list.add(ModelCardList(
+            list.add(
+                ModelCardList(
                 alimento = it.alimento,
                 cantidad_sugerida = it.cantidad_sugerida,
                 unidad = it.unidad,
@@ -72,7 +73,8 @@ class VMCategory (
                 ag_monoinsaturados_g = it.ag_monoinsaturados_g,
                 ag_poliinsaturados_g = it.ag_poliinsaturados_g,
                 categoria =it.categoria
-            ))
+            )
+            )
         }
 
         val listFood: MutableList<ModelCardList> = mutableListOf()

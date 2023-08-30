@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.liftechnology.planalimenticio.data.local.ModelCardList
+import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.databinding.DialogCustomDetailBinding
 import com.liftechnology.planalimenticio.databinding.FragmentDetailsCategoryBinding
 import com.liftechnology.planalimenticio.ui.adapters.FoodClickedListener

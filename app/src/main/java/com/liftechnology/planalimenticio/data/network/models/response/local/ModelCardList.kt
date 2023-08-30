@@ -1,4 +1,4 @@
-package com.liftechnology.planalimenticio.data.local
+package com.liftechnology.planalimenticio.data.network.models.response.local
 
 data class ModelCardList (
     val alimento : String,

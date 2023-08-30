@@ -1,5 +1,8 @@
 package com.liftechnology.planalimenticio.data.network.repository
 
+import android.util.Log
+import com.liftechnology.planalimenticio.data.local.dao.CategoryDao
+import com.liftechnology.planalimenticio.data.local.entity.CategoryEntity
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.data.network.service.CategoryApi
 
@@ -13,21 +16,30 @@ interface CategoryRepository {
 }
 
 class CategoryRepositoryImpl(
-    private val apiCategory: CategoryApi
+    private val apiCategory: CategoryApi,
+    private val categoryDao: CategoryDao
 ) : CategoryRepository {
     /** Conexión para mandar a llamar el API
      * @author pelkidev
      * @date 28/08/2023
      * */
     override suspend fun getCategory(): List<CategoryResponse?> {
+        // Obtiene datos de la base de datos local
+        val localData = categoryDao.getAllCategory()
+/*
+        if (!localData.isNullOrEmpty()) {
+            val categoryResponses = localData.map { categoryEntity ->
+                CategoryResponse(
+                    categoryEntity.category,
+                    categoryEntity.url,
+                    categoryEntity.startColor,
+                    categoryEntity.endColor
+                )
+            }
 
-        // Se agrega validacion para firebase y leer base de datos local
-        // Del mismo modo se agrega una base de datos local
-        /*val localData = localDataSource.getCachedCategory()
-
-        if (localData != null) {
             // Si hay datos en la base de datos local, devuelve esos datos
-            return localData
+            Log.d("pelkidev-test","De Room")
+            return categoryResponses
         }*/
 
         /* Salida por el servicio */
@@ -35,7 +47,21 @@ class CategoryRepositoryImpl(
         if (response.isSuccessful) {
             val responseData = response.body()?.result
             if (responseData != null) {
+                // Mapea la respuesta de la API a entidades de la base de datos local
+                val categoryEntities = responseData.mapNotNull { it?.let { response ->
+                    CategoryEntity(
+                        category = response.category,
+                        url = response.url,
+                        startColor = response.startColor,
+                        endColor = response.endColor
+                    )
+                }}
+                // Guarda las entidades en la base de datos local
+                categoryDao.insertAllCategory(categoryEntities)
+
+
                 //localDataSource.saveCategory(responseData)
+                Log.d("pelkidev-test","Del servicio")
                 return responseData
             }
         }

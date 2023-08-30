@@ -11,6 +11,10 @@ import com.liftechnology.planalimenticio.ui.utils.BaseApplication
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -77,6 +81,8 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
      * @date 20/08/2023
      * */
     override fun onError(errorCode: String) {
+        GlobalScope.launch (Dispatchers.Main) {
         toastActivity("The error was $errorCode")
+        }
     }
 }

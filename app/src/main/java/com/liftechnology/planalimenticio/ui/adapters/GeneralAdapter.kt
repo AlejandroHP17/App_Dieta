@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.liftechnology.planalimenticio.data.local.ModelCardList
+import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.databinding.CardDetailCategoriesBinding
 
 class GeneralAdapter(private val listener: FoodClickedListener):
@@ -24,7 +24,7 @@ class GeneralAdapter(private val listener: FoodClickedListener):
 
     class ViewHolder(private val binding : CardDetailCategoriesBinding): RecyclerView.ViewHolder(binding.root){
         // Method like a listener; bring the item and the action of click
-        fun bind(item:ModelCardList, action:FoodClickedListener){
+        fun bind(item: ModelCardList, action:FoodClickedListener){
             // Synchronize the item response with the view
             binding.item = item
 
