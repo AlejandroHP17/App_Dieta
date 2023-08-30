@@ -4,13 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
-import com.liftechnology.planalimenticio.model.usecase.MainUseCase
+import com.liftechnology.planalimenticio.model.usecase.CategoryUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class AllViewModel(
-    private val useCase: MainUseCase
+    private val useCase: CategoryUseCase
 ) : ViewModel() {
 
     // Variable que inicializa el listener con el SplashActivity

@@ -1,13 +1,13 @@
 package com.liftechnology.planalimenticio.model.usecase
 
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
-import com.liftechnology.planalimenticio.data.network.repository.MainRepository
+import com.liftechnology.planalimenticio.data.network.repository.CategoryRepository
 import com.liftechnology.planalimenticio.ui.utils.ErrorCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MainUseCase(
-    private val repository: MainRepository
+class CategoryUseCase(
+    private val repository: CategoryRepository
 ) {
 
     /** Obtiene el listado de categorias y procesa la informacion para el viewmodel

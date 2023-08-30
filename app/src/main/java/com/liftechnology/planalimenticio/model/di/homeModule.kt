@@ -1,10 +1,10 @@
 package com.liftechnology.planalimenticio.model.di
 
 import com.liftechnology.planalimenticio.data.network.enviroment.Environment
-import com.liftechnology.planalimenticio.data.network.repository.MainRepository
-import com.liftechnology.planalimenticio.data.network.repository.MainRepositoryImpl
-import com.liftechnology.planalimenticio.data.network.service.MyApi
-import com.liftechnology.planalimenticio.model.usecase.MainUseCase
+import com.liftechnology.planalimenticio.data.network.repository.CategoryRepository
+import com.liftechnology.planalimenticio.data.network.repository.CategoryRepositoryImpl
+import com.liftechnology.planalimenticio.data.network.service.CategoryApi
+import com.liftechnology.planalimenticio.model.usecase.CategoryUseCase
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -23,14 +23,14 @@ val homeModule = module{
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(Environment.URL_BASE)
             .build()
-            .create(MyApi::class.java)
+            .create(CategoryApi::class.java)
     }
 
-    single<MainRepository> {
-        MainRepositoryImpl(get()) }
+    single<CategoryRepository> {
+        CategoryRepositoryImpl(get()) }
 
     single{
-        MainUseCase(get())
+        CategoryUseCase(get())
 
     }
 

@@ -5,13 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.liftechnology.planalimenticio.data.local.ModelCardList
 import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
-import com.liftechnology.planalimenticio.data.network.service.SecondaryRetrofitService
+import com.liftechnology.planalimenticio.model.usecase.ListFoodUseCase
 import com.liftechnology.planalimenticio.ui.utils.ErrorCode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class VMCategory : ViewModel() {
+class VMCategory (
+    private val useCase: ListFoodUseCase
+        ): ViewModel() {
 
     private val _listFood = MutableLiveData<List<ModelCardList>>()
     val listFood: LiveData<List<ModelCardList>> = _listFood
@@ -22,9 +24,9 @@ class VMCategory : ViewModel() {
     fun getListFood(url:String, startColor: String, endColor:String){
         CoroutineScope(Dispatchers.IO).launch {
             try{
-                SecondaryRetrofitService().getItemsVegetable(url){ success, error ->
+                useCase.getListFood(url){ success, error ->
                     if (error.isNullOrEmpty()){
-                        buildListFood(success?.result,startColor,endColor)
+                        buildListFood(success,startColor,endColor)
                     }else{
                         _errorListFood.postValue(ErrorCode.ERROR_SERVICE)
                     }

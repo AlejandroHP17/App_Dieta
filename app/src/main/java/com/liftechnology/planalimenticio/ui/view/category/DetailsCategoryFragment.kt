@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.data.local.ModelCardList
 import com.liftechnology.planalimenticio.databinding.DialogCustomDetailBinding
@@ -16,6 +15,7 @@ import com.liftechnology.planalimenticio.ui.adapters.GeneralAdapter
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastFragment
 import com.liftechnology.planalimenticio.ui.viewmodel.VMCategory
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
  * @author pelkidev
@@ -26,7 +26,7 @@ class DetailsCategoryFragment : Fragment() {
     /* Variables iniciales */
     private lateinit var binding: FragmentDetailsCategoryBinding
     private lateinit var bindingDialog: DialogCustomDetailBinding
-    private val vmCategory: VMCategory by viewModels()
+    private val vmCategory: VMCategory by sharedViewModel()
 
     // Variable para el AlertDialog
     private lateinit var dialog : AlertDialog
@@ -153,7 +153,6 @@ class DetailsCategoryFragment : Fragment() {
     /** Error en el servicio
      * @author pelkidev
      * @date 21/08/2023
-     * @param [String] Contiene el tipo de error
      * */
     private fun handlerErrorListFood(): (String) -> Unit = { text ->
         // Muestra el error

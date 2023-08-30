@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
 import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
+import com.liftechnology.planalimenticio.ui.utils.BaseApplication
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
@@ -24,7 +25,6 @@ class SplashActivity : AppCompatActivity(), ActivityListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Inicializa la vista con binding y viewmodel
         initUI()
         // Inicializa la animacion del splash

@@ -5,7 +5,7 @@ import com.liftechnology.planalimenticio.data.network.models.response.PrincipalR
 import retrofit2.Response
 import retrofit2.http.GET
 
-interface MyApi {
+interface CategoryApi {
     /** Realiza la petición al API
      * @author pelkidev
      * @date 28/08/2023

@@ -3,10 +3,8 @@ package com.liftechnology.planalimenticio.ui.viewextensions
 import android.content.Context
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.liftechnology.planalimenticio.R
 

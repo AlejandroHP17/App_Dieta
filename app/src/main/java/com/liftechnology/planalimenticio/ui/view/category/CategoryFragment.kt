@@ -5,33 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.R
-import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.FragmentCategoryBinding
-import com.liftechnology.planalimenticio.model.di.homeModule
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesAdapter
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesClickedListener
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import kotlinx.coroutines.launch
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.context.startKoin
 
 /**
  * @author pelkidev
  * @date 21/08/2023
  * */
 class CategoryFragment : Fragment() {
-
-
     /* Variables iniciales */
     private lateinit var binding: FragmentCategoryBinding
     //private val viewModelMain: AllViewModel by activityViewModels()
@@ -83,13 +73,6 @@ class CategoryFragment : Fragment() {
      * @date 21/08/2023
      * */
     private fun initObservers() {
-        // Observador del servicio de categorias
-       // viewModelMain.listCategories.observe(viewLifecycleOwner, handlerCategories())
-        /*viewModelMain.listCategories.observe(viewLifecycleOwner) { categories ->
-            adapterCategory.submitList(categories)
-            // Construye el recycler con el adaptador
-            binding.recyclerCards.adapter = adapterCategory
-        }*/
         viewLifecycleOwner.lifecycleScope.launch{
 
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
@@ -130,16 +113,4 @@ class CategoryFragment : Fragment() {
         findNavController().navigate(directions)
     }
 
-
-    /** Respuesta de las categorias al cambiar su valor
-     * @author pelkidev
-     * @date 21/08/2023
-     * @param [List<CategoryResponse>] Contiene el listado de categorías
-     * */
-    private fun handlerCategories(): (List<CategoryResponse>) -> Unit = { list ->
-        // Registra la lista creada en el adaptador
-        adapterCategory.submitList(list)
-        // Construye el recycler con el adaptador
-        binding.recyclerCards.adapter = adapterCategory
-    }
 }

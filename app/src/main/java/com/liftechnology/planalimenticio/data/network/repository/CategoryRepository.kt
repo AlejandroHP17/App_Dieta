@@ -1,9 +1,9 @@
 package com.liftechnology.planalimenticio.data.network.repository
 
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
-import com.liftechnology.planalimenticio.data.network.service.MyApi
+import com.liftechnology.planalimenticio.data.network.service.CategoryApi
 
-interface MainRepository {
+interface CategoryRepository {
     /** Repository para enlazar con el UseCase
      * @author pelkidev
      * @date 28/08/2023
@@ -12,9 +12,9 @@ interface MainRepository {
     suspend fun getCategory(): List<CategoryResponse?>?
 }
 
-class MainRepositoryImpl(
-    private val apiCategory: MyApi
-) : MainRepository {
+class CategoryRepositoryImpl(
+    private val apiCategory: CategoryApi
+) : CategoryRepository {
     /** Conexión para mandar a llamar el API
      * @author pelkidev
      * @date 28/08/2023

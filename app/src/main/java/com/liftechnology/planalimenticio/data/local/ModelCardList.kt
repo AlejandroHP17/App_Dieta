@@ -32,6 +32,4 @@ data class ModelCardList (
     val ag_monoinsaturados_g :Float?,
     val ag_poliinsaturados_g :Float?,
     val categoria : String,
-
-
 )
