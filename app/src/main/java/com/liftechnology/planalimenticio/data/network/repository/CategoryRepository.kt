@@ -24,23 +24,6 @@ class CategoryRepositoryImpl(
      * @date 28/08/2023
      * */
     override suspend fun getCategory(): List<CategoryResponse?> {
-        // Obtiene datos de la base de datos local
-        val localData = categoryDao.getAllCategory()
-/*
-        if (!localData.isNullOrEmpty()) {
-            val categoryResponses = localData.map { categoryEntity ->
-                CategoryResponse(
-                    categoryEntity.category,
-                    categoryEntity.url,
-                    categoryEntity.startColor,
-                    categoryEntity.endColor
-                )
-            }
-
-            // Si hay datos en la base de datos local, devuelve esos datos
-            Log.d("pelkidev-test","De Room")
-            return categoryResponses
-        }*/
 
         /* Salida por el servicio */
         val response = apiCategory.callApi()

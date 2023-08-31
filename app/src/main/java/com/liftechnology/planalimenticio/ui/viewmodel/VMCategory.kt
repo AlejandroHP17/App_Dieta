@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
-import com.liftechnology.planalimenticio.model.usecase.ListFoodUseCase
+import com.liftechnology.planalimenticio.model.usecase.FoodUseCase
 import com.liftechnology.planalimenticio.ui.utils.ErrorCode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class VMCategory (
-    private val useCase: ListFoodUseCase
+    private val useCase: FoodUseCase
         ): ViewModel() {
 
     private val _listFood = MutableLiveData<List<ModelCardList>>()
@@ -21,10 +21,11 @@ class VMCategory (
     private val _errorListFood = MutableLiveData<String>()
     val errorListFood : LiveData<String> = _errorListFood
 
-    fun getListFood(url:String, startColor: String, endColor:String){
+    fun getListFood(url:String, startColor: String, endColor:String, category:String){
+
         CoroutineScope(Dispatchers.IO).launch {
             try{
-                useCase.getListFood(url){ success, error ->
+                useCase.getListFood(url, category){ success, error ->
                     if (error.isNullOrEmpty()){
                         buildListFood(success,startColor,endColor)
                     }else{

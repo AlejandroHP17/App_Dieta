@@ -76,7 +76,7 @@ class DetailsCategoryFragment : Fragment() {
     private fun getArgument(){
         dataNavigate = DetailsCategoryFragmentArgs.fromBundle(requireArguments()).data
         // Sale al servicio una vez obteniendo el argumento
-        vmCategory.getListFood(dataNavigate!![2],dataNavigate!![0], dataNavigate!![1])
+        vmCategory.getListFood(dataNavigate!![2],dataNavigate!![0], dataNavigate!![1], dataNavigate!![3])
     }
 
     /** Inicializa la vista con parametros iniciales
