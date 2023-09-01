@@ -14,6 +14,7 @@ import com.liftechnology.planalimenticio.databinding.FragmentCategoryBinding
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesAdapter
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesClickedListener
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.VMCategory
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -108,6 +109,7 @@ class CategoryFragment : Fragment() {
      * */
     private fun goToDetailsCategory(color: Pair<String, String>, url:String, category:String) {
         /* Genera un argumento para enviarla a través de la navegación de fragmentos */
+        viewModelMain.changeStateLoader(true)
         val data = arrayOf(color.first, color.second, url, category)
         val directions = CategoryFragmentDirections.actionNavigationCategoryToDetailsCategoryFragment(data)
         findNavController().navigate(directions)

@@ -14,21 +14,9 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.category.DetailsCategoryFragment">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_rotate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
-            android:src="@drawable/splashscreen"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <LinearLayout
             android:id="@+id/all_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

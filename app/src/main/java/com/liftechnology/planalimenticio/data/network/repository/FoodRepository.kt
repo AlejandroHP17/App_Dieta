@@ -69,7 +69,6 @@ class FoodRepositoryImpl(
                 }
                 foodDao.insertAllListFood(foodEntities)
                 //localDataSource.saveCategory(responseData)
-                Log.d("pelkidev-test","De service")
                 return responseData
             }
         }

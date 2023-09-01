@@ -36,7 +36,6 @@ class CategoryUseCase(
                     }
 
                     // Si hay datos en la base de datos local, devuelve esos datos
-                    Log.d("pelkidev-test","De Room")
                     callback.invoke(categoryResponses, null)
                 }else{
                     val response = repository.getCategory()

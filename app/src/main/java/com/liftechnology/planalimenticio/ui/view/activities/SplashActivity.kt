@@ -6,12 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
-import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
-import com.liftechnology.planalimenticio.ui.utils.BaseApplication
+import com.liftechnology.planalimenticio.model.interfaces.SplashListener
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * @author pelkidev
  * @date 20/08/2023
  * */
-class SplashActivity : AppCompatActivity(), ActivityListener {
+class SplashActivity : AppCompatActivity(), SplashListener {
 
     /* Variables iniciales */
     private lateinit var binding: ActivitySplashBinding

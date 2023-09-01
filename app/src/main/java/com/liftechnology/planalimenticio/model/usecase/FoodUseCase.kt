@@ -62,7 +62,6 @@ class FoodUseCase(
                             foodEntity.categoria,
                         )
                     }
-                    Log.d("pelkidev-test","De Room")
                     callback.invoke(foodResponses, null)
                 } else {
                     val response = repository.getListFood(url)

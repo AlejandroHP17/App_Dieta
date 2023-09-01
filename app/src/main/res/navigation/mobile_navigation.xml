@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_category" >
         <action
             android:id="@+id/action_navigation_category_to_detailsCategoryFragment"
-            app:destination="@id/detailsCategoryFragment" />
+            app:destination="@id/detailsCategoryFragment"
+            app:enterAnim="@anim/to_center"
+            app:exitAnim="@anim/from_center"
+            app:popEnterAnim="@anim/to_center"
+            app:popExitAnim="@anim/from_center" />
     </fragment>
 
     <fragment
@@ -35,6 +39,6 @@
 
         <argument
             android:name="data"
-            app:argType="string[]" />
+            app:argType="string[]"/>
     </fragment>
 </navigation>

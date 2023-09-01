@@ -3,7 +3,8 @@ package com.liftechnology.planalimenticio.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
-import com.liftechnology.planalimenticio.model.interfaces.ActivityListener
+import com.liftechnology.planalimenticio.model.interfaces.HomeListener
+import com.liftechnology.planalimenticio.model.interfaces.SplashListener
 import com.liftechnology.planalimenticio.model.usecase.CategoryUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +15,8 @@ class AllViewModel(
 ) : ViewModel() {
 
     // Variable que inicializa el listener con el SplashActivity
-    var listener: ActivityListener? = null
+    var listener: SplashListener? = null
+    var listenerHome: HomeListener? = null
 
     /* Variables para live data */
     private val _dataFlow = MutableStateFlow<List<CategoryResponse>>(emptyList())
@@ -56,6 +58,11 @@ class AllViewModel(
             listCategory.addAll(list)
             _dataFlow.value = listCategory
         }
+    }
+
+    fun changeStateLoader(state:Boolean){
+        listenerHome?.onChangeStatesLoader(state)
+
     }
 
 

@@ -44,7 +44,6 @@ class CategoryRepositoryImpl(
 
 
                 //localDataSource.saveCategory(responseData)
-                Log.d("pelkidev-test","Del servicio")
                 return responseData
             }
         }

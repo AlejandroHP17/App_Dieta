@@ -1,4 +1,4 @@
-package com.liftechnology.planalimenticio.ui.utils
+package com.liftechnology.planalimenticio.framework
 
 import android.app.Application
 import com.liftechnology.planalimenticio.model.di.foodModule

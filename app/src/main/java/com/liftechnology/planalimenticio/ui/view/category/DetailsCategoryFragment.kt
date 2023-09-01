@@ -12,8 +12,8 @@ import com.liftechnology.planalimenticio.databinding.DialogCustomDetailBinding
 import com.liftechnology.planalimenticio.databinding.FragmentDetailsCategoryBinding
 import com.liftechnology.planalimenticio.ui.adapters.FoodClickedListener
 import com.liftechnology.planalimenticio.ui.adapters.GeneralAdapter
-import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastFragment
+import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMCategory
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -27,6 +27,7 @@ class DetailsCategoryFragment : Fragment() {
     private lateinit var binding: FragmentDetailsCategoryBinding
     private lateinit var bindingDialog: DialogCustomDetailBinding
     private val vmCategory: VMCategory by sharedViewModel()
+    private val viewModelMain: AllViewModel by sharedViewModel()
 
     // Variable para el AlertDialog
     private lateinit var dialog : AlertDialog
@@ -65,8 +66,6 @@ class DetailsCategoryFragment : Fragment() {
         initObservers()
         // Inicializa los listeners
         initListeners()
-
-
     }
 
     /** Obtiene los argumentos de navegación
@@ -87,9 +86,10 @@ class DetailsCategoryFragment : Fragment() {
         /* Toolbar: Se configura de manera inicial */
         binding.toolbarCategory.btnReturn.visibility = View.GONE
         binding.toolbarCategory.btnSearchBar.visibility = View.GONE
+        binding.allContent.visibility = View.GONE
         binding.toolbarCategory.tvNameCategory.text = dataNavigate!![3]
         /* Inicia el loader */
-        context?.let { binding.imageRotate.initAnim(it) }
+        //context?.let { binding.imageRotate.initAnim(it) }
     }
 
     /** Inicializa el Alert Dialog
@@ -144,10 +144,8 @@ class DetailsCategoryFragment : Fragment() {
         adapterCategory.submitList(list)
         // Build the adapter
         binding.recyclerCardsList.adapter = adapterCategory
-        /* Cambios en la vista del loader */
-        binding.imageRotate.visibility= View.GONE
-        binding.imageRotate.clearAnimation()
         binding.allContent.visibility = View.VISIBLE
+        viewModelMain.changeStateLoader(false)
     }
 
     /** Error en el servicio
@@ -160,5 +158,4 @@ class DetailsCategoryFragment : Fragment() {
         // Regresa a la vista anterior
         findNavController().popBackStack()
     }
-
 }
