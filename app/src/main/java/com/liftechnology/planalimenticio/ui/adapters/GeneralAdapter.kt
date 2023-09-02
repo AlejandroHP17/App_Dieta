@@ -16,7 +16,7 @@ class GeneralAdapter(private val listener: FoodClickedListener):
     /** Use the [ItemsDiffCallBack] to detect if any item is duplicated and then no return the value */
     companion object ItemsDiffCallBack : DiffUtil.ItemCallback<ModelCardList>() {
         override fun areItemsTheSame(oldItem: ModelCardList, newItem: ModelCardList) =
-            oldItem.alimento == newItem.alimento
+            oldItem.food == newItem.food
 
         override fun areContentsTheSame(oldItem: ModelCardList, newItem: ModelCardList) =
             oldItem == newItem

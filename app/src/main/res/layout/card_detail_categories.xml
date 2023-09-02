@@ -39,7 +39,7 @@
                 android:layout_weight="10"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/margin_16dp"
-                tools:text="@{item.alimento}"/>
+                tools:text="@{item.food}"/>
 
             <LinearLayout
                 android:id="@+id/linear_data"
@@ -60,14 +60,14 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/padding_8dp"
                         android:layout_marginEnd="@dimen/margin_4dp"
-                        tools:text="@{String.valueOf(item.cantidad_sugerida)}"/>
+                        tools:text="@{String.valueOf(item.suggestedQuantity)}"/>
                     <TextView
                         android:id="@+id/text_unit"
                         android:textSize="@dimen/size_text_card"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="@dimen/padding_8dp"
-                        tools:text="@{item.unidad}"/>
+                        tools:text="@{item.unit}"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingVertical="@dimen/padding_8dp"
-                        tools:text="@{item.peso_neto_g+ ` g`}"/>
+                        tools:text="@{item.netWeightG+ ` g`}"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

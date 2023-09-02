@@ -1,6 +1,5 @@
 package com.liftechnology.planalimenticio.model.usecase
 
-import android.util.Log
 import com.liftechnology.planalimenticio.data.local.repository.CategoryLocalRepository
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.data.network.repository.CategoryRepository
@@ -25,7 +24,7 @@ class CategoryUseCase(
                 // Obtiene datos de la base de datos local
                 val localData = localRepository.getAllCategory()
 
-                if (!localData.isNullOrEmpty()) {
+                if (localData.isNotEmpty()) {
                     val categoryResponses = localData.map { categoryEntity ->
                         CategoryResponse(
                             categoryEntity.category,

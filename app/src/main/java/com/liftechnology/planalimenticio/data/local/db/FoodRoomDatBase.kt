@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.liftechnology.planalimenticio.data.local.dao.CategoryDao
 import com.liftechnology.planalimenticio.data.local.dao.FoodDao
 import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
 

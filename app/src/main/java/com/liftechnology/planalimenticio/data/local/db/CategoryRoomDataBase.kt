@@ -11,7 +11,6 @@ import com.liftechnology.planalimenticio.data.local.entity.CategoryEntity
 abstract class CategoryRoomDataBase : RoomDatabase() {
 
     abstract fun CategoryDao(): CategoryDao
-
     companion object{
         @Volatile
         private var INSTANCE : CategoryRoomDataBase? = null

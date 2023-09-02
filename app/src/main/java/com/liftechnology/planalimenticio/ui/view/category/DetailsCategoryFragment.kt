@@ -1,6 +1,5 @@
 package com.liftechnology.planalimenticio.ui.view.category
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
-import com.liftechnology.planalimenticio.databinding.DialogCustomDetailBinding
 import com.liftechnology.planalimenticio.databinding.FragmentDetailsCategoryBinding
 import com.liftechnology.planalimenticio.ui.adapters.FoodClickedListener
 import com.liftechnology.planalimenticio.ui.adapters.GeneralAdapter
+import com.liftechnology.planalimenticio.ui.utils.CustomDialog
 import com.liftechnology.planalimenticio.ui.viewextensions.toastFragment
-import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMCategory
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -25,12 +23,8 @@ class DetailsCategoryFragment : Fragment() {
 
     /* Variables iniciales */
     private lateinit var binding: FragmentDetailsCategoryBinding
-    private lateinit var bindingDialog: DialogCustomDetailBinding
     private val vmCategory: VMCategory by sharedViewModel()
-    private val viewModelMain: AllViewModel by sharedViewModel()
 
-    // Variable para el AlertDialog
-    private lateinit var dialog : AlertDialog
 
     /* Variable para el recycler */
     private lateinit var adapterCategory: GeneralAdapter
@@ -47,9 +41,6 @@ class DetailsCategoryFragment : Fragment() {
         binding = FragmentDetailsCategoryBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vmList = vmCategory
-        // Inicializa el AlertDialog
-        bindingDialog = DialogCustomDetailBinding.inflate(inflater)
-
         return binding.root
     }
 
@@ -60,8 +51,6 @@ class DetailsCategoryFragment : Fragment() {
         getArgument()
         // Inicializa las vistas
         initView()
-        // Inicializa el Alert Dialog
-        initAlertDialog()
         // Inicializa los observers
         initObservers()
         // Inicializa los listeners
@@ -88,20 +77,8 @@ class DetailsCategoryFragment : Fragment() {
         binding.toolbarCategory.btnSearchBar.visibility = View.GONE
         binding.allContent.visibility = View.GONE
         binding.toolbarCategory.tvNameCategory.text = dataNavigate!![3]
-        /* Inicia el loader */
-        //context?.let { binding.imageRotate.initAnim(it) }
     }
 
-    /** Inicializa el Alert Dialog
-     * @author pelkidev
-     * @date 21/08/2023
-     * */
-    private fun initAlertDialog() {
-        dialog = AlertDialog.Builder(requireContext())
-            .setView(bindingDialog.root)
-            .create()
-        dialog.setCancelable(false)
-    }
 
     /** Inicializa los observadores del viewmodel, para saber sus cambios
      * @author pelkidev
@@ -120,17 +97,8 @@ class DetailsCategoryFragment : Fragment() {
     private fun initListeners() {
         /* Maneja el click del card del adapter */
         adapterCategory = GeneralAdapter(FoodClickedListener {
-            // Pinta en el titulo del alert el nombre del alimento
-            bindingDialog.txtTitle.text = it.alimento
-            // Pinta en el cuerpo del alert toda la informacion que contiene dicho aliemento
-            bindingDialog.txtDescription.text = vmCategory.buildTextAlert(it)
-            dialog.show()
+            showDialog( it.food, vmCategory.buildTextAlert(it))
         })
-
-        /* Maneja el click cerrar del alert */
-        bindingDialog.btnClose.setOnClickListener {
-            dialog.dismiss()
-        }
     }
 
 
@@ -145,7 +113,6 @@ class DetailsCategoryFragment : Fragment() {
         // Build the adapter
         binding.recyclerCardsList.adapter = adapterCategory
         binding.allContent.visibility = View.VISIBLE
-        viewModelMain.changeStateLoader(false)
     }
 
     /** Error en el servicio
@@ -157,5 +124,12 @@ class DetailsCategoryFragment : Fragment() {
         toastFragment(text)
         // Regresa a la vista anterior
         findNavController().popBackStack()
+    }
+
+    private fun showDialog(title: String, body:StringBuilder){
+        val dialogFragment = CustomDialog.newInstance(title, body.toString())
+        fragmentManager?.let {
+            dialogFragment.show(it, "customDialog")
+        }
     }
 }

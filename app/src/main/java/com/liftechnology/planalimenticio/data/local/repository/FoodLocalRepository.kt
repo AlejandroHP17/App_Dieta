@@ -5,6 +5,6 @@ import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
 
 class FoodLocalRepository(private val foodDao: FoodDao) {
 
-    suspend fun  getCategoryFood(categoria:String): List<FoodEntity> = foodDao.getFoodCategory(categoria)
+    fun  getCategoryFood(categoria:String): List<FoodEntity> = foodDao.getFoodCategory(categoria)
 
 }

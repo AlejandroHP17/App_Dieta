@@ -1,6 +1,5 @@
 package com.liftechnology.planalimenticio.data.network.repository
 
-import android.util.Log
 import com.liftechnology.planalimenticio.data.local.dao.CategoryDao
 import com.liftechnology.planalimenticio.data.local.entity.CategoryEntity
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
@@ -31,7 +30,7 @@ class CategoryRepositoryImpl(
             val responseData = response.body()?.result
             if (responseData != null) {
                 // Mapea la respuesta de la API a entidades de la base de datos local
-                val categoryEntities = responseData.mapNotNull { it?.let { response ->
+                val categoryEntities = responseData.map { it.let { response ->
                     CategoryEntity(
                         category = response.category,
                         url = response.url,
@@ -42,8 +41,6 @@ class CategoryRepositoryImpl(
                 // Guarda las entidades en la base de datos local
                 categoryDao.insertAllCategory(categoryEntities)
 
-
-                //localDataSource.saveCategory(responseData)
                 return responseData
             }
         }
