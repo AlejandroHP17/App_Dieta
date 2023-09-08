@@ -1,17 +1,20 @@
 package com.liftechnology.planalimenticio.ui.view.category
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.databinding.FragmentDetailsCategoryBinding
 import com.liftechnology.planalimenticio.ui.adapters.FoodClickedListener
 import com.liftechnology.planalimenticio.ui.adapters.GeneralAdapter
-import com.liftechnology.planalimenticio.ui.utils.CustomDialog
+import com.liftechnology.planalimenticio.ui.utils.CustomDetailDialog
 import com.liftechnology.planalimenticio.ui.viewextensions.toastFragment
+import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMCategory
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -24,13 +27,14 @@ class DetailsCategoryFragment : Fragment() {
     /* Variables iniciales */
     private lateinit var binding: FragmentDetailsCategoryBinding
     private val vmCategory: VMCategory by sharedViewModel()
+    private val viewModelMain: AllViewModel by sharedViewModel()
 
 
     /* Variable para el recycler */
     private lateinit var adapterCategory: GeneralAdapter
 
     // Variable para recibir los argumentos
-    private var dataNavigate : Array<String> ?= null
+    private var dataNavigate : CategoryResponse? = null
 
 
     override fun onCreateView(
@@ -62,9 +66,10 @@ class DetailsCategoryFragment : Fragment() {
      * @date 21/08/2023
      * */
     private fun getArgument(){
-        dataNavigate = DetailsCategoryFragmentArgs.fromBundle(requireArguments()).data
+        dataNavigate = DetailsCategoryFragmentArgs.fromBundle(requireArguments()).arg
         // Sale al servicio una vez obteniendo el argumento
-        vmCategory.getListFood(dataNavigate!![2],dataNavigate!![0], dataNavigate!![1], dataNavigate!![3])
+        vmCategory.getListFood(dataNavigate!!)
+        viewModelMain.colorGeneral = dataNavigate?.startColor
     }
 
     /** Inicializa la vista con parametros iniciales
@@ -73,10 +78,11 @@ class DetailsCategoryFragment : Fragment() {
      * */
     private fun initView(){
         /* Toolbar: Se configura de manera inicial */
-        binding.toolbarCategory.btnReturn.visibility = View.GONE
+        binding.toolbarCategory.btnReturn.visibility = View.VISIBLE
         binding.toolbarCategory.btnSearchBar.visibility = View.GONE
         binding.allContent.visibility = View.GONE
-        binding.toolbarCategory.tvNameCategory.text = dataNavigate!![3]
+        binding.toolbarCategory.tvNameCategory.text = dataNavigate?.category
+        binding.toolbarCategory.toolbar.setBackgroundColor(Color.parseColor(dataNavigate?.startColor))
     }
 
 
@@ -99,6 +105,10 @@ class DetailsCategoryFragment : Fragment() {
         adapterCategory = GeneralAdapter(FoodClickedListener {
             showDialog( it.food, vmCategory.buildTextAlert(it))
         })
+
+        binding.toolbarCategory.btnReturn.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
 
@@ -127,7 +137,7 @@ class DetailsCategoryFragment : Fragment() {
     }
 
     private fun showDialog(title: String, body:StringBuilder){
-        val dialogFragment = CustomDialog.newInstance(title, body.toString())
+        val dialogFragment = CustomDetailDialog.newInstance(title, body.toString())
         fragmentManager?.let {
             dialogFragment.show(it, "customDialog")
         }

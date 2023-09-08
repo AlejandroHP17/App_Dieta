@@ -2,16 +2,20 @@ package com.liftechnology.planalimenticio.ui.utils
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.DialogCustomDetailBinding
+import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class CustomDialog : DialogFragment() {
+class CustomDetailDialog : DialogFragment() {
 
+    private val viewModelMain: AllViewModel by sharedViewModel()
     companion object {
-        fun newInstance(title: String, body: String): CustomDialog {
-            val fragment = CustomDialog()
+        fun newInstance(title: String, body: String): CustomDetailDialog {
+            val fragment = CustomDetailDialog()
             val args = Bundle()
             args.putString("title", title)
             args.putString("body", body)
@@ -26,16 +30,18 @@ class CustomDialog : DialogFragment() {
         val dialog = builder.create()
 
         // Recuperar los argumentos
-        val argumento1 = arguments?.getString("title")
-        val argumento2 = arguments?.getString("body")
+        val argument1 = arguments?.getString("title")
+        val argument2 = arguments?.getString("body")
 
         // Configura el estilo de animación personalizado
         dialog.window?.attributes?.windowAnimations = R.style.CustomDialogAnimation
 
+
         // Infla y configura tu contenido personalizado en el cuadro de diálogo
         val bindingDialog = DialogCustomDetailBinding.inflate(layoutInflater)
-        bindingDialog.txtTitle.text = argumento1
-        bindingDialog.txtDescription.text = argumento2
+        bindingDialog.txtTitle.text = argument1
+        bindingDialog.txtDescription.text = argument2
+        bindingDialog.btnClose.setBackgroundColor(Color.parseColor(viewModelMain.colorGeneral))
 
         dialog.setCanceledOnTouchOutside(false)
 

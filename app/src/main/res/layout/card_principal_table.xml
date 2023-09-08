@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.liftechnology.planalimenticio.model.dataclass.TypeMeals" />
+
+        <variable
+            name="clickListener"
+            type="com.liftechnology.planalimenticio.ui.adapters.SectionClickedListener" />
+
+        <variable
+            name="vmTable"
+            type="com.liftechnology.planalimenticio.ui.adapters.TableAdapter.ViewHolder" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_recycler_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:elevation="@dimen/elevation_generic"
+            android:onClick="@{()->clickListener.onClickCategory(item)}"
+            app:cardCornerRadius="@dimen/radius_generic">
+
+            <TextView
+                android:id="@+id/text_title_portion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.category.component1()}" />
+
+            <TextView
+                android:id="@+id/text_portion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                android:gravity="end"
+                tools:text="@{item.category.component2().toString()}" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_first_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{()->clickListener.onClickMeal1(item)}"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.meal1.component1()}" />
+
+            <TextView
+                android:id="@+id/text_second_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{()->clickListener.onClickMeal2(item)}"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.meal2.component1()}" />
+
+            <TextView
+                android:id="@+id/text_third_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{()->clickListener.onClickMeal3(item)}"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.meal3.component1()}" />
+
+            <TextView
+                android:id="@+id/text_fourth_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{()->clickListener.onClickMeal4(item)}"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.meal4.component1()}" />
+
+            <TextView
+                android:id="@+id/text_fifth_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{()->clickListener.onClickMeal5(item)}"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.meal5.component1()}" />
+
+            <TextView
+                android:id="@+id/text_sixth_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{()->clickListener.onClickMeal6(item)}"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.meal6.component1()}" />
+
+            <TextView
+                android:id="@+id/text_seventh_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{()->clickListener.onClickMeal7(item)}"
+                android:padding="@dimen/padding_16dp"
+                android:textSize="@dimen/size_title_card"
+                tools:text="@{item.meal7.component1()}" />
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

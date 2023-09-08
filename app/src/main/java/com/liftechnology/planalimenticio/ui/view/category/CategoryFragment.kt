@@ -1,5 +1,6 @@
 package com.liftechnology.planalimenticio.ui.view.category
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.R
+import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.FragmentCategoryBinding
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesAdapter
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesClickedListener
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.util.*
 
 /**
  * @author pelkidev
@@ -35,7 +38,7 @@ class CategoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        /* Inicializa la vista con binding y viewmodel */
+        /* Inicializa la vista con binding (databinding )y viewmodel */
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vmList = viewModelMain
@@ -52,8 +55,6 @@ class CategoryFragment : Fragment() {
         // Inicializa los listeners
         initListeners()
 
-
-
     }
 
     /** Inicializa la vista con parametros iniciales
@@ -65,6 +66,7 @@ class CategoryFragment : Fragment() {
         binding.toolbarCategory.btnReturn.visibility = View.GONE
         binding.toolbarCategory.btnSearchBar.visibility = View.GONE
         binding.toolbarCategory.tvNameCategory.text = getString(R.string.toolbar_txt_categories)
+
     }
 
     /** Inicializa los observadores del viewmodel, para saber sus cambios
@@ -76,6 +78,7 @@ class CategoryFragment : Fragment() {
 
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModelMain.dataFlow.collect{
+                    setColorToolbar(it)
                     adapterCategory.submitList(it)
                     // Construye el recycler con el adaptador
                     binding.recyclerCards.adapter = adapterCategory
@@ -86,6 +89,12 @@ class CategoryFragment : Fragment() {
         }
     }
 
+    private fun setColorToolbar(it: List<CategoryResponse>) {
+        val color = it[Random().nextInt(it.size)]
+        viewModelMain.colorGeneral = color.startColor
+        binding.toolbarCategory.toolbar.setBackgroundColor(Color.parseColor(color.startColor))
+    }
+
     /** Inicializa los listeners
      * @author pelkidev
      * @date 21/08/2023
@@ -94,20 +103,17 @@ class CategoryFragment : Fragment() {
         /* Maneja el click del card del adapter */
         adapterCategory = CategoriesAdapter(CategoriesClickedListener {
             // Navega al fragmento del listado de alimentos
-            goToDetailsCategory(Pair(it.startColor, it.endColor),it.url,it.category)
+            goToDetailsCategory(it)
         })
     }
 
     /** Metodo para realizar la navegacion al fragmento DetailsCategory
      * @author pelkidev
      * @date 21/08/2023
-     * @param [color] Valores para generar la gradiente al construir el adapter
-     * @param [url] endPoint para consultar el servicio de la categoria
-     * @param [category] Valor con el nombre de la categoria
+     * @param [data] objeto tipo categoryresponse que pasara como argumento
      * */
-    private fun goToDetailsCategory(color: Pair<String, String>, url:String, category:String) {
+    private fun goToDetailsCategory(data:CategoryResponse) {
         /* Genera un argumento para enviarla a través de la navegación de fragmentos */
-        val data = arrayOf(color.first, color.second, url, category)
         val directions = CategoryFragmentDirections.actionNavigationCategoryToDetailsCategoryFragment(data)
         findNavController().navigate(directions)
     }

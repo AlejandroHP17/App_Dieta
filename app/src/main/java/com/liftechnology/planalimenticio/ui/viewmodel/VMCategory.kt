@@ -3,6 +3,7 @@ package com.liftechnology.planalimenticio.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
 import com.liftechnology.planalimenticio.model.usecase.FoodUseCase
@@ -21,13 +22,13 @@ class VMCategory(
     private val _errorListFood = MutableLiveData<String>()
     val errorListFood: LiveData<String> = _errorListFood
 
-    fun getListFood(url: String, startColor: String, endColor: String, category: String) {
+    fun getListFood(data: CategoryResponse) {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                useCase.getListFood(url, category) { success, error ->
+                useCase.getListFood(data.url, data.category) { success, error ->
                     if (error.isNullOrEmpty()) {
-                        buildListFood(success, startColor, endColor)
+                        buildListFood(success, data.startColor, data.endColor)
                     } else {
                         _errorListFood.postValue(ErrorCode.ERROR_SERVICE)
                     }

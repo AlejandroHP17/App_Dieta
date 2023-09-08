@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 
 class AllViewModel(
     private val useCase: CategoryUseCase
-) : ViewModel() {
+
+    ) : ViewModel() {
 
     // Variable que inicializa el listener con el SplashActivity
     var listener: SplashListener? = null
@@ -19,6 +20,8 @@ class AllViewModel(
     /* Variables para live data */
     private val _dataFlow = MutableStateFlow<List<CategoryResponse>>(emptyList())
     val dataFlow: StateFlow<List<CategoryResponse>> = _dataFlow
+
+    var colorGeneral: String? = null
 
     /** Apenas inicia el viewmodel sale por el servicio para obtener las categorias
      * @author pelkidev

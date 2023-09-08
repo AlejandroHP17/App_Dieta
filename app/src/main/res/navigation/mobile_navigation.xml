@@ -38,7 +38,7 @@
         android:label="DetailsCategoryFragment" >
 
         <argument
-            android:name="data"
-            app:argType="string[]"/>
+            android:name="arg"
+            app:argType="com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse" />
     </fragment>
 </navigation>

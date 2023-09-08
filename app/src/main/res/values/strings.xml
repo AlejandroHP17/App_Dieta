@@ -7,11 +7,11 @@
     <string name="nav_generator">Generador</string>
 
     <string name="toolbar_txt_categories">Categorías</string>
+    <string name="toolbar_txt_table">Tabla de control</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
 
     <!-- Images -->
     <string name="image_loader">Image Loader</string>
@@ -19,5 +19,30 @@
 
     <!-- Buttons -->
     <string name="button_close">Cerrar</string>
+    <string name="button_accept">Aceptar</string>
+    <string name="button_number_meals">Número de comidas al dia: </string>
+
+    <!-- Text table -->
+    <string name="table_first">Desayuno</string>
+    <string name="table_mix">colacion</string>
+    <string name="table_third">Comida</string>
+    <string name="table_fifth">Cena</string>
+
+
+    <string-array name="table_category">
+        <item>Verduras</item>
+        <item>Frutas</item>
+        <item>Alimentos de origen animal</item>
+        <item>Leguminosas</item>
+        <item>Leche o Yogurt</item>
+        <item>Cereales sin grasa</item>
+        <item>Aceites y grasas</item>
+        <item>Aceite y grasa con proteína</item>
+    </string-array>
+
+    <string name="dialog_change_portion">¿Cuál es el número de porciones que deseas implementar en esta categoria?</string>
+    <string name="dialog_change_quantity">¿Cuál es el número de porciones para esta comida?</string>
+    <string name="dialog_change_meals">¿Cuál es el número de comidas que deseas realizar al día?</string>
+
 
 </resources>

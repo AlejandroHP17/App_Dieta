@@ -22,4 +22,12 @@
         <item name="android:windowEnterAnimation">@anim/to_center</item>
         <item name="android:windowExitAnimation">@anim/from_center</item>
     </style>
+    
+    <style name="Button_dialog" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="android:radius">@dimen/radius_generic</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/size_text_button</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 </resources>

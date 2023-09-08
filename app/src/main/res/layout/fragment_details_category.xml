@@ -7,6 +7,8 @@
         <variable
             name="vmList"
             type="com.liftechnology.planalimenticio.ui.viewmodel.VMCategory" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
