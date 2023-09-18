@@ -1,2 +1,6 @@
 
->kotlin:S1128"Remove this unused import.(ÊÒÅ­ùÿÿÿÿ8á®¯™¦1
+ykotlin:S6558["URemove this it parameter declaration or give this lambda parameter a meaningful name.(üËüùÿÿÿÿ8«ÁÃŒ©1
+Okotlin:S1481Ö"0Remove this unused "updatedItem" local variable.(Œƒÿ8ÛŞüŒ©1
+Okotlin:S1481ğ"0Remove this unused "updatedItem" local variable.(Œƒÿ8Ü€Š©1
+Ckotlin:S1874Å"#Deprecated code should not be used.(Ç¶’Ñ8±ÁÃŒ©1
+ykotlin:S1186ê"ZAdd a nested comment explaining why this function is empty or complete the implementation.(‡‡"8²ÁÃŒ©1

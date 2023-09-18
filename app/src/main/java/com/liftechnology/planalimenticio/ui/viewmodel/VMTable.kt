@@ -11,6 +11,7 @@ import com.google.gson.Gson
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.model.dataclass.TypeMeals
+import com.liftechnology.planalimenticio.model.dataclass.TypeTable
 import com.liftechnology.planalimenticio.model.usecase.TableUseCase
 import com.liftechnology.planalimenticio.ui.utils.CustomDetailDialog
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,28 +24,33 @@ class VMTable(
 ) : ViewModel() {
 
     /* Variables para live data */
-    private val _dataFlow = MutableStateFlow<List<TypeMeals>>(emptyList())
-    val dataFlow: StateFlow<List<TypeMeals>> = _dataFlow
+    private val _dataFlow = MutableLiveData<TypeTable>()
+    val dataFlow: LiveData<TypeTable> = _dataFlow
 
-    private val _typeClick = MutableLiveData<String>()
+    private val _typeClick = MutableLiveData("")
     val typeClick: LiveData<String> = _typeClick
 
     var numberMeals: Int = 5
 
 
-    fun startTable(context: Context) {
+    fun startTable(context: Context, typeTable: TypeTable) {
         viewModelScope.launch {
-            useCase.getTable(context) { success, error ->
+            useCase.readTable(context, typeTable) { success, error ->
                 if (error.isNullOrEmpty()) {
-                    _dataFlow.value = success!!
+                    _dataFlow.postValue(success)
                 }
             }
         }
     }
 
     fun onClickNumberMeals() {
-        _typeClick.value = "something"
-        //Logica para enviar dos datos
+        _typeClick.postValue("something")
+    }
+
+    fun updateTable(context: Context, typeTable: TypeTable){
+        viewModelScope.launch {
+            useCase.updateTable(context, typeTable)
+        }
     }
 
 }

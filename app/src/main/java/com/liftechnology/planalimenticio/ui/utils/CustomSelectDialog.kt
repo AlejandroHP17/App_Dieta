@@ -7,14 +7,17 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.DialogCustomSelectBinding
+import com.liftechnology.planalimenticio.model.dataclass.TypeTable
 import com.liftechnology.planalimenticio.model.interfaces.DialogListener
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.VMTable
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CustomSelectDialog : DialogFragment() {
 
     private val viewModelMain: AllViewModel by sharedViewModel()
     var dialogListener: DialogListener? = null
+    private val viewModelTable: VMTable by sharedViewModel()
 
     private var argTitle: String? = null
     private var argDescription: String? = null
@@ -92,6 +95,9 @@ class CustomSelectDialog : DialogFragment() {
                     ValidateTextDialogSelect.QUANTITY -> dialogListener?.onDataReceivedQuantity(argNumber!!)
                     ValidateTextDialogSelect.MEALS -> dialogListener?.onDataReceivedMeals(argNumber!!)
                 }
+
+                //val typeTable = TypeTable(listTable, Pair(titleNumberMeals, data))
+                //viewModelTable.updateTable(requireContext(), typeTable)
                 dismiss()
             }
 

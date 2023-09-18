@@ -10,3 +10,8 @@ data class TypeMeals(
     val meal6: Pair<String,Int>? = null,
     val meal7: Pair<String,Int>? = null
 )
+
+data class TypeTable(
+    val list: List<TypeMeals>,
+    val meals: Pair<String,Int>? = null
+)
