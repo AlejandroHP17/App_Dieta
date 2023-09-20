@@ -3,7 +3,6 @@ package com.liftechnology.planalimenticio.model.usecase
 import com.liftechnology.planalimenticio.data.local.repository.FoodLocalRepository
 import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
 import com.liftechnology.planalimenticio.data.network.repository.FoodRepository
-import com.liftechnology.planalimenticio.ui.utils.ErrorCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -64,13 +63,7 @@ class FoodUseCase(
                 }
                 else {
                     val response = repository.getListFood(url)
-                    if (response != null) {
-                        // Si la respuesta no es nula, se considera exitosa y se invoca el callback con los datos
-                        callback.invoke(response, null)
-                    } else {
-                        // Si la respuesta es nula, se considera un error en el servicio
-                        callback.invoke(null, ErrorCode.ERROR_SERVICE)
-                    }
+                    callback.invoke(response, null)
                 }
             } catch (e: Exception) {
                 // En caso de una excepción, se invoca el callback con el mensaje de error

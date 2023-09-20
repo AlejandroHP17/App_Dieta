@@ -20,6 +20,7 @@
     <string name="button_close">Cerrar</string>
     <string name="button_accept">Aceptar</string>
     <string name="button_number_meals">Número de comidas al dia: %d</string>
+    <string name="button_clean">Limpiar</string>
 
     <!-- Text table -->
     <string name="table_first">Desayuno</string>

@@ -9,6 +9,10 @@ import androidx.viewbinding.ViewBinding
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+/**
+ * @author pelkidev
+ * @date 20/09/2023
+ * */
 abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
 
     open var useSharedViewModel: Boolean = false

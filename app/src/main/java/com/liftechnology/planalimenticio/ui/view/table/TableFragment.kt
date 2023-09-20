@@ -118,7 +118,6 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
     }
 
 
-
     /** Inicializa los listeners
      * @author pelkidev
      * @date 01/09/2023

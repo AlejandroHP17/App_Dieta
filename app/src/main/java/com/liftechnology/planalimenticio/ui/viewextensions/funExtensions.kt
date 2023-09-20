@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.view.animation.Animation
@@ -26,49 +27,43 @@ fun Fragment.toastFragment(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.toastSuccess(message: String, activity: Activity,time:Long=2500)
-{
-    val dialogBuilder: AlertDialog.Builder =
-        AlertDialog.Builder(activity, R.style.AlertDialogRoundBase)
-    var layoutView: View? = activity?.layoutInflater?.inflate(R.layout.dialog_custom_success_toast, null)
+fun toastSuccess(message: String, activity: Activity,time:Long=2500) {
+    val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(activity, R.style.AlertDialogRoundBase)
+    val layoutView: View? = activity.layoutInflater.inflate(R.layout.dialog_custom_success_toast, null)
     val ivClose: AppCompatImageView? = layoutView?.findViewById(R.id.iv_close)
-    val tv_mensaje: AppCompatTextView? = layoutView?.findViewById(R.id.tv_mensaje)
-    tv_mensaje?.text = message
+    val tvMessage: AppCompatTextView? = layoutView?.findViewById(R.id.tv_mensaje)
+    tvMessage?.text = message
     dialogBuilder.setView(layoutView)
-    var alertDialog: AlertDialog = dialogBuilder.create()
+    val alertDialog: AlertDialog = dialogBuilder.create()
     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     alertDialog.window?.setGravity(Gravity.TOP)
     alertDialog.show()
     ivClose?.setOnClickListener { alertDialog.dismiss() }
-    Handler().postDelayed({
+    Handler(Looper.getMainLooper()).postDelayed({
         try {
             alertDialog.dismiss()
-        } catch (e: Exception) {
+        } catch (_: Exception) { // NOTHING
         }
     }, time)
 }
 
-fun Fragment.toastFailed(message: String?, activity: Activity, time: Long = 5000)
+fun toastFailed(message: String?, activity: Activity, time: Long = 5000)
 {
     val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(activity,R.style.AlertDialogRoundBase)
-    var layoutView: View? = activity?.layoutInflater?.inflate(R.layout.dialog_custom_failed_toast, null)
-
+    val layoutView: View? =activity.layoutInflater.inflate(R.layout.dialog_custom_failed_toast, null)
     val ivClose: AppCompatImageView? = layoutView?.findViewById(R.id.iv_close)
-
-    val tv_mensaje: AppCompatTextView? = layoutView?.findViewById(R.id.tv_mensaje)
-
-    tv_mensaje?.text = message
-
+    val tvMessage: AppCompatTextView? = layoutView?.findViewById(R.id.tv_mensaje)
+    tvMessage?.text = message
     dialogBuilder.setView(layoutView)
-    var alertDialog: AlertDialog = dialogBuilder.create()
+    val alertDialog: AlertDialog = dialogBuilder.create()
     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     alertDialog.window?.setGravity(Gravity.TOP)
     alertDialog.show()
     ivClose?.setOnClickListener { alertDialog.dismiss() }
-    Handler().postDelayed({
+    Handler(Looper.getMainLooper()).postDelayed({
         try {
             if (!activity.isDestroyed) alertDialog.dismiss()
-        } catch (e: Exception) {
+        } catch (e: Exception) { // NOTHING
         }
     }, time)
 
@@ -82,6 +77,5 @@ fun AppCompatImageView.initAnim(context: Context){
 
 fun TextView.concatTextWithAdditional(text: Pair<String, Int>) {
     val currentText = text.first + " -> " + text.second.toString()
-    val concatenatedText = "$currentText -> $text"
     this.text = currentText
 }
