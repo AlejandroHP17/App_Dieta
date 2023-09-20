@@ -10,7 +10,7 @@ import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
 import com.liftechnology.planalimenticio.model.interfaces.SplashListener
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
-import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,7 +22,7 @@ class SplashActivity : AppCompatActivity(), SplashListener {
 
     /* Variables iniciales */
     private lateinit var binding: ActivitySplashBinding
-    private val viewModel: AllViewModel by viewModel()
+    private val viewModel: ShareViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

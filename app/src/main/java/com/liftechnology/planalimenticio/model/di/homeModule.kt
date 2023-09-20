@@ -7,7 +7,7 @@ import com.liftechnology.planalimenticio.data.network.repository.CategoryReposit
 import com.liftechnology.planalimenticio.data.network.repository.CategoryRepositoryImpl
 import com.liftechnology.planalimenticio.data.network.service.CategoryApi
 import com.liftechnology.planalimenticio.model.usecase.CategoryUseCase
-import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -48,6 +48,6 @@ val homeModule = module{
     }
 
     viewModel{
-        AllViewModel(get())
+        ShareViewModel(get())
     }
 }

@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.ActivityHomeBinding
-import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -21,7 +21,7 @@ class HomeActivity : AppCompatActivity() {
 
     /* Variables iniciales */
     private lateinit var binding: ActivityHomeBinding
-    private val viewModel: AllViewModel by viewModel()
+    private val viewModel: ShareViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

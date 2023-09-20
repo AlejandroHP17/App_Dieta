@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -13,9 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.FragmentCategoryBinding
+import com.liftechnology.planalimenticio.framework.BaseFragment
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesAdapter
 import com.liftechnology.planalimenticio.ui.adapters.CategoriesClickedListener
-import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
@@ -24,12 +24,13 @@ import java.util.*
  * @author pelkidev
  * @date 21/08/2023
  * */
-class CategoryFragment : Fragment() {
-    /* Variables iniciales */
-    private lateinit var binding: FragmentCategoryBinding
-    private val viewModelMain: AllViewModel by sharedViewModel()
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
 
-
+    // Vista al fragment base
+    override fun getViewBinding() = FragmentCategoryBinding.inflate(layoutInflater)
+    // Variable del viewModel
+    private val shareModelMain: ShareViewModel by sharedViewModel()
+    
     /* Variable para el recycler */
     private lateinit var adapterCategory: CategoriesAdapter
 
@@ -39,45 +40,34 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         /* Inicializa la vista con binding (databinding )y viewmodel */
-        binding = FragmentCategoryBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.vmList = viewModelMain
+        binding.vmList = shareModelMain
         return binding.root
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // Inicializa los elementos de la vista
-        initView()
-        // Inicializa los observers
-        initObservers()
-        // Inicializa los listeners
-        initListeners()
-
-    }
 
     /** Inicializa la vista con parametros iniciales
      * @author pelkidev
-     * @date 21/08/2023
+     * @date 20/09/2023
      * */
-    private fun initView(){
+    override fun setUpViews() {
+        super.setUpViews()
         /* Toolbar: Se configura de manera inicial */
         binding.toolbarCategory.btnReturn.visibility = View.GONE
         binding.toolbarCategory.btnSearchBar.visibility = View.GONE
         binding.toolbarCategory.tvNameCategory.text = getString(R.string.toolbar_txt_categories)
-
     }
+
 
     /** Inicializa los observadores del viewmodel, para saber sus cambios
      * @author pelkidev
-     * @date 21/08/2023
+     * @date 20/09/2023
      * */
-    private fun initObservers() {
+    override fun observeData() {
+        super.observeData()
         viewLifecycleOwner.lifecycleScope.launch{
-
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModelMain.dataFlow.collect{
+                shareModelMain.dataFlow.collect{
                     setColorToolbar(it)
                     adapterCategory.submitList(it)
                     // Construye el recycler con el adaptador
@@ -85,21 +75,16 @@ class CategoryFragment : Fragment() {
 
                 }
             }
-
         }
     }
 
-    private fun setColorToolbar(it: List<CategoryResponse>) {
-        val color = it[Random().nextInt(it.size)]
-        viewModelMain.colorGeneral = color.startColor
-        binding.toolbarCategory.toolbar.setBackgroundColor(Color.parseColor(color.startColor))
-    }
 
     /** Inicializa los listeners
      * @author pelkidev
-     * @date 21/08/2023
+     * @date 20/09/2023
      * */
-    private fun initListeners() {
+    override fun listenersView() {
+        super.listenersView()
         /* Maneja el click del card del adapter */
         adapterCategory = CategoriesAdapter(CategoriesClickedListener {
             // Navega al fragmento del listado de alimentos
@@ -107,9 +92,22 @@ class CategoryFragment : Fragment() {
         })
     }
 
+
+    /** Método para darle color al toolbar de forma aleatoria
+     * @author pelkidev
+     * @date 20/09/2023
+     * @param [it] lista de colores por servicio
+     * */
+    private fun setColorToolbar(it: List<CategoryResponse>) {
+        val color = it[Random().nextInt(it.size)]
+        shareModelMain.colorGeneral = color.startColor
+        binding.toolbarCategory.toolbar.setBackgroundColor(Color.parseColor(color.startColor))
+    }
+
+
     /** Metodo para realizar la navegacion al fragmento DetailsCategory
      * @author pelkidev
-     * @date 21/08/2023
+     * @date 20/09/2023
      * @param [data] objeto tipo categoryresponse que pasara como argumento
      * */
     private fun goToDetailsCategory(data:CategoryResponse) {
@@ -117,5 +115,4 @@ class CategoryFragment : Fragment() {
         val directions = CategoryFragmentDirections.actionNavigationCategoryToDetailsCategoryFragment(data)
         findNavController().navigate(directions)
     }
-
 }

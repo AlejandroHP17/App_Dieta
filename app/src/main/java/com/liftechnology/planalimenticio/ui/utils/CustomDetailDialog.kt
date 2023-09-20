@@ -7,12 +7,12 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.DialogCustomDetailBinding
-import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CustomDetailDialog : DialogFragment() {
 
-    private val viewModelMain: AllViewModel by sharedViewModel()
+    private val shareModelMain: ShareViewModel by sharedViewModel()
     companion object {
         fun newInstance(title: String, body: String): CustomDetailDialog {
             val fragment = CustomDetailDialog()
@@ -41,7 +41,7 @@ class CustomDetailDialog : DialogFragment() {
         val bindingDialog = DialogCustomDetailBinding.inflate(layoutInflater)
         bindingDialog.txtTitle.text = argument1
         bindingDialog.txtDescription.text = argument2
-        bindingDialog.btnClose.setBackgroundColor(Color.parseColor(viewModelMain.colorGeneral))
+        bindingDialog.btnClose.setBackgroundColor(Color.parseColor(shareModelMain.colorGeneral))
 
         dialog.setCanceledOnTouchOutside(false)
 

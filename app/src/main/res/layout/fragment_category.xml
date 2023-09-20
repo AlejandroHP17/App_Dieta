@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vmList"
-            type="com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel" />
+            type="com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel" />
 
     </data>
 

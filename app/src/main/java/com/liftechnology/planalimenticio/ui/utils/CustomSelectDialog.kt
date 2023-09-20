@@ -9,13 +9,13 @@ import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.DialogCustomSelectBinding
 import com.liftechnology.planalimenticio.model.dataclass.TypeTable
 import com.liftechnology.planalimenticio.model.interfaces.DialogListener
-import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
+import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMTable
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CustomSelectDialog : DialogFragment() {
 
-    private val viewModelMain: AllViewModel by sharedViewModel()
+    private val shareModelMain: ShareViewModel by sharedViewModel()
     var dialogListener: DialogListener? = null
     private val viewModelTable: VMTable by sharedViewModel()
 
@@ -112,7 +112,7 @@ class CustomSelectDialog : DialogFragment() {
         }
         bindingDialog.txtTitle.text = argTitle
         bindingDialog.textQuantity.text = argNumber.toString()
-        bindingDialog.btnClose.setBackgroundColor(Color.parseColor(viewModelMain.colorGeneral))
+        bindingDialog.btnClose.setBackgroundColor(Color.parseColor(shareModelMain.colorGeneral))
     }
 
     private fun initConfigurations(){
