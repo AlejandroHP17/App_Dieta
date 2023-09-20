@@ -16,7 +16,6 @@
     <!-- Images -->
     <string name="image_loader">Image Loader</string>
 
-
     <!-- Buttons -->
     <string name="button_close">Cerrar</string>
     <string name="button_accept">Aceptar</string>
@@ -40,9 +39,12 @@
         <item>Aceite y grasa con proteína</item>
     </string-array>
 
+    <!-- dialogs -->
     <string name="dialog_change_portion">¿Cuál es el número de porciones que deseas implementar en esta categoria?</string>
     <string name="dialog_change_quantity">¿Cuál es el número de porciones para esta comida?</string>
     <string name="dialog_change_meals">¿Cuál es el número de comidas que deseas realizar al día?</string>
 
+    <!-- Content descriptions -->
+    <string name="content_image">Imagen</string>
 
 </resources>

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.liftechnology.planalimenticio.databinding.CardPrincipalTableBinding
 import com.liftechnology.planalimenticio.model.dataclass.TypeMeals
 import com.liftechnology.planalimenticio.ui.utils.TableNumberMeal
+import com.liftechnology.planalimenticio.ui.viewextensions.concatTextWithAdditional
 
 class TableAdapter(
     private val listener: SectionClickedListener,
@@ -27,9 +28,18 @@ class TableAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: TypeMeals, action: SectionClickedListener) {
-
             binding.item = item
             binding.clickListener = action
+
+            // Concatenar el texto y establecerlo en cada TextView
+            binding.textFirstMeal.concatTextWithAdditional(item.meal1!!)
+            binding.textSecondMeal.concatTextWithAdditional(item.meal2!!)
+            binding.textThirdMeal.concatTextWithAdditional(item.meal3!!)
+            binding.textFourthMeal.concatTextWithAdditional(item.meal4!!)
+            binding.textFifthMeal.concatTextWithAdditional(item.meal5!!)
+            binding.textSixthMeal.concatTextWithAdditional(item.meal6!!)
+            binding.textSeventhMeal.concatTextWithAdditional(item.meal7!!)
+
             binding.executePendingBindings()
         }
     }

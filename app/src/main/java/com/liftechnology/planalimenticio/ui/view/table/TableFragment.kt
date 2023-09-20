@@ -2,7 +2,6 @@ package com.liftechnology.planalimenticio.ui.view.table
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,8 @@ import com.liftechnology.planalimenticio.ui.adapters.TableAdapter
 import com.liftechnology.planalimenticio.ui.utils.CustomSelectDialog
 import com.liftechnology.planalimenticio.ui.utils.TableNumberMeal
 import com.liftechnology.planalimenticio.ui.utils.ValidateTextDialogSelect
+import com.liftechnology.planalimenticio.ui.viewextensions.toastFragment
+import com.liftechnology.planalimenticio.ui.viewextensions.toastSuccess
 import com.liftechnology.planalimenticio.ui.viewmodel.AllViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMTable
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -34,7 +35,6 @@ class TableFragment : Fragment(), DialogListener {
     /* Variable para el recycler */
     private lateinit var adapterTable: TableAdapter
     private lateinit var listTable: List<TypeMeals>
-    private var position = 0
 
     /* Variables auxiliares */
     private var titleNumberMeals = ""
@@ -82,6 +82,12 @@ class TableFragment : Fragment(), DialogListener {
         titleNumberMeals = getString(R.string.button_number_meals)
         val typeTable = TypeTable(listOf(), Pair(titleNumberMeals, 3))
         viewModelTable.startTable(requireContext(), typeTable)
+
+        initListenerAdapter(3)
+        listTable = listOf<TypeMeals>()
+        adapterTable.submitList(listTable)
+        // Construye el recycler con el adaptador
+        binding.recyclerTable.adapter = adapterTable
     }
 
     /** Inicializa los observadores del viewmodel, para saber sus cambios
@@ -89,25 +95,31 @@ class TableFragment : Fragment(), DialogListener {
      * @date 01/09/2023
      * */
     private fun initObservers() {
-        viewModelTable.dataFlow.observe(viewLifecycleOwner) { it ->
-            if (it.list.isNotEmpty()) {
-                updateView(it.list)
-                initListenerAdapter(it.list[0].category?.second!!)
-                listTable = it.list
-                adapterTable.submitList(listTable)
-                // Construye el recycler con el adaptador
+        viewModelTable.dataFlow.observe(viewLifecycleOwner) { data ->
+            if (data.list.isNotEmpty()) {
+                viewModelTable.numberMeals = data.meals?.second!!
                 binding.recyclerTable.adapter = adapterTable
+                binding.btnNumberMeals.text = getString(R.string.button_number_meals, data.meals.second)
+                adapterTable.submitList(data.list)
+                adapterTable.updateMealsCount(data.meals.second)
+
             }
         }
 
 
-        viewModelTable.typeClick.observe(viewLifecycleOwner) { _ ->
+        viewModelTable.typeClick.observe(viewLifecycleOwner) { value ->
             if (isInitial) {
-                showDialog(
-                    getString(R.string.button_number_meals),
-                    ValidateTextDialogSelect.MEALS,
-                    viewModelTable.numberMeals
-                )
+                if(value == "number"){
+                    showDialog(
+                        getString(R.string.button_number_meals),
+                        ValidateTextDialogSelect.MEALS,
+                        ""
+                    )
+                }else{
+                    titleNumberMeals = getString(R.string.button_number_meals)
+                    viewModelTable.cleanTable(requireContext(),Pair(titleNumberMeals, 3))
+                }
+
             } else {
                 isInitial = true
             }
@@ -124,68 +136,21 @@ class TableFragment : Fragment(), DialogListener {
     private fun initListenerAdapter(numberMeal: Int) {
         adapterTable = TableAdapter(
             SectionClickedListener { card, click ->
-                Log.d("pelkidev-test",click)
-                Log.d("pelkidev-test",card.toString())
+                viewModelTable.dataFlow
                 when (click) {
                     TableNumberMeal.CATEGORY -> {
                         showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.PORTION,
-                            card.category?.second!!
+                            title = card.category?.first!!,
+                            body = ValidateTextDialogSelect.PORTION,
+                            click = click
                         )
                     }
-                    TableNumberMeal.M1 -> {
-                        showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.QUANTITY,
-                            card.meal1?.second!!
-                        )
-                    }
-                    TableNumberMeal.M2 -> {
-                        showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.QUANTITY,
-                            card.meal2?.second!!
-                        )
-                    }
-                    TableNumberMeal.M3 -> {
-                        showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.QUANTITY,
-                            card.meal3?.second!!
-                        )
-                    }
-                    TableNumberMeal.M4 -> {
-                        showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.QUANTITY,
-                            card.meal4?.second!!
-                        )
-                    }
-                    TableNumberMeal.M5 -> {
-                        showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.QUANTITY,
-                            card.meal5?.second!!
-                        )
-                    }
-                    TableNumberMeal.M6 -> {
-                        showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.QUANTITY,
-                            card.meal6?.second!!
-                        )
-                    }
-                    TableNumberMeal.M7 -> {
-                        showDialog(
-                            card.category?.first!!,
-                            ValidateTextDialogSelect.QUANTITY,
-                            card.meal7?.second!!
-                        )
-                    }
-
                     else -> {
-                        // Clic en un elemento no identificado
+                        showDialog(
+                            title = card.category?.first!!,
+                            body = ValidateTextDialogSelect.QUANTITY,
+                            click = click
+                        )
                     }
                 }
             }, numberMeal
@@ -193,69 +158,18 @@ class TableFragment : Fragment(), DialogListener {
 
     }
 
-    private fun showDialog(title: String, body: String, number: Int) {
-        val dialogFragment = CustomSelectDialog.newInstance(title, body, number)
+    private fun showDialog(title: String, body: String, click: String) {
+        val structure =  viewModelTable.dataFlow.value!!
+        val dialogFragment = CustomSelectDialog.newInstance(title, body, click, structure)
         dialogFragment.dialogListener = this
         fragmentManager?.let {
             dialogFragment.show(it, "customDialog")
         }
     }
 
-    private fun updateView(typeMeals: List<TypeMeals>) {
-        binding.btnNumberMeals.text =
-            getString(R.string.button_number_meals, typeMeals[0].category?.second)
+    override fun onDataReceivedTable() {
+        toastSuccess("La informacion se ha actualizado correctamente", requireActivity())
+        viewModelTable.getTable(requireContext())
     }
 
-    override fun onDataReceivedMeals(data: Int) {
-        binding.btnNumberMeals.text = getString(R.string.button_number_meals, data)
-        viewModelTable.numberMeals = data
-        adapterTable.updateMealsCount(data)
-
-
-        // Supongamos que quieres actualizar el valor en la posición 'position' de listTable
-        val updatedItem = listTable[position].copy(category = Pair(listTable[position].category?.first!!, data))
-
-// Crea una nueva lista con el elemento actualizado
-        val updatedListTable = listTable.toMutableList()
-        updatedListTable[position] = updatedItem
-
-// Ahora updatedListTable contiene la lista actualizada con el valor cambiado
-        listTable = updatedListTable.toList()
-
-
-
-        adapterTable.submitList(listTable)
-        // Construye el recycler con el adaptador
-        binding.recyclerTable.adapter = adapterTable
-
-
-        val typeTable = TypeTable(listTable, Pair(titleNumberMeals, data))
-        viewModelTable.updateTable(requireContext(), typeTable)
-    }
-
-    override fun onDataReceivedQuantity(data: Int) {
-
-    }
-
-    override fun onDataReceivedPortion(data: Int) {
-        // Supongamos que quieres actualizar el valor en la posición 'position' de listTable
-        val updatedItem = listTable[position].copy(category = Pair(listTable[position].category?.first!!, data))
-
-// Crea una nueva lista con el elemento actualizado
-        val updatedListTable = listTable.toMutableList()
-        updatedListTable[position] = updatedItem
-
-// Ahora updatedListTable contiene la lista actualizada con el valor cambiado
-        listTable = updatedListTable.toList()
-
-
-
-        adapterTable.submitList(listTable)
-        // Construye el recycler con el adaptador
-        binding.recyclerTable.adapter = adapterTable
-
-
-        val typeTable = TypeTable(listTable, Pair(titleNumberMeals, data))
-        viewModelTable.updateTable(requireContext(), typeTable)
-    }
 }

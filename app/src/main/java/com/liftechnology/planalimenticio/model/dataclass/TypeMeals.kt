@@ -1,5 +1,7 @@
 package com.liftechnology.planalimenticio.model.dataclass
 
+import java.io.Serializable
+
 data class TypeMeals(
     val category: Pair<String,Int>? = null,
     val meal1: Pair<String,Int>? = null,
@@ -14,4 +16,4 @@ data class TypeMeals(
 data class TypeTable(
     val list: List<TypeMeals>,
     val meals: Pair<String,Int>? = null
-)
+): Serializable

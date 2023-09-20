@@ -37,6 +37,13 @@
                     android:layout_margin="@dimen/margin_16dp"
                     android:onClick="@{()->vmTable.onClickNumberMeals()}"/>
 
+                <Button
+                    android:id="@+id/btn_reset_meals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_16dp"
+                    android:onClick="@{()->vmTable.onClickResetMeals()}"/>
+
             </LinearLayout>
 
             <androidx.core.widget.NestedScrollView

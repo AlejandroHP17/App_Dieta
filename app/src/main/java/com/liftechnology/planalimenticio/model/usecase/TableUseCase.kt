@@ -9,14 +9,14 @@ import kotlinx.coroutines.withContext
 
 class TableUseCase(private val localRepository: TableLocalRepository) {
 
-    suspend fun readTable(
+    suspend fun startTable(
         context: Context,
         typeTable: TypeTable,
         callback: (success: TypeTable?, error: String?) -> Unit
     ) {
         return withContext(Dispatchers.IO) {
             try {
-                val mutableList: TypeTable = localRepository.readTable(context,typeTable)
+                val mutableList: TypeTable = localRepository.startTable(context,typeTable)
                 callback.invoke(mutableList, null)
             } catch (e: Exception) {
                 // En caso de una excepción, se invoca el callback con el mensaje de error
@@ -38,4 +38,37 @@ class TableUseCase(private val localRepository: TableLocalRepository) {
             }
         }
     }
+
+    suspend fun getTable(
+        context: Context,
+        callback: (success: TypeTable?, error: String?) -> Unit
+    ) {
+        return withContext(Dispatchers.IO) {
+            try {
+                val mutableList: TypeTable = localRepository.getTable(context)
+                callback.invoke(mutableList, null)
+            } catch (e: Exception) {
+                // En caso de una excepción, se invoca el callback con el mensaje de error
+                callback.invoke(null, e.message)
+            }
+        }
+    }
+
+    suspend fun cleanTable(
+        context: Context,
+        title :Pair<String, Int>,
+        callback: (success: TypeTable?, error: String?) -> Unit
+    ) {
+        return withContext(Dispatchers.IO) {
+            try {
+                val mutableList: TypeTable = localRepository.cleanTable(context, title)
+                callback.invoke(mutableList, null)
+            } catch (e: Exception) {
+                // En caso de una excepción, se invoca el callback con el mensaje de error
+                callback.invoke(null, e.message)
+            }
+        }
+    }
+
+
 }

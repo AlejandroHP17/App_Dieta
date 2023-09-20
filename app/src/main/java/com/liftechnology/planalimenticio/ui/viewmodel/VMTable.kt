@@ -35,7 +35,7 @@ class VMTable(
 
     fun startTable(context: Context, typeTable: TypeTable) {
         viewModelScope.launch {
-            useCase.readTable(context, typeTable) { success, error ->
+            useCase.startTable(context, typeTable) { success, error ->
                 if (error.isNullOrEmpty()) {
                     _dataFlow.postValue(success)
                 }
@@ -44,12 +44,35 @@ class VMTable(
     }
 
     fun onClickNumberMeals() {
-        _typeClick.postValue("something")
+        _typeClick.postValue("number")
+    }
+    fun onClickResetMeals() {
+        _typeClick.postValue("clean")
+    }
+
+    fun getTable(context: Context){
+        viewModelScope.launch {
+            useCase.getTable(context) { success, error ->
+                if (error.isNullOrEmpty()) {
+                    _dataFlow.postValue(success)
+                }
+            }
+        }
     }
 
     fun updateTable(context: Context, typeTable: TypeTable){
         viewModelScope.launch {
             useCase.updateTable(context, typeTable)
+        }
+    }
+
+    fun cleanTable(context: Context, title :Pair<String, Int>){
+        viewModelScope.launch {
+            useCase.cleanTable(context, title){ success, error ->
+                if (error.isNullOrEmpty()) {
+                    _dataFlow.postValue(success)
+                }
+            }
         }
     }
 

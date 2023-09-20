@@ -14,7 +14,7 @@ class TableLocalRepository {
     private val gson = Gson()
 
 
-    fun readTable(context: Context, typeTable: TypeTable): TypeTable {
+    fun startTable(context: Context, typeTable: TypeTable): TypeTable {
         /* declara variables auxiliares */
         val list = context.resources.getStringArray(R.array.table_category)
         val file = File(context.filesDir, NAME_JSON)
@@ -77,4 +77,44 @@ class TableLocalRepository {
         val jsonString = gson.toJson(typeTableReturn)
         file.writeText(jsonString)
     }
+
+    fun getTable(context: Context): TypeTable {
+        val file = File(context.filesDir, NAME_JSON)
+        val jsonString = file.readText()
+        val listType = object : TypeToken<TypeTable>() {}.type
+        return gson.fromJson(jsonString, listType)
+    }
+
+    fun cleanTable(context: Context, title :Pair<String, Int>,): TypeTable {
+        /* declara variables auxiliares */
+        val list = context.resources.getStringArray(R.array.table_category)
+        val listAdapter = mutableListOf<TypeMeals>()
+
+        /* Construye con datos base */
+        list.forEach {
+            listAdapter.add(
+                TypeMeals(
+                    category = Pair(it, 3),
+                    meal1 = Pair("C1", 0),
+                    meal2 = Pair("C2", 0),
+                    meal3 = Pair("C3", 0),
+                    meal4 = Pair("C4", 0),
+                    meal5 = Pair("C5", 0),
+                    meal6 = Pair("C6", 0),
+                    meal7 = Pair("C7", 0)
+                )
+            )
+        }
+
+
+        val typeTableReturn = TypeTable(listAdapter, title)
+        val jsonString = gson.toJson(typeTableReturn)
+        val file = File(context.filesDir, NAME_JSON)
+        file.writeText(jsonString)
+
+        val listType = object : TypeToken<TypeTable>() {}.type
+        return gson.fromJson(jsonString, listType)
+    }
+
+
 }
