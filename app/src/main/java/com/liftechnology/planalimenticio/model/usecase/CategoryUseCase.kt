@@ -4,12 +4,14 @@ import com.liftechnology.planalimenticio.data.local.repository.CategoryLocalRepo
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.data.network.repository.CategoryRepository
 import com.liftechnology.planalimenticio.ui.utils.ErrorCode
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class CategoryUseCase(
     private val repository: CategoryRepository,
-    private val localRepository : CategoryLocalRepository
+    private val localRepository : CategoryLocalRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
 
     /** Obtiene el listado de categorias y procesa la informacion para el viewmodel
@@ -19,7 +21,7 @@ class CategoryUseCase(
     suspend fun getCategory(
         callback: (success: List<CategoryResponse?>?, error: String?) -> Unit
     ) {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatcher) {
             try {
                 // Obtiene datos de la base de datos local
                 val localData = localRepository.getAllCategory()
@@ -38,7 +40,7 @@ class CategoryUseCase(
                     callback.invoke(categoryResponses, null)
                 }else{
                     val response = repository.getCategory()
-                    if (response != null) {
+                    if (!response.isNullOrEmpty()) {
                         // Si la respuesta no es nula, se considera exitosa y se invoca el callback con los datos
                         callback.invoke(response, null)
                     } else {
@@ -50,7 +52,7 @@ class CategoryUseCase(
 
             } catch (e: Exception) {
                 // En caso de una excepción, se invoca el callback con el mensaje de error
-                callback.invoke(null, e.message)
+                callback.invoke(null,ErrorCode.ERROR_DB)
             }
         }
     }

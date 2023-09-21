@@ -4,17 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
-import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
 import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
+import com.liftechnology.planalimenticio.data.network.models.response.local.ModelCardList
+import com.liftechnology.planalimenticio.framework.CoroutineScopeManager
 import com.liftechnology.planalimenticio.model.usecase.FoodUseCase
 import com.liftechnology.planalimenticio.ui.utils.ErrorCode
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class VMCategory(
     private val useCase: FoodUseCase
 ) : ViewModel() {
+    // Corrutina controlada
+    private val coroutine = CoroutineScopeManager()
 
     private val _listFood = MutableLiveData<List<ModelCardList>>()
     val listFood: LiveData<List<ModelCardList>> = _listFood
@@ -23,14 +24,13 @@ class VMCategory(
     val errorListFood: LiveData<String> = _errorListFood
 
     fun getListFood(data: CategoryResponse) {
-
-        CoroutineScope(Dispatchers.IO).launch {
+        coroutine.scopeIO.launch {
             try {
                 useCase.getListFood(data.url, data.category) { success, error ->
                     if (error.isNullOrEmpty()) {
                         buildListFood(success, data.startColor, data.endColor)
                     } else {
-                        _errorListFood.postValue(ErrorCode.ERROR_SERVICE)
+                        _errorListFood.postValue(error)
                     }
                 }
             } catch (e: java.lang.Exception) {

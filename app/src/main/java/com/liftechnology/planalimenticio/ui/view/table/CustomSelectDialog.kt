@@ -1,4 +1,4 @@
-package com.liftechnology.planalimenticio.ui.utils
+package com.liftechnology.planalimenticio.ui.view.table
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -9,6 +9,8 @@ import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.DialogCustomSelectBinding
 import com.liftechnology.planalimenticio.model.dataclass.TypeTable
 import com.liftechnology.planalimenticio.model.interfaces.DialogListener
+import com.liftechnology.planalimenticio.ui.utils.TableNumberMeal
+import com.liftechnology.planalimenticio.ui.utils.ValidateTextDialogSelect
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMTable
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -121,9 +123,7 @@ class CustomSelectDialog : DialogFragment() {
 
     private fun initListeners(){
         bindingDialog.apply {
-            btnClose.setOnClickListener {
-                dismiss()
-            }
+            btnClose.setOnClickListener { dismiss() }
 
             btnAccept.setOnClickListener {
                 updateData()
@@ -131,36 +131,39 @@ class CustomSelectDialog : DialogFragment() {
                 dismiss()
             }
 
-            btnPlus.setOnClickListener {
-                if (argDescription == ValidateTextDialogSelect.MEALS){
-                    if (argNumber!=7) {
-                        argNumber = argNumber!! + 1
-                        bindingDialog.textQuantity.text = argNumber.toString()
-                    }
-                }else{
-                    if (argNumber!=10) {
-                        argNumber = argNumber!! + 1
-                        bindingDialog.textQuantity.text = argNumber.toString()
-                    }
-                }
-            }
+            btnPlus.setOnClickListener { makeSum() }
 
-            btnMinus.setOnClickListener {
-                if(argDescription == ValidateTextDialogSelect.MEALS){
-                    if (argNumber!=3){
-                        argNumber = argNumber!! - 1
-                        bindingDialog.textQuantity.text = argNumber.toString()
-                    }
-                }else{
-                    if (argNumber!=0){
-                        argNumber = argNumber!! - 1
-                        bindingDialog.textQuantity.text = argNumber.toString()
-                    }
-                }
+            btnMinus.setOnClickListener { makeSubtract() }
+        }
+    }
+
+    private fun makeSubtract() {
+        if(argDescription == ValidateTextDialogSelect.MEALS){
+            if (argNumber!=3){
+                argNumber = argNumber!! - 1
+                bindingDialog.textQuantity.text = argNumber.toString()
+            }
+        }else{
+            if (argNumber!=0){
+                argNumber = argNumber!! - 1
+                bindingDialog.textQuantity.text = argNumber.toString()
             }
         }
     }
 
+    private fun makeSum() {
+        if (argDescription == ValidateTextDialogSelect.MEALS){
+            if (argNumber!=7) {
+                argNumber = argNumber!! + 1
+                bindingDialog.textQuantity.text = argNumber.toString()
+            }
+        }else{
+            if (argNumber!=10) {
+                argNumber = argNumber!! + 1
+                bindingDialog.textQuantity.text = argNumber.toString()
+            }
+        }
+    }
 
 
     private fun updateData() {
@@ -202,10 +205,8 @@ class CustomSelectDialog : DialogFragment() {
                         }
                     }.toList()
                 }
-
             }
         }
-
         allTable = TypeTable(updateList!!,updateFirstTable)
         viewModelTable.updateTable(requireContext(), allTable!!)
     }

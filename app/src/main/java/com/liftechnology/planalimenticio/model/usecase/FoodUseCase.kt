@@ -3,12 +3,15 @@ package com.liftechnology.planalimenticio.model.usecase
 import com.liftechnology.planalimenticio.data.local.repository.FoodLocalRepository
 import com.liftechnology.planalimenticio.data.network.models.response.FoodResponse
 import com.liftechnology.planalimenticio.data.network.repository.FoodRepository
+import com.liftechnology.planalimenticio.ui.utils.ErrorCode
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class FoodUseCase(
     private val repository: FoodRepository,
-    private val localRepository: FoodLocalRepository
+    private val localRepository: FoodLocalRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
 
     /** Obtiene el listado de categorias y procesa la informacion para el viewmodel
@@ -20,7 +23,7 @@ class FoodUseCase(
         nameCategory : String,
         callback: (success: List<FoodResponse>?, error: String?) -> Unit
     ) {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatcher) {
             try {
                 // Obtiene datos de la base de datos local
                 val localData = localRepository.getCategoryFood(nameCategory)
@@ -63,11 +66,16 @@ class FoodUseCase(
                 }
                 else {
                     val response = repository.getListFood(url)
-                    callback.invoke(response, null)
+                    if (response.isEmpty()){
+                        callback.invoke(null, ErrorCode.ERROR_SERVICE)
+                    }else{
+                        callback.invoke(response, null)
+                    }
+
                 }
             } catch (e: Exception) {
                 // En caso de una excepción, se invoca el callback con el mensaje de error
-                callback.invoke(null, e.message)
+                callback.invoke(null, ErrorCode.ERROR_DB)
             }
         }
     }

@@ -2,19 +2,22 @@ package com.liftechnology.planalimenticio.model.usecase
 
 import android.content.Context
 import com.liftechnology.planalimenticio.data.local.repository.TableLocalRepository
-import com.liftechnology.planalimenticio.model.dataclass.TypeMeals
 import com.liftechnology.planalimenticio.model.dataclass.TypeTable
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class TableUseCase(private val localRepository: TableLocalRepository) {
+class TableUseCase(
+    private val localRepository: TableLocalRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Default
+    ) {
 
     suspend fun startTable(
         context: Context,
         typeTable: TypeTable,
         callback: (success: TypeTable?, error: String?) -> Unit
     ) {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatcher) {
             try {
                 val mutableList: TypeTable = localRepository.startTable(context,typeTable)
                 callback.invoke(mutableList, null)
@@ -29,13 +32,8 @@ class TableUseCase(private val localRepository: TableLocalRepository) {
         context: Context,
         typeTable: TypeTable
     ) {
-        withContext(Dispatchers.IO) {
-            try {
-                localRepository.updateTable(context,typeTable)
-
-            } catch (e: Exception) {
-
-            }
+        return withContext(dispatcher) {
+            localRepository.updateTable(context,typeTable)
         }
     }
 
@@ -43,7 +41,7 @@ class TableUseCase(private val localRepository: TableLocalRepository) {
         context: Context,
         callback: (success: TypeTable?, error: String?) -> Unit
     ) {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatcher) {
             try {
                 val mutableList: TypeTable = localRepository.getTable(context)
                 callback.invoke(mutableList, null)
@@ -59,7 +57,7 @@ class TableUseCase(private val localRepository: TableLocalRepository) {
         title :Pair<String, Int>,
         callback: (success: TypeTable?, error: String?) -> Unit
     ) {
-        return withContext(Dispatchers.IO) {
+        return withContext(dispatcher) {
             try {
                 val mutableList: TypeTable = localRepository.cleanTable(context, title)
                 callback.invoke(mutableList, null)

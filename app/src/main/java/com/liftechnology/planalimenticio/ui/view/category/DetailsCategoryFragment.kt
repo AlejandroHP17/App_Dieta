@@ -12,8 +12,7 @@ import com.liftechnology.planalimenticio.databinding.FragmentDetailsCategoryBind
 import com.liftechnology.planalimenticio.framework.BaseFragment
 import com.liftechnology.planalimenticio.ui.adapters.FoodClickedListener
 import com.liftechnology.planalimenticio.ui.adapters.GeneralAdapter
-import com.liftechnology.planalimenticio.ui.utils.CustomDetailDialog
-import com.liftechnology.planalimenticio.ui.viewextensions.toastFragment
+import com.liftechnology.planalimenticio.ui.viewextensions.toastFailed
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMCategory
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -123,7 +122,7 @@ class DetailsCategoryFragment : BaseFragment<FragmentDetailsCategoryBinding>() {
      * */
     private fun handlerErrorListFood(): (String) -> Unit = { text ->
         // Muestra el error
-        toastFragment(text)
+        toastFailed(text, requireActivity())
         // Regresa a la vista anterior
         findNavController().popBackStack()
     }

@@ -13,7 +13,6 @@ import com.liftechnology.planalimenticio.model.dataclass.TypeTable
 import com.liftechnology.planalimenticio.model.interfaces.DialogListener
 import com.liftechnology.planalimenticio.ui.adapters.SectionClickedListener
 import com.liftechnology.planalimenticio.ui.adapters.TableAdapter
-import com.liftechnology.planalimenticio.ui.utils.CustomSelectDialog
 import com.liftechnology.planalimenticio.ui.utils.TableNumberMeal
 import com.liftechnology.planalimenticio.ui.utils.ValidateTextDialogSelect
 import com.liftechnology.planalimenticio.ui.viewextensions.toastSuccess

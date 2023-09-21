@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.liftechnology.planalimenticio.framework.CoroutineScopeManager
 import com.liftechnology.planalimenticio.model.dataclass.TypeTable
 import com.liftechnology.planalimenticio.model.usecase.TableUseCase
 import kotlinx.coroutines.launch
@@ -12,6 +12,9 @@ import kotlinx.coroutines.launch
 class VMTable(
     private val useCase: TableUseCase
 ) : ViewModel() {
+
+    // Corrutina controlada
+    private val coroutine = CoroutineScopeManager()
 
     /* Variables para live data */
     private val _dataFlow = MutableLiveData<TypeTable>()
@@ -24,7 +27,7 @@ class VMTable(
 
 
     fun startTable(context: Context, typeTable: TypeTable) {
-        viewModelScope.launch {
+        coroutine.scopeIO.launch {
             useCase.startTable(context, typeTable) { success, error ->
                 if (error.isNullOrEmpty()) {
                     _dataFlow.postValue(success)
@@ -41,7 +44,7 @@ class VMTable(
     }
 
     fun getTable(context: Context){
-        viewModelScope.launch {
+        coroutine.scopeIO.launch {
             useCase.getTable(context) { success, error ->
                 if (error.isNullOrEmpty()) {
                     _dataFlow.postValue(success)
@@ -51,13 +54,13 @@ class VMTable(
     }
 
     fun updateTable(context: Context, typeTable: TypeTable){
-        viewModelScope.launch {
+        coroutine.scopeIO.launch {
             useCase.updateTable(context, typeTable)
         }
     }
 
     fun cleanTable(context: Context, title :Pair<String, Int>){
-        viewModelScope.launch {
+        coroutine.scopeIO.launch {
             useCase.cleanTable(context, title){ success, error ->
                 if (error.isNullOrEmpty()) {
                     _dataFlow.postValue(success)
