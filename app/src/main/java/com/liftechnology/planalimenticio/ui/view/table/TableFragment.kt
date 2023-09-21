@@ -154,9 +154,10 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
         }
     }
 
-    override fun onDataReceivedTable() {
+    override fun onDataUpdateTable() {
         toastSuccess("La informacion se ha actualizado correctamente", requireActivity())
         viewModelTable.getTable(requireContext())
     }
+
 
 }

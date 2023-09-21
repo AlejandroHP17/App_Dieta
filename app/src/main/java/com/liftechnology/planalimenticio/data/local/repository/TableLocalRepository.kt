@@ -86,7 +86,7 @@ class TableLocalRepository {
         list.forEach {
             listAdapter.add(
                 TypeMeals(
-                    category = Pair(it, 3),
+                    category = Pair(it, 0),
                     meal1 = Pair("C1", 0),
                     meal2 = Pair("C2", 0),
                     meal3 = Pair("C3", 0),

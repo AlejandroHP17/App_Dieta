@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.DialogCustomSelectBinding
+import com.liftechnology.planalimenticio.model.dataclass.TypeMeals
 import com.liftechnology.planalimenticio.model.dataclass.TypeTable
 import com.liftechnology.planalimenticio.model.interfaces.DialogListener
 import com.liftechnology.planalimenticio.ui.utils.TableNumberMeal
@@ -127,7 +128,7 @@ class CustomSelectDialog : DialogFragment() {
 
             btnAccept.setOnClickListener {
                 updateData()
-                dialogListener?.onDataReceivedTable()
+                dialogListener?.onDataUpdateTable()
                 dismiss()
             }
 
@@ -174,6 +175,24 @@ class CustomSelectDialog : DialogFragment() {
         when (argDescription) {
             ValidateTextDialogSelect.MEALS -> {
                 updateFirstTable = Pair(updateFirstTable?.first!!, argNumber!!)
+                val list = context?.resources?.getStringArray(R.array.table_category)
+                val listAdapter = mutableListOf<TypeMeals>()
+
+                /* Construye con datos base */
+                list?.forEach {
+                    updateListFinish?.add(
+                        TypeMeals(
+                            category = Pair(it, 0),
+                            meal1 = Pair("C1", 0),
+                            meal2 = Pair("C2", 0),
+                            meal3 = Pair("C3", 0),
+                            meal4 = Pair("C4", 0),
+                            meal5 = Pair("C5", 0),
+                            meal6 = Pair("C6", 0),
+                            meal7 = Pair("C7", 0)
+                        )
+                    )
+                }
             }
             ValidateTextDialogSelect.PORTION -> {
                 updateListFinish?.let { list ->

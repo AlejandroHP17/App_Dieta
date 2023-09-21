@@ -17,6 +17,7 @@
     <string name="image_loader">Image Loader</string>
 
     <!-- Buttons -->
+    <string name="button_generic">Boton</string>
     <string name="button_close">Cerrar</string>
     <string name="button_accept">Aceptar</string>
     <string name="button_number_meals">Número de comidas al dia: %d</string>
