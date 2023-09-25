@@ -4,39 +4,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.liftechnology.planalimenticio.databinding.FragmentGeneratorBinding
+import com.liftechnology.planalimenticio.framework.BaseFragment
+import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class GeneratorFragment : Fragment() {
+class GeneratorFragment : BaseFragment<FragmentGeneratorBinding>() {
+    override fun getViewBinding() = FragmentGeneratorBinding.inflate(layoutInflater)
 
-    private var _binding: FragmentGeneratorBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    /* Variable del viewModel */
+    private val shareModelMain: ShareViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this)[NotificationsViewModel::class.java]
 
-        _binding = FragmentGeneratorBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+    /** Inicializa la vista con parametros iniciales
+     * @author pelkidev
+     * @date 20/09/2023
+     * */
+    override fun setUpViews() {
+        super.setUpViews()
+        /* Toolbar: Se configura de manera inicial */
     }
 }

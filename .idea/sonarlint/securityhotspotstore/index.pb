@@ -43,8 +43,6 @@ Vapp/src/main/java/com/liftechnology/planalimenticio/ui/view/activities/HomeActi
 Xapp/src/main/java/com/liftechnology/planalimenticio/ui/view/activities/SplashActivity.kt,5/9/59d110fed412c37b2f0d78d5fb24ea9666d675fd
 ä
 Zapp/src/main/java/com/liftechnology/planalimenticio/ui/view/generator/GeneratorFragment.kt,a/1/a1e1636a43cbda1dfbda9d8bce6a949bbfc4b8e3
-è
-_app/src/main/java/com/liftechnology/planalimenticio/ui/view/generator/NotificationsViewModel.kt,8/5/8539ee5febc368bc67f593e5ad8ba2da5991d659
 Ü
 Vapp/src/main/java/com/liftechnology/planalimenticio/ui/viewextensions/funExtensions.kt,8/4/84509f905cd0d287508a4489a4253ed9dd27a086
 ó
@@ -63,8 +61,6 @@ Qapp/src/main/java/com/liftechnology/planalimenticio/ui/adapters/GeneralAdapter.
 _app/src/main/java/com/liftechnology/planalimenticio/ui/view/category/DetailsCategoryFragment.kt,c/6/c6d2f93b1d52f7c83f2bed2a7213db7da946cae1
 à
 Xapp/src/main/java/com/liftechnology/planalimenticio/ui/view/category/CategoryFragment.kt,b/6/b62ee99c067126d421a89f4cb9780017bc3b7def
-Ä
-Papp/src/main/java/com/liftechnology/planalimenticio/ui/viewmodel/AllViewModel.kt,e/7/e7ece5a7a44cae2531c7783b5acfde2ec5426ded
 z
 Japp/src/main/java/com/liftechnology/planalimenticio/model/di/FoodModule.kt,9/6/96b1b8bd23bc980a3d621c79a6b3ffb972410a1e
 Ä
@@ -79,8 +75,6 @@ Kapp/src/main/java/com/liftechnology/planalimenticio/ui/viewmodel/VMTable.kt,8/
 Oapp/src/main/java/com/liftechnology/planalimenticio/ui/adapters/TableAdapter.kt,f/9/f97a53179bf0826961950b4302ea3e4a88c8f51e
 Ç
 Rapp/src/main/java/com/liftechnology/planalimenticio/ui/view/table/TableFragment.kt,5/c/5c81d80991d08cc90afb4d2eee2fec03bae6b8c0
-Ç
-Rapp/src/main/java/com/liftechnology/planalimenticio/ui/utils/CustomDetailDialog.kt,9/7/97e04a07eb9e7aa977ebe4a1ac6c3dbaf498e9f3
 Ü
 Vapp/src/main/java/com/liftechnology/planalimenticio/model/interfaces/DialogListener.kt,2/6/2679b3154159ed29cf32ed033d0371e11386bf38
 à
@@ -89,9 +83,17 @@ Xapp/src/main/java/com/liftechnology/planalimenticio/ui/utils/ValidateTextDialog
 Oapp/src/main/java/com/liftechnology/planalimenticio/ui/utils/TableNumberMeal.kt,f/1/f18809ce6733b54d8d272de1b24d09151cefd36e
 y
 Iapp/src/main/java/com/liftechnology/planalimenticio/ui/utils/Constants.kt,4/7/47cdfd8aa5da1b04c8cd44565cfd1523f75d300e
-Ç
-Rapp/src/main/java/com/liftechnology/planalimenticio/ui/utils/CustomSelectDialog.kt,9/c/9ccbd46e22f55c555afc4f1e589a399b086ced50
 Å
 Qapp/src/main/java/com/liftechnology/planalimenticio/model/usecase/TableUseCase.kt,7/5/7576ab8c169434e0917ea15df4e4e1d9e267d65c
 ë
 aapp/src/main/java/com/liftechnology/planalimenticio/data/local/repository/TableLocalRepository.kt,9/6/96ef228a468ca3d418434ff90df72ea1398b638d
+}
+Mapp/src/main/java/com/liftechnology/planalimenticio/framework/BaseFragment.kt,f/3/f37e41b0030773f8466a4f92ab51ae8ffc6ee126
+Ü
+Vapp/src/main/java/com/liftechnology/planalimenticio/framework/CoroutineScopeManager.kt,4/2/4236634ea98427e3739ddc0da33308942b18e2f5
+ä
+Zapp/src/main/java/com/liftechnology/planalimenticio/ui/view/category/CustomDetailDialog.kt,f/9/f99b73a49302e940781af7d7ea34c023b0dc69bc
+Ç
+Rapp/src/main/java/com/liftechnology/planalimenticio/ui/viewmodel/ShareViewModel.kt,1/e/1e4b570053b29533cae759d0401c4c531c0d2e88
+á
+Wapp/src/main/java/com/liftechnology/planalimenticio/ui/view/table/CustomSelectDialog.kt,b/f/bf1eb2be45f653f0df2421d8a17b2b4043cc4817

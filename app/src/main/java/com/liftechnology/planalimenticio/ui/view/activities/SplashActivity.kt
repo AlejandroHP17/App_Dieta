@@ -3,15 +3,13 @@ package com.liftechnology.planalimenticio.ui.view.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.google.gson.Gson
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
 import com.liftechnology.planalimenticio.model.interfaces.SplashListener
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
-import com.liftechnology.planalimenticio.ui.viewextensions.toastActivity
+import com.liftechnology.planalimenticio.ui.viewextensions.toastFailed
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -78,8 +76,7 @@ class SplashActivity : AppCompatActivity(), SplashListener {
      * @date 20/08/2023
      * */
     override fun onError(errorCode: String) {
-        lifecycleScope.launch {
-        toastActivity("The error was $errorCode")
-        }
+        toastFailed(errorCode, this)
+        binding.imageRotate.clearAnimation()
     }
 }
