@@ -45,15 +45,25 @@ abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
         observeData()
     }
 
-    open fun setUpViews() {}
+    open fun setUpViews() {
+        //EMPTY
+    }
 
-    open fun listenersView(){}
+    open fun listenersView(){
+        //EMPTY
+    }
 
-    open fun observeData() {}
+    open fun observeData() {
+        //EMPTY
+    }
 
-    open fun getArgumentsNavigation(){}
+    open fun getArgumentsNavigation(){
+        //EMPTY
+    }
 
-    open fun initData(){}
+    open fun initData(){
+        //EMPTY
+    }
 
     private fun init() {
         binding = getViewBinding()
@@ -64,5 +74,9 @@ abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
     override fun onDestroyView() {
         disposableContainer.clear()
         super.onDestroyView()
+    }
+
+    fun navToDestination(id: Int){
+        (this.requireActivity() as BaseActivity).navToDestination(id)
     }
 }

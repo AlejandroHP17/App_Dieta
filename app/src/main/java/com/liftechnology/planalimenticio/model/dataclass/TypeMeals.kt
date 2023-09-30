@@ -25,3 +25,8 @@ data class TypeTable(
     val list: List<TypeMeals>,
     val meals: Pair<String,Int>? = null
 ): Serializable
+
+data class ListTypeTable(
+    val typeTable: TypeTable,
+    val name : String
+): Serializable

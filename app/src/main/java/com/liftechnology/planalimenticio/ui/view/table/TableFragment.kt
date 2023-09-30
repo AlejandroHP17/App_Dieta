@@ -14,7 +14,11 @@ import com.liftechnology.planalimenticio.model.interfaces.DialogListener
 import com.liftechnology.planalimenticio.ui.adapters.SectionClickedListener
 import com.liftechnology.planalimenticio.ui.adapters.TableAdapter
 import com.liftechnology.planalimenticio.ui.utils.TableNumberMeal
+import com.liftechnology.planalimenticio.ui.utils.TypeClick.CLEAN
+import com.liftechnology.planalimenticio.ui.utils.TypeClick.NUMBER_MEALS
+import com.liftechnology.planalimenticio.ui.utils.TypeClick.SAVE
 import com.liftechnology.planalimenticio.ui.utils.ValidateTextDialogSelect
+import com.liftechnology.planalimenticio.ui.view.dialog.CustomSaveDialog
 import com.liftechnology.planalimenticio.ui.viewextensions.toastSuccess
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMTable
@@ -74,7 +78,7 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
         val typeTable = TypeTable(listOf(), Pair(titleNumberMeals, 3))
         viewModelTable.startTable(requireContext(), typeTable)
 
-        initListenerAdapter(3)
+        initListenerAdapter()
         listTable = listOf()
         adapterTable.submitList(listTable)
         // Construye el recycler con el adaptador
@@ -100,19 +104,28 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
 
         viewModelTable.typeClick.observe(viewLifecycleOwner) { value ->
             if (isInitial) {
-                if(value == "number"){
-                    showDialog(
+                when(value){
+                    NUMBER_MEALS -> {showDialog(
                         getString(R.string.button_number_meals),
                         ValidateTextDialogSelect.MEALS,
-                        ""
-                    )
-                }else{
-                    titleNumberMeals = getString(R.string.button_number_meals)
-                    viewModelTable.cleanTable(requireContext(),Pair(titleNumberMeals, 3))
+                        "")}
+                    CLEAN -> {
+                        titleNumberMeals = getString(R.string.button_number_meals)
+                        viewModelTable.cleanTable(requireContext(),Pair(titleNumberMeals, 3))
+                    }
+                    SAVE -> {showDialogSave()}
                 }
             } else {
                 isInitial = true
             }
+        }
+    }
+
+    private fun showDialogSave() {
+        val dialogFragment = CustomSaveDialog()
+        dialogFragment.dialogListener = this
+        childFragmentManager.let {
+            dialogFragment.show(it, "customDialog")
         }
     }
 
@@ -121,7 +134,8 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
      * @author pelkidev
      * @date 01/09/2023
      * */
-    private fun initListenerAdapter(numberMeal: Int) {
+    private fun initListenerAdapter() {
+        val numberMeal = 3
         adapterTable = TableAdapter(
             SectionClickedListener { card, click ->
                 viewModelTable.dataFlow
@@ -157,6 +171,10 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
     override fun onDataUpdateTable() {
         toastSuccess("La informacion se ha actualizado correctamente", requireActivity())
         viewModelTable.getTable(requireContext())
+    }
+
+    override fun onSaveTable() {
+        toastSuccess("La informacion se ha almacenado correctamente", requireActivity())
     }
 
 

@@ -17,11 +17,13 @@
     <string name="image_loader">Image Loader</string>
 
     <!-- Buttons -->
-    <string name="button_generic">Boton</string>
+    <string name="button_category">Categorias   #</string>
     <string name="button_close">Cerrar</string>
     <string name="button_accept">Aceptar</string>
     <string name="button_number_meals">Número de comidas al dia: %d</string>
     <string name="button_clean">Limpiar</string>
+    <string name="button_save">Guardar</string>
+    <string name="button_add">Agregar</string>
 
     <!-- Text table -->
     <string name="table_first">Desayuno</string>
@@ -45,6 +47,10 @@
     <string name="dialog_change_portion">¿Cuál es el número de porciones que deseas implementar en esta categoria?</string>
     <string name="dialog_change_quantity">¿Cuál es el número de porciones para esta comida?</string>
     <string name="dialog_change_meals">¿Cuál es el número de comidas que deseas realizar al día?</string>
+    <string name="dialog_error_meals">Has alcanzado el número máximo de comidas permitido</string>
+    <string name="dialog_error_portion">Has alcanzado el número máximo de porciones permitido por categoría</string>
+    <string name="dialog_error_quantity">Has alcanzado las porción máxima de la categoría</string>
+    <string name="dialog_ask_name_file">¿Qué nombre quieres darle al archivo?</string>
 
     <!-- Content descriptions -->
     <string name="content_image">Imagen</string>

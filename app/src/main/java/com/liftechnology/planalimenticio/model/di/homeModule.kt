@@ -2,11 +2,13 @@ package com.liftechnology.planalimenticio.model.di
 
 import com.liftechnology.planalimenticio.data.local.db.CategoryRoomDataBase
 import com.liftechnology.planalimenticio.data.local.repository.CategoryLocalRepository
+import com.liftechnology.planalimenticio.data.local.repository.ListTableLocalRepository
 import com.liftechnology.planalimenticio.data.network.enviroment.Environment
 import com.liftechnology.planalimenticio.data.network.repository.CategoryRepository
 import com.liftechnology.planalimenticio.data.network.repository.CategoryRepositoryImpl
 import com.liftechnology.planalimenticio.data.network.service.CategoryApi
 import com.liftechnology.planalimenticio.model.usecase.CategoryUseCase
+import com.liftechnology.planalimenticio.model.usecase.SaveUseCase
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -43,11 +45,16 @@ val homeModule = module{
         CategoryRepositoryImpl(get(),get()) }
 
     single{
-        CategoryUseCase(get(),get())
-
+        ListTableLocalRepository()
     }
 
+    single{
+        CategoryUseCase(get(),get())
+    }
+
+    single { SaveUseCase(get(),get()) }
+
     viewModel{
-        ShareViewModel(get())
+        ShareViewModel(get(), get())
     }
 }

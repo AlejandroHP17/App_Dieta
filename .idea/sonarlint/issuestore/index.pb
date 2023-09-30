@@ -97,3 +97,13 @@ Zapp/src/main/java/com/liftechnology/planalimenticio/ui/view/category/CustomDeta
 Wapp/src/main/java/com/liftechnology/planalimenticio/ui/view/table/CustomSelectDialog.kt,b/f/bf1eb2be45f653f0df2421d8a17b2b4043cc4817
 ‚
 Rapp/src/main/java/com/liftechnology/planalimenticio/ui/viewmodel/ShareViewModel.kt,1/e/1e4b570053b29533cae759d0401c4c531c0d2e88
+y
+Iapp/src/main/java/com/liftechnology/planalimenticio/ui/utils/TypeClick.kt,4/d/4d417cdc69f520284827b446d9fc2d0b9f5c1198
+†
+Vapp/src/main/java/com/liftechnology/planalimenticio/ui/view/dialog/CustomSaveDialog.kt,6/d/6d0e892ef886bfc3500cb2774858d941ff9e01af
+•
+eapp/src/main/java/com/liftechnology/planalimenticio/data/local/repository/ListTableLocalRepository.kt,d/0/d0aca9d0d587153869b8b66ae2682d7ebbded4da
+€
+Papp/src/main/java/com/liftechnology/planalimenticio/model/usecase/SaveUseCase.kt,3/1/31394e8f1cc7f94ae43b7c45e8f6f078f16d003d
+
+Oapp/src/main/java/com/liftechnology/planalimenticio/ui/viewmodel/VMGenerator.kt,a/1/a1d7d8994be4069d3991606917bcdb7d0c6f6da8

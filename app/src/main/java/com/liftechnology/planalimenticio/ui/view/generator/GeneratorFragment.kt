@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.liftechnology.planalimenticio.databinding.FragmentGeneratorBinding
 import com.liftechnology.planalimenticio.framework.BaseFragment
+import com.liftechnology.planalimenticio.ui.utils.StackConstant
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -32,5 +33,13 @@ class GeneratorFragment : BaseFragment<FragmentGeneratorBinding>() {
     override fun setUpViews() {
         super.setUpViews()
         /* Toolbar: Se configura de manera inicial */
+    }
+
+    override fun listenersView() {
+        super.listenersView()
+        binding.apply {
+            btnAdd.setOnClickListener { navToDestination(StackConstant.TABLE) }
+        }
+
     }
 }

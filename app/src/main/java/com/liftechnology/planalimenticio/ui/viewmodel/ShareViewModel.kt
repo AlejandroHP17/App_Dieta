@@ -1,19 +1,23 @@
 package com.liftechnology.planalimenticio.ui.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.framework.CoroutineScopeManager
 import com.liftechnology.planalimenticio.model.interfaces.SplashListener
 import com.liftechnology.planalimenticio.model.usecase.CategoryUseCase
+import com.liftechnology.planalimenticio.model.usecase.SaveUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ShareViewModel(
-    private val useCase: CategoryUseCase
-    ) : ViewModel() {
+    private val useCase: CategoryUseCase,
+    private val saveUseCase: SaveUseCase
+) : ViewModel() {
     // Corrutina controlada
     private val coroutine = CoroutineScopeManager()
+
     // Variable que inicializa el listener con el SplashActivity
     var listener: SplashListener? = null
 
@@ -58,6 +62,17 @@ class ShareViewModel(
             val listCategory: MutableList<CategoryResponse> = mutableListOf()
             listCategory.addAll(list)
             _dataFlow.value = listCategory
+        }
+    }
+
+    /** Método para mguardar la tabla con un nombre diferente
+     * @author pelkidev
+     * @date 27/09/2023
+     * @param name Nombre de la tabla
+     * */
+    fun saveTableWithName(context: Context, name: String) {
+        coroutine.scopeIO.launch {
+            saveUseCase.saveNewTable(context, name)
         }
     }
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/start_nav_category"
+    app:startDestination="@id/categoryFragment">
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.liftechnology.planalimenticio.ui.view.category.CategoryFragment"
+        android:label="@string/nav_list"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_navigation_category_to_detailsCategoryFragment"
+            app:destination="@id/detailsCategoryFragment"
+            app:enterAnim="@anim/to_center"
+            app:exitAnim="@anim/from_center"
+            app:popEnterAnim="@anim/to_center"
+            app:popExitAnim="@anim/from_center" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsCategoryFragment"
+        android:name="com.liftechnology.planalimenticio.ui.view.category.DetailsCategoryFragment"
+        android:label="DetailsCategoryFragment" >
+
+        <argument
+            android:name="arg"
+            app:argType="com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse" />
+    </fragment>
+
+</navigation>
