@@ -43,9 +43,6 @@ class VMTable(
         _typeClick.postValue("clean")
     }
 
-    fun onClickSaveTable(){
-        _typeClick.postValue("save")
-    }
 
     fun getTable(context: Context){
         coroutine.scopeIO.launch {

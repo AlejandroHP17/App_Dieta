@@ -12,6 +12,7 @@ import com.liftechnology.planalimenticio.databinding.FragmentDetailsCategoryBind
 import com.liftechnology.planalimenticio.framework.BaseFragment
 import com.liftechnology.planalimenticio.ui.adapters.FoodClickedListener
 import com.liftechnology.planalimenticio.ui.adapters.GeneralAdapter
+import com.liftechnology.planalimenticio.ui.view.dialog.CustomDetailDialog
 import com.liftechnology.planalimenticio.ui.viewextensions.toastFailed
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMCategory
@@ -66,7 +67,6 @@ class DetailsCategoryFragment : BaseFragment<FragmentDetailsCategoryBinding>() {
         super.setUpViews()
         /* Toolbar: Se configura de manera inicial */
         binding.toolbarCategory.btnReturn.visibility = View.VISIBLE
-        binding.toolbarCategory.btnSearchBar.visibility = View.GONE
         binding.allContent.visibility = View.GONE
         binding.toolbarCategory.tvNameCategory.text = dataNavigate?.category
         binding.toolbarCategory.toolbar.setBackgroundColor(Color.parseColor(dataNavigate?.startColor))

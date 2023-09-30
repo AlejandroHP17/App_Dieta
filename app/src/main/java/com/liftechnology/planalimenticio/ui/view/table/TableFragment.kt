@@ -16,9 +16,9 @@ import com.liftechnology.planalimenticio.ui.adapters.TableAdapter
 import com.liftechnology.planalimenticio.ui.utils.TableNumberMeal
 import com.liftechnology.planalimenticio.ui.utils.TypeClick.CLEAN
 import com.liftechnology.planalimenticio.ui.utils.TypeClick.NUMBER_MEALS
-import com.liftechnology.planalimenticio.ui.utils.TypeClick.SAVE
 import com.liftechnology.planalimenticio.ui.utils.ValidateTextDialogSelect
 import com.liftechnology.planalimenticio.ui.view.dialog.CustomSaveDialog
+import com.liftechnology.planalimenticio.ui.view.dialog.CustomSelectDialog
 import com.liftechnology.planalimenticio.ui.viewextensions.toastSuccess
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
 import com.liftechnology.planalimenticio.ui.viewmodel.VMTable
@@ -62,10 +62,9 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
     override fun setUpViews() {
         super.setUpViews()
         /* Toolbar: Se configura de manera inicial */
-        binding.toolbarCategory.btnReturn.visibility = View.GONE
-        binding.toolbarCategory.btnSearchBar.visibility = View.GONE
         binding.toolbarCategory.tvNameCategory.text = getString(R.string.toolbar_txt_table)
         binding.btnNumberMeals.text = getString(R.string.button_number_meals)
+        binding.toolbarCategory.btnSave.visibility = View.VISIBLE
         binding.toolbarCategory.toolbar.setBackgroundColor(Color.parseColor(shareModelMain.colorGeneral))
     }
 
@@ -83,6 +82,12 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
         adapterTable.submitList(listTable)
         // Construye el recycler con el adaptador
         binding.recyclerTable.adapter = adapterTable
+    }
+
+    override fun listenersView() {
+        super.listenersView()
+        binding.toolbarCategory.btnSave.setOnClickListener { showDialogSave() }
+
     }
 
 
@@ -113,7 +118,6 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
                         titleNumberMeals = getString(R.string.button_number_meals)
                         viewModelTable.cleanTable(requireContext(),Pair(titleNumberMeals, 3))
                     }
-                    SAVE -> {showDialogSave()}
                 }
             } else {
                 isInitial = true

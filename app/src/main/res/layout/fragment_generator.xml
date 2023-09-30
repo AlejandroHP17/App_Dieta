@@ -14,6 +14,11 @@
         android:layout_height="match_parent"
         tools:context=".ui.view.generator.GeneratorFragment">
 
+        <include
+            android:id="@+id/toolbar_generator"
+            layout="@layout/toolbar_generic">
+        </include>
+
         <ImageView
             android:id="@+id/text_notifications"
             android:layout_width="match_parent"

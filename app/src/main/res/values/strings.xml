@@ -8,6 +8,7 @@
 
     <string name="toolbar_txt_categories">Categorías</string>
     <string name="toolbar_txt_table">Tabla de control</string>
+    <string name="toolbar_txt_generator">Generador de dietas</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

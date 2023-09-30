@@ -1,9 +1,11 @@
 package com.liftechnology.planalimenticio.ui.view.generator
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.FragmentGeneratorBinding
 import com.liftechnology.planalimenticio.framework.BaseFragment
 import com.liftechnology.planalimenticio.ui.utils.StackConstant
@@ -33,6 +35,8 @@ class GeneratorFragment : BaseFragment<FragmentGeneratorBinding>() {
     override fun setUpViews() {
         super.setUpViews()
         /* Toolbar: Se configura de manera inicial */
+        binding.toolbarGenerator.tvNameCategory.text = getString(R.string.toolbar_txt_generator)
+        binding.toolbarGenerator.toolbar.setBackgroundColor(Color.parseColor(shareModelMain.colorGeneral))
     }
 
     override fun listenersView() {

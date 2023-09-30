@@ -1,4 +1,4 @@
-package com.liftechnology.planalimenticio.ui.view.category
+package com.liftechnology.planalimenticio.ui.view.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog

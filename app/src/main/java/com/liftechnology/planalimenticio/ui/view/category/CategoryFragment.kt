@@ -53,8 +53,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
     override fun setUpViews() {
         super.setUpViews()
         /* Toolbar: Se configura de manera inicial */
-        binding.toolbarCategory.btnReturn.visibility = View.GONE
-        binding.toolbarCategory.btnSearchBar.visibility = View.GONE
         binding.toolbarCategory.tvNameCategory.text = getString(R.string.toolbar_txt_categories)
     }
 
