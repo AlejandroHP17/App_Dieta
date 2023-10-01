@@ -49,9 +49,6 @@ class CategoriesAdapter(private val listener: CategoriesClickedListener):
 
             }
 
-
-
-
             // Give the action to the click
             binding.clickListener = action
             binding.executePendingBindings()

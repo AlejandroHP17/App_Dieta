@@ -2,6 +2,7 @@ package com.liftechnology.planalimenticio.framework
 
 import android.app.Application
 import com.liftechnology.planalimenticio.model.di.foodModule
+import com.liftechnology.planalimenticio.model.di.generatorModule
 import com.liftechnology.planalimenticio.model.di.homeModule
 import com.liftechnology.planalimenticio.model.di.tableModule
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +21,7 @@ class BaseApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@BaseApplication)
-            modules(homeModule, foodModule, tableModule)
+            modules(homeModule, foodModule, tableModule, generatorModule)
         }
     }
 }

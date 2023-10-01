@@ -142,7 +142,7 @@ class TableFragment : BaseFragment<FragmentTableBinding>(), DialogListener {
         val numberMeal = 3
         adapterTable = TableAdapter(
             SectionClickedListener { card, click ->
-                viewModelTable.dataFlow
+
                 when (click) {
                     TableNumberMeal.CATEGORY -> {
                         showDialog(
