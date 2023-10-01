@@ -8,7 +8,8 @@
 
     <string name="toolbar_txt_categories">Categorías</string>
     <string name="toolbar_txt_table">Tabla de control</string>
-    <string name="toolbar_txt_generator">Generador de dietas</string>
+    <string name="toolbar_txt_generator">Dietas existentes</string>
+    <string name="toolbar_txt_buildDiet">Generador de dieta</string>
 
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -55,5 +56,7 @@
 
     <!-- Content descriptions -->
     <string name="content_image">Imagen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

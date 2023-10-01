@@ -26,27 +26,29 @@ class VMGenerator(
 
     fun getListTable(context: Context) {
         coroutine.scopeIO.launch {
-
-            useCaseGenerator.getListTable(context){success, error ->
-                if (error.isNullOrEmpty()){
-                    _listGenerator.postValue(success!!)
-                }else{
-                    _listGeneratorEmpty.postValue(error)
-                }
-            }
-        }
-    }
-
-    fun deleteItemTable(context: Context, position: Int) {
-        coroutine.scopeIO.launch {
-            useCaseGenerator.deleteItemTableDiet(context,position) { success, error ->
+            useCaseGenerator.getListTableDiet(context){ success, error ->
                 if (error.isNullOrEmpty()) {
                     _listGenerator.postValue(success!!)
                 } else {
                     _listGeneratorEmpty.postValue(error)
                 }
             }
+
         }
     }
+
+    fun deleteItemTableDiet(context: Context, position: Int) {
+        coroutine.scopeIO.launch {
+            useCaseGenerator.deleteItemTableDiet(context, position){ success, error ->
+                if (error.isNullOrEmpty()) {
+                    _listGenerator.postValue(success!!)
+                } else {
+                    _listGeneratorEmpty.postValue(error)
+                }
+            }
+
+        }
+    }
+
 
 }

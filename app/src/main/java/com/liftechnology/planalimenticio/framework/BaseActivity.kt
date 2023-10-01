@@ -3,11 +3,13 @@ package com.liftechnology.planalimenticio.framework
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.ActivityHomeBinding
+import com.liftechnology.planalimenticio.ui.utils.StackConstant
 
 open class BaseActivity : AppCompatActivity() {
     private lateinit var navController  : NavController
@@ -43,6 +45,13 @@ open class BaseActivity : AppCompatActivity() {
                 NavigationUI.setupWithNavController(this, navController)
                 setOnItemSelectedListener { item ->
                     NavigationUI.onNavDestinationSelected(item, navController)
+                }
+
+                setOnItemReselectedListener {
+                    val selectedMenuItem = navController.graph.findNode(it.itemId) as NavGraph
+                    selectedMenuItem.let {item ->
+                        navController.popBackStack(item.startDestinationId, false)
+                    }
                 }
             }
         }

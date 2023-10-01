@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu
 import androidx.core.view.get
+import androidx.navigation.fragment.findNavController
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.databinding.FragmentGeneratorBinding
 import com.liftechnology.planalimenticio.framework.BaseFragment
@@ -61,8 +62,12 @@ class GeneratorFragment : BaseFragment<FragmentGeneratorBinding>() {
 
         adapterGenerator = GeneratorAdapter(GeneratorClickedListener {item, click, position ->
             when(click){
-                "Data" -> {}
-                "Delete" -> {vmGenerator.deleteItemTable(requireContext(),position)}
+                "Data" -> {
+                    val direction = GeneratorFragmentDirections.actionGeneratorFragmentToBuildDiet(item)
+                    findNavController().navigate(direction)
+                }
+                "Delete" -> {
+                    vmGenerator.deleteItemTableDiet(requireContext(),position)}
 
             }
         })
@@ -72,11 +77,17 @@ class GeneratorFragment : BaseFragment<FragmentGeneratorBinding>() {
     override fun observeData() {
         super.observeData()
         vmGenerator.listGenerator.observe(viewLifecycleOwner){
-            adapterGenerator.submitList(it)
-            // Construye el recycler con el adaptador
-            binding.recyclerCardsList.adapter = adapterGenerator
-            binding.llEmpty.visibility = View.GONE
-            binding.llList.visibility = View.VISIBLE
+            if(it.isEmpty()){
+                binding.llEmpty.visibility = View.VISIBLE
+                binding.llList.visibility = View.GONE
+            }else{
+                adapterGenerator.submitList(it)
+                // Construye el recycler con el adaptador
+                binding.recyclerCardsList.adapter = adapterGenerator
+                binding.llEmpty.visibility = View.GONE
+                binding.llList.visibility = View.VISIBLE
+            }
+
         }
         vmGenerator.listGeneratorEmpty.observe(viewLifecycleOwner){
             binding.llEmpty.visibility = View.VISIBLE

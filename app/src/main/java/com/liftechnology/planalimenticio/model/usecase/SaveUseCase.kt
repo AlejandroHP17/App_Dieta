@@ -27,44 +27,44 @@ class SaveUseCase(
         }
     }
 
-    suspend fun getListTable(
+    suspend fun getListTableDiet(
         context: Context,
         callback: (success: List<ListTypeTable>?, error: String?) -> Unit
-    ) {
+    ){
         return withContext(dispatcher) {
             try{
-                val localData = listTablelocalRepository.getListTableDiets(context)
-                if (localData.isNullOrEmpty()){
+                val localData = listTablelocalRepository.getListTableDiet(context)
+                if (localData.isNullOrEmpty()) {
                     callback.invoke(null, ErrorCode.ERROR_DB)
                 }else{
                     callback.invoke(localData, null)
                 }
-
-            } catch (e: Exception) {
+            }catch (e: Exception) {
                 // En caso de una excepción, se invoca el callback con el mensaje de error
-                callback.invoke(null, ErrorCode.ERROR_DB)
+                callback.invoke(null, ErrorCode.ERROR_READ_DB)
             }
+
         }
     }
 
     suspend fun deleteItemTableDiet(
         context: Context,
-        position: Int,
+        position:Int,
         callback: (success: List<ListTypeTable>?, error: String?) -> Unit
     ){
         return withContext(dispatcher) {
             try{
                 val localData = listTablelocalRepository.deleteItemTableDiet(context, position)
-                if (localData.isNullOrEmpty()){
+                if (localData.isNullOrEmpty()) {
                     callback.invoke(null, ErrorCode.ERROR_DB)
                 }else{
                     callback.invoke(localData, null)
                 }
-
-            } catch (e: Exception) {
+            }catch (e: Exception) {
                 // En caso de una excepción, se invoca el callback con el mensaje de error
-                callback.invoke(null, ErrorCode.ERROR_DB)
+                callback.invoke(null, ErrorCode.ERROR_READ_DB)
             }
+
         }
     }
 }

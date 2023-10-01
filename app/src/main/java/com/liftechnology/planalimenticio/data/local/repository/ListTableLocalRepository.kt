@@ -39,20 +39,22 @@ class ListTableLocalRepository {
         file.writeText(jsonString)
     }
 
-    fun getListTableDiets(context: Context):List<ListTypeTable>?{
+    fun getListTableDiet(context: Context):List<ListTypeTable>?{
         val file = File(context.filesDir, Constants.NAME_JSON_LIST_TABLE)
         val existingData = if (file.exists()) {
             val jsonString = file.readText()
             val listType = object : TypeToken<List<ListTypeTable>>() {}.type
-            gson.fromJson(jsonString, listType)}
-        else{ null}
+            gson.fromJson<List<ListTypeTable>>(jsonString, listType)
+        } else {
+            null
+        }
         return existingData
     }
 
     fun deleteItemTableDiet(context: Context, position: Int): List<ListTypeTable>? {
         val file = File(context.filesDir, Constants.NAME_JSON_LIST_TABLE)
-        val table = getListTableDiets(context)
-        return if (table.isNullOrEmpty()){
+        val table = getListTableDiet(context)
+        val existingData = if (table.isNullOrEmpty()|| !file.exists()){
             null
         }else{
             val mutableList = table.toMutableList()
@@ -61,6 +63,7 @@ class ListTableLocalRepository {
             file.writeText(jsonString)
             mutableList
         }
-
+        return existingData
     }
+
 }
