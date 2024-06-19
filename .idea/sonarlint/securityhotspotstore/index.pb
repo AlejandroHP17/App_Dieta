@@ -107,3 +107,7 @@ Papp/src/main/java/com/liftechnology/planalimenticio/model/usecase/SaveUseCase.k
 eapp/src/main/java/com/liftechnology/planalimenticio/data/local/repository/ListTableLocalRepository.kt,d/0/d0aca9d0d587153869b8b66ae2682d7ebbded4da
 
 Oapp/src/main/java/com/liftechnology/planalimenticio/ui/viewmodel/VMGenerator.kt,a/1/a1d7d8994be4069d3991606917bcdb7d0c6f6da8
+}
+Mapp/src/main/java/com/liftechnology/planalimenticio/framework/BaseActivity.kt,e/6/e613ec56f5646b1029ce98256aa5060226f8dcdb
+}
+Mapp/src/main/java/com/liftechnology/planalimenticio/ui/utils/StackConstant.kt,5/b/5bd2d043a5304348222b81919be54efa0c993e5c

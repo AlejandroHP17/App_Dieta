@@ -17,6 +17,10 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import com.liftechnology.planalimenticio.R
+import com.liftechnology.planalimenticio.databinding.DialogCustomFailedToastBinding
+import com.liftechnology.planalimenticio.databinding.DialogCustomSuccessToastBinding
+import com.liftechnology.planalimenticio.framework.CoroutineScopeManager
+import kotlinx.coroutines.launch
 
 /** Toast generic to Fragments */
 fun Context.toastActivity(message: String) {
@@ -28,45 +32,42 @@ fun Fragment.toastFragment(message: String) {
 }
 
 fun toastSuccess(message: String, activity: Activity,time:Long=2500) {
-    val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(activity, R.style.AlertDialogRoundBase)
-    val layoutView: View? = activity.layoutInflater.inflate(R.layout.dialog_custom_success_toast, null)
-    val ivClose: AppCompatImageView? = layoutView?.findViewById(R.id.iv_close)
-    val tvMessage: AppCompatTextView? = layoutView?.findViewById(R.id.tv_mensaje)
-    tvMessage?.text = message
-    dialogBuilder.setView(layoutView)
-    val alertDialog: AlertDialog = dialogBuilder.create()
+    val dialogBuilder = AlertDialog.Builder(activity, R.style.AlertDialogRoundBase)
+    val dialogView = DialogCustomSuccessToastBinding.inflate(activity.layoutInflater)
+
+    dialogView.tvMensaje.text = message
+    dialogBuilder.setView(dialogView.root)
+
+    val alertDialog = dialogBuilder.create()
     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     alertDialog.window?.setGravity(Gravity.TOP)
     alertDialog.show()
-    ivClose?.setOnClickListener { alertDialog.dismiss() }
+
+    dialogView.ivClose.setOnClickListener { alertDialog.dismiss() }
+
     Handler(Looper.getMainLooper()).postDelayed({
-        try {
-            alertDialog.dismiss()
-        } catch (_: Exception) { // NOTHING
-        }
+        if (!activity.isDestroyed) alertDialog.dismiss()
     }, time)
 }
 
 fun toastFailed(message: String?, activity: Activity, time: Long = 5000)
 {
-    val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(activity,R.style.AlertDialogRoundBase)
-    val layoutView: View? =activity.layoutInflater.inflate(R.layout.dialog_custom_failed_toast, null)
-    val ivClose: AppCompatImageView? = layoutView?.findViewById(R.id.iv_close)
-    val tvMessage: AppCompatTextView? = layoutView?.findViewById(R.id.tv_mensaje)
-    tvMessage?.text = message
-    dialogBuilder.setView(layoutView)
-    val alertDialog: AlertDialog = dialogBuilder.create()
+    val dialogBuilder = AlertDialog.Builder(activity, R.style.AlertDialogRoundBase)
+    val dialogView = DialogCustomFailedToastBinding.inflate(activity.layoutInflater)
+
+    dialogView.tvMensaje.text = message
+    dialogBuilder.setView(dialogView.root)
+
+    val alertDialog = dialogBuilder.create()
     alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     alertDialog.window?.setGravity(Gravity.TOP)
     alertDialog.show()
-    ivClose?.setOnClickListener { alertDialog.dismiss() }
-    Handler(Looper.getMainLooper()).postDelayed({
-        try {
-            if (!activity.isDestroyed) alertDialog.dismiss()
-        } catch (e: Exception) { // NOTHING
-        }
-    }, time)
 
+    dialogView.ivClose.setOnClickListener { alertDialog.dismiss() }
+
+    Handler(Looper.getMainLooper()).postDelayed({
+        if (!activity.isDestroyed) alertDialog.dismiss()
+    }, time)
 }
 
 fun AppCompatImageView.initAnim(context: Context){

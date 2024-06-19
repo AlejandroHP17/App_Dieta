@@ -13,5 +13,5 @@ interface ListFoodApi {
      * @return [GenericResponse] modelo de este tipo
      * */
     @GET
-    suspend fun callApi(@Url url: String) : Response<GenericResponse<FoodResponse>>
+    suspend fun callApi(@Url url: String?) : Response<GenericResponse<FoodResponse>>
 }

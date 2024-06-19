@@ -9,7 +9,7 @@ import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
 interface FoodDao {
 
     @Query("SELECT * FROM food_table WHERE category = :category")
-    fun getFoodCategory(category:String) : List<FoodEntity>
+    fun getFoodCategory(category:String?) : List<FoodEntity>
 
     @Insert
     fun insertAllListFood(listFood:List<FoodEntity>)

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -24,10 +25,10 @@ import java.util.*
  * @author pelkidev
  * @date 21/08/2023
  * */
-class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
+class CategoryFragment : Fragment() {
 
     // Vista al fragment base
-    override fun getViewBinding() = FragmentCategoryBinding.inflate(layoutInflater)
+    private var binding: FragmentCategoryBinding? = null
     // Variable del viewModel
     private val shareModelMain: ShareViewModel by sharedViewModel()
     
@@ -39,10 +40,18 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding =  FragmentCategoryBinding.inflate(layoutInflater)
         /* Inicializa la vista con binding (databinding )y viewmodel */
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.vmList = shareModelMain
-        return binding.root
+        binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.vmList = shareModelMain
+        return binding?.root!!
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpViews()
+        observeData()
+        listenersView()
     }
 
 
@@ -50,10 +59,9 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
      * @author pelkidev
      * @date 20/09/2023
      * */
-    override fun setUpViews() {
-        super.setUpViews()
+    private fun setUpViews() {
         /* Toolbar: Se configura de manera inicial */
-        binding.toolbarCategory.tvNameCategory.text = getString(R.string.toolbar_txt_categories)
+        binding?.toolbarCategory?.tvNameCategory?.text = getString(R.string.toolbar_txt_categories)
     }
 
 
@@ -61,15 +69,14 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
      * @author pelkidev
      * @date 20/09/2023
      * */
-    override fun observeData() {
-        super.observeData()
+    private fun observeData() {
         viewLifecycleOwner.lifecycleScope.launch{
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
                 shareModelMain.dataFlow.collect{
                     setColorToolbar(it)
                     adapterCategory.submitList(it)
                     // Construye el recycler con el adaptador
-                    binding.recyclerCards.adapter = adapterCategory
+                    binding?.recyclerCards?.adapter = adapterCategory
 
                 }
             }
@@ -81,8 +88,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
      * @author pelkidev
      * @date 20/09/2023
      * */
-    override fun listenersView() {
-        super.listenersView()
+    private fun listenersView() {
         /* Maneja el click del card del adapter */
         adapterCategory = CategoriesAdapter(CategoriesClickedListener {
             // Navega al fragmento del listado de alimentos
@@ -99,7 +105,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
     private fun setColorToolbar(it: List<CategoryResponse>) {
         val color = it[Random().nextInt(it.size)]
         shareModelMain.colorGeneral = color.startColor
-        binding.toolbarCategory.toolbar.setBackgroundColor(Color.parseColor(color.startColor))
+        binding?.toolbarCategory?.toolbar?.setBackgroundColor(Color.parseColor(color.startColor))
     }
 
 

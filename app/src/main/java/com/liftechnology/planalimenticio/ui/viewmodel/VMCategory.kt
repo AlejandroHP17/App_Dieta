@@ -23,12 +23,12 @@ class VMCategory(
     private val _errorListFood = MutableLiveData<String>()
     val errorListFood: LiveData<String> = _errorListFood
 
-    fun getListFood(data: CategoryResponse) {
+    fun getListFood(data: CategoryResponse?) {
         coroutine.scopeIO.launch {
             try {
-                useCase.getListFood(data.url, data.category) { success, error ->
+                useCase.getListFood(data?.url, data?.category) { success, error ->
                     if (error.isNullOrEmpty()) {
-                        buildListFood(success, data.startColor, data.endColor)
+                        buildListFood(success, data?.startColor, data?.endColor)
                     } else {
                         _errorListFood.postValue(error)
                     }
@@ -39,7 +39,7 @@ class VMCategory(
         }
     }
 
-    private fun buildListFood(items: List<FoodResponse>?, startColor: String, endColor: String) {
+    private fun buildListFood(items: List<FoodResponse>?, startColor: String?, endColor: String?) {
         val list: MutableList<ModelCardList> = mutableListOf()
         items?.forEach {
             list.add(
@@ -48,8 +48,8 @@ class VMCategory(
                     suggestedQuantity = it.suggestedQuantity,
                     unit = it.unit,
                     netWeightG = it.netWeightG,
-                    startColor = startColor,
-                    endColor = endColor,
+                    startColor = startColor ?: "#FFFFFF",
+                    endColor = endColor?:"#FFFFFF",
                     roundedGrossWeightG = it.roundedGrossWeightG,
                     energyKcal = it.energyKcal,
                     proteinG = it.proteinG,

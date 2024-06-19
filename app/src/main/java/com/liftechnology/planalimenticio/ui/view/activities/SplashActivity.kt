@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.liftechnology.planalimenticio.data.network.models.response.CategoryResponse
 import com.liftechnology.planalimenticio.databinding.ActivitySplashBinding
+import com.liftechnology.planalimenticio.framework.CoroutineScopeManager
 import com.liftechnology.planalimenticio.model.interfaces.SplashListener
 import com.liftechnology.planalimenticio.ui.viewextensions.initAnim
 import com.liftechnology.planalimenticio.ui.viewextensions.toastFailed
 import com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -76,7 +78,7 @@ class SplashActivity : AppCompatActivity(), SplashListener {
      * @date 20/08/2023
      * */
     override fun onError(errorCode: String) {
-        toastFailed(errorCode, this)
+        CoroutineScopeManager().scopeMainThread.launch {toastFailed(errorCode, this@SplashActivity)}
         binding.imageRotate.clearAnimation()
     }
 }

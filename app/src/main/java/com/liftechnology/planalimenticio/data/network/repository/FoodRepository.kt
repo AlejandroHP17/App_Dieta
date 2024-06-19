@@ -11,7 +11,7 @@ interface FoodRepository {
      * @date 30/08/2023
      * @return [FoodResponse] modelo de este tipo
      * */
-    suspend fun getListFood(url: String): List<FoodResponse>
+    suspend fun getListFood(url: String?): List<FoodResponse>
 }
 
 
@@ -23,7 +23,7 @@ class FoodRepositoryImpl(
      * @author pelkidev
      * @date 30/08/2023
      * */
-    override suspend fun getListFood(url: String): List<FoodResponse> {
+    override suspend fun getListFood(url: String?): List<FoodResponse> {
         
         /* Salida por el servicio */
         val response = apiListFood.callApi(url)

@@ -19,8 +19,8 @@ class FoodUseCase(
      * @date 30/08/2023
      * */
     suspend fun getListFood(
-        url: String,
-        nameCategory : String,
+        url: String?,
+        nameCategory : String?,
         callback: (success: List<FoodResponse>?, error: String?) -> Unit
     ) {
         return withContext(dispatcher) {

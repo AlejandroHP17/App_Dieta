@@ -77,7 +77,7 @@ abstract class BaseFragment<VBinding : ViewBinding> : Fragment() {
     }
 
     fun navToDestination(id: Int){
-        (this.requireActivity() as BaseActivity).navToDestination(id)
+        //(this.requireActivity() as BaseActivity).navToDestination(id)
     }
 
 
