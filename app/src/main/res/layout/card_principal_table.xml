@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-        <variable
-            name="item"
-            type="com.liftechnology.planalimenticio.model.dataclass.TypeMeals" />
-
-        <variable
-            name="clickListener"
-            type="com.liftechnology.planalimenticio.ui.adapters.SectionClickedListener" />
-
-        <variable
-            name="vmTable"
-            type="com.liftechnology.planalimenticio.ui.adapters.TableAdapter.ViewHolder" />
-    </data>
 
     <LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -128,4 +115,3 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-</layout>

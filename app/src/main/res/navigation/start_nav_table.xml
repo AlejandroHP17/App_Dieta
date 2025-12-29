@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/tableFragment"
-        android:name="com.liftechnology.planalimenticio.ui.view.table.TableFragment"
+        android:name="com.liftechnology.planalimenticio.main.view.table.TableFragment"
         android:label="@string/nav_table"
         tools:layout="@layout/fragment_table" />
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/generatorFragment"
-        android:name="com.liftechnology.planalimenticio.ui.view.generator.GeneratorFragment"
+        android:name="com.liftechnology.planalimenticio.main.view.generator.GeneratorFragment"
         android:label="@string/nav_generator"
         tools:layout="@layout/fragment_generator" >
         <action
@@ -17,11 +17,11 @@
 
     <fragment
         android:id="@+id/buildDiet"
-        android:name="com.liftechnology.planalimenticio.ui.view.generator.BuildDiet"
+        android:name="com.liftechnology.planalimenticio.main.view.generator.BuildDiet"
         android:label="fragment_build_diet"
         tools:layout="@layout/fragment_build_diet" >
         <argument
             android:name="arg"
-            app:argType="com.liftechnology.planalimenticio.model.dataclass.ListTypeTable" />
+            app:argType="com.liftechnology.planalimenticio.domain.dataclass.ListTypeTable" />
     </fragment>
 </navigation>

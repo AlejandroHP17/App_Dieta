@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.liftechnology.planalimenticio.ui.view.category.CategoryFragment"
+        android:name="com.liftechnology.planalimenticio.main.view.category.CategoryFragment"
         android:label="@string/nav_list"
         tools:layout="@layout/fragment_category" >
         <action
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/detailsCategoryFragment"
-        android:name="com.liftechnology.planalimenticio.ui.view.category.DetailsCategoryFragment"
+        android:name="com.liftechnology.planalimenticio.main.view.category.DetailsCategoryFragment"
         android:label="DetailsCategoryFragment" >
 
         <argument

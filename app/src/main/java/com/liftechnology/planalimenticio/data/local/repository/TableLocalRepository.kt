@@ -4,9 +4,9 @@ import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.liftechnology.planalimenticio.R
-import com.liftechnology.planalimenticio.model.dataclass.TypeMeals
-import com.liftechnology.planalimenticio.model.dataclass.TypeTable
-import com.liftechnology.planalimenticio.ui.utils.Constants.NAME_JSON
+import com.liftechnology.planalimenticio.domain.dataclass.TypeMeals
+import com.liftechnology.planalimenticio.domain.dataclass.TypeTable
+import com.liftechnology.planalimenticio.main.utils.Constants.NAME_JSON
 import java.io.File
 
 class TableLocalRepository {

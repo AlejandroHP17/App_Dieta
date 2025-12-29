@@ -3,9 +3,9 @@ package com.liftechnology.planalimenticio.data.local.repository
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.liftechnology.planalimenticio.model.dataclass.ListTypeTable
-import com.liftechnology.planalimenticio.model.dataclass.TypeTable
-import com.liftechnology.planalimenticio.ui.utils.Constants
+import com.liftechnology.planalimenticio.domain.dataclass.ListTypeTable
+import com.liftechnology.planalimenticio.domain.dataclass.TypeTable
+import com.liftechnology.planalimenticio.main.utils.Constants
 import java.io.File
 
 class ListTableLocalRepository {

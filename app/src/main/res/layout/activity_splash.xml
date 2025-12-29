@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <data>
-        <variable
-            name="vm"
-            type="com.liftechnology.planalimenticio.ui.viewmodel.ShareViewModel" />
 
-    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.view.activities.SplashActivity">
+        tools:context=".main.activity.SplashActivity">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_rotate"
@@ -29,4 +24,3 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
