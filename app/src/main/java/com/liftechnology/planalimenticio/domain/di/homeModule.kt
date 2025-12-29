@@ -49,6 +49,19 @@ val homeModule = module{
 
     single { SaveUseCase(get(),get()) }
 
+    // Database de alimentos
+    single { com.liftechnology.planalimenticio.data.local.db.FoodRoomDatBase.getDataBase(context = get()).FoodDao() }
+    single { com.liftechnology.planalimenticio.data.local.repository.FoodLocalRepository(get()) }
+    
+    // Use Cases de alimentos
+    single { com.liftechnology.planalimenticio.domain.usecase.InitializeDatabaseUseCase(get(), get()) }
+    single { com.liftechnology.planalimenticio.domain.usecase.GetFoodsByCategoryUseCase(get()) }
+    single { com.liftechnology.planalimenticio.domain.usecase.GetAllFoodsUseCase(get()) }
+    single { com.liftechnology.planalimenticio.domain.usecase.SearchFoodsUseCase(get()) }
+    single { com.liftechnology.planalimenticio.domain.usecase.GetFoodByIdUseCase(get()) }
+    single { com.liftechnology.planalimenticio.domain.usecase.GetAllCategoriesUseCase(get()) }
+    single { com.liftechnology.planalimenticio.domain.usecase.GetFoodCountByCategoryUseCase(get()) }
+
     viewModelOf(::SharedViewModel)
     viewModelOf(::SplashViewModel)
 }

@@ -66,7 +66,7 @@ class FoodRepositoryImpl(
                         )
                     }
                 }
-                foodDao.insertAllListFood(foodEntities)
+                //foodDao.insertAllListFood(foodEntities)
                 return responseData
             }
         }
