@@ -51,6 +51,9 @@ dependencies {
     implementation(libs.bundles.compose.unit)
     implementation(libs.bundles.test)
     implementation(libs.bundles.room)
+    
+    // Room compiler con kapt - necesario para generar las clases *_Impl
+    kapt(libs.room.compiler)
 }
 
 /**

@@ -9,6 +9,7 @@
     <dimen name="margin_icon">12dp</dimen>
 
     <dimen name="margin_16dp">16dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
     <dimen name="margin_4dp">4dp</dimen>
 
     <dimen name="size_title_alert">22sp</dimen>

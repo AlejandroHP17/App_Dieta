@@ -1,10 +1,11 @@
 package com.liftechnology.planalimenticio.data.local.database
 
 import android.content.Context
-import android.content.res.AssetManager
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
+import com.liftechnology.planalimenticio.data.local.model.FoodJsonResponse
 import com.liftechnology.planalimenticio.data.local.repository.FoodLocalRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -26,6 +27,7 @@ class DatabaseInitializer(
     private val repository: FoodLocalRepository
 ) {
     private val gson = Gson()
+    private val TAG = "DatabaseInitializer"
 
     /**
      * Inicializa la base de datos si está vacía.
@@ -38,33 +40,45 @@ class DatabaseInitializer(
             // Verifica si la base de datos ya está poblada
             val existingFoods = repository.getAllFoodsSuspend()
             if (existingFoods.isNotEmpty()) {
+                Log.d(TAG, "Base de datos ya está inicializada con ${existingFoods.size} alimentos")
                 return@withContext false // Ya está inicializada
             }
 
             // Lee el archivo JSON de assets
             val jsonString = loadJSONFromAssets("alimentos_smae.json")
             if (jsonString == null) {
+                Log.e(TAG, "No se encontró el archivo alimentos_smae.json en assets")
                 // Si no existe el archivo JSON, usa los datos hardcodeados
                 val initialFoods = getInitialFoodsData()
                 repository.insertAllFoods(initialFoods)
+                Log.d(TAG, "Base de datos inicializada con ${initialFoods.size} alimentos hardcodeados")
                 return@withContext true
             }
 
-            // Parsea el JSON a una lista de FoodEntity
-            val type = object : TypeToken<List<FoodEntity>>() {}.type
-            val foods: List<FoodEntity> = gson.fromJson(jsonString, type)
+            // Parsea el JSON a una lista de FoodJsonResponse
+            val type = object : TypeToken<List<FoodJsonResponse>>() {}.type
+            val jsonResponses: List<FoodJsonResponse> = gson.fromJson(jsonString, type)
+            
+            Log.d(TAG, "JSON parseado correctamente: ${jsonResponses.size} alimentos encontrados")
+
+            // Convierte los modelos JSON a FoodEntity
+            val foods: List<FoodEntity> = jsonResponses.map { it.toFoodEntity() }
 
             // Inserta los alimentos en la base de datos
             repository.insertAllFoods(foods)
+            Log.d(TAG, "✅ Base de datos inicializada correctamente con ${foods.size} alimentos del SMAE")
             true
         } catch (e: Exception) {
+            Log.e(TAG, "Error al inicializar la base de datos", e)
             e.printStackTrace()
             // En caso de error, intenta con datos hardcodeados
             try {
                 val initialFoods = getInitialFoodsData()
                 repository.insertAllFoods(initialFoods)
+                Log.d(TAG, "Base de datos inicializada con datos hardcodeados como fallback")
                 true
             } catch (ex: Exception) {
+                Log.e(TAG, "Error crítico al inicializar con datos hardcodeados", ex)
                 ex.printStackTrace()
                 false
             }
@@ -86,23 +100,20 @@ class DatabaseInitializer(
             inputStream.close()
             String(buffer, Charsets.UTF_8)
         } catch (ex: IOException) {
-            ex.printStackTrace()
+            Log.e(TAG, "Error al leer archivo desde assets: $fileName", ex)
             null
         }
     }
 
     /**
      * Retorna los datos iniciales hardcodeados del SMAE.
-     * Estos datos se usan como fallback si no existe el archivo JSON.
-     * 
-     * NOTA: Este método contiene una muestra de datos. Para una implementación completa,
-     * deberías crear un archivo JSON con todos los datos del PDF o usar un parser de PDF.
+     * Estos datos se usan como fallback si no existe el archivo JSON o hay un error.
      * 
      * @return Lista de alimentos iniciales
      */
     private fun getInitialFoodsData(): List<FoodEntity> {
         return listOf(
-            // Ejemplo de VERDURAS
+            // Ejemplo mínimo para fallback
             FoodEntity(
                 id = 0,
                 category = "VERDURAS",
@@ -134,107 +145,7 @@ class DatabaseInitializer(
                 agSaturatedG = null,
                 agMonounsaturatedG = null,
                 agPolyunsaturatedG = null
-            ),
-            FoodEntity(
-                id = 0,
-                category = "VERDURAS",
-                food = "Acelga picada cocida",
-                suggestedQuantity = 0.5f,
-                unit = "taza",
-                netWeightG = "72",
-                roundedGrossWeightG = 72,
-                energyKcal = 19,
-                proteinG = 1.9f,
-                lipidsG = 0.1f,
-                carbohydratesG = 3.9f,
-                fiverG = 2.1f,
-                vitaminAUgRe = 275.8f,
-                ascorbicAcidMg = 17.9f,
-                folicAcidUg = 10.1f,
-                ironNoHemMg = 1.4f,
-                potassiumMg = 654.5f,
-                hypoglycemicIndex = 64.0f,
-                hypoglycemicLoad = 2.5f,
-                sugarPerEquivalentG = null,
-                calciumMg = null,
-                ironMg = null,
-                sodiumMg = null,
-                cholesterolMg = null,
-                seleniumMg = null,
-                seleniumUg = null,
-                phosphorusMg = null,
-                agSaturatedG = null,
-                agMonounsaturatedG = null,
-                agPolyunsaturatedG = null
-            ),
-            FoodEntity(
-                id = 0,
-                category = "VERDURAS",
-                food = "Brócoli cocido",
-                suggestedQuantity = 0.5f,
-                unit = "taza",
-                netWeightG = "92",
-                roundedGrossWeightG = 92,
-                energyKcal = 26,
-                proteinG = 2.7f,
-                lipidsG = 0.4f,
-                carbohydratesG = 4.6f,
-                fiverG = 2.7f,
-                vitaminAUgRe = 127.4f,
-                ascorbicAcidMg = 68.4f,
-                folicAcidUg = 46.0f,
-                ironNoHemMg = 0.8f,
-                potassiumMg = 268.9f,
-                hypoglycemicIndex = null,
-                hypoglycemicLoad = null,
-                sugarPerEquivalentG = null,
-                calciumMg = null,
-                ironMg = null,
-                sodiumMg = null,
-                cholesterolMg = null,
-                seleniumMg = null,
-                seleniumUg = null,
-                phosphorusMg = null,
-                agSaturatedG = null,
-                agMonounsaturatedG = null,
-                agPolyunsaturatedG = null
-            ),
-            // Ejemplo de FRUTAS
-            FoodEntity(
-                id = 0,
-                category = "FRUTAS",
-                food = "Manzana roja con cáscara",
-                suggestedQuantity = 1f,
-                unit = "pieza",
-                netWeightG = "138",
-                roundedGrossWeightG = 150,
-                energyKcal = 81,
-                proteinG = 0.3f,
-                lipidsG = 0.3f,
-                carbohydratesG = 21.1f,
-                fiverG = 3.7f,
-                vitaminAUgRe = 4.1f,
-                ascorbicAcidMg = 7.6f,
-                folicAcidUg = 3.4f,
-                ironNoHemMg = 0.2f,
-                potassiumMg = 159.0f,
-                hypoglycemicIndex = 38.0f,
-                hypoglycemicLoad = 8.0f,
-                sugarPerEquivalentG = null,
-                calciumMg = null,
-                ironMg = null,
-                sodiumMg = null,
-                cholesterolMg = null,
-                seleniumMg = null,
-                seleniumUg = null,
-                phosphorusMg = null,
-                agSaturatedG = null,
-                agMonounsaturatedG = null,
-                agPolyunsaturatedG = null
             )
-            // NOTA: Aquí deberías agregar todos los alimentos del PDF.
-            // Para una implementación completa, es mejor usar un archivo JSON
-            // con todos los datos extraídos del PDF.
         )
     }
 }

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.liftechnology.planalimenticio.data.local.dao.FoodDao
 import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
 
-@Database(entities = [FoodEntity::class], version = 1, exportSchema = false)
+@Database(entities = [FoodEntity::class], version = 2, exportSchema = false)
 abstract class FoodRoomDatBase : RoomDatabase() {
 
     abstract  fun FoodDao() : FoodDao
@@ -21,7 +21,9 @@ abstract class FoodRoomDatBase : RoomDatabase() {
                     context.applicationContext,
                     FoodRoomDatBase::class.java,
                     "food_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration() // En desarrollo: recrea la BD si hay cambios de esquema
+                .build()
                 INSTANCE = instance
                 instance
             }

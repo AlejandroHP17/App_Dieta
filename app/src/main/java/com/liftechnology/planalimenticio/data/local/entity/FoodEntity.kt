@@ -3,11 +3,18 @@ package com.liftechnology.planalimenticio.data.local.entity
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-@Entity(tableName = "food_table")
+@Entity(
+    tableName = "food_table",
+    indices = [
+        Index(value = ["category"]),  // Índice para búsquedas por categoría
+        Index(value = ["food"])       // Índice para búsquedas por nombre
+    ]
+)
 data class FoodEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,

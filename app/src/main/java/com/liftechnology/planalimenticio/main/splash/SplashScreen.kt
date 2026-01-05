@@ -44,7 +44,7 @@ fun SplashScreen(
 
 @Preview
 @Composable
-fun SplashScreenView()
+private fun SplashScreenView()
 {
     SplashScreen( onNavigateToMain = {})
 }

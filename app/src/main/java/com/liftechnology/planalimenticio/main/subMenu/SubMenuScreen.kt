@@ -1,43 +1,53 @@
 package com.liftechnology.planalimenticio.main.subMenu
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.liftechnology.planalimenticio.R
-import com.liftechnology.planalimenticio.main.splash.SplashViewModel
+import com.liftechnology.planalimenticio.main.components.cards.CategoryCard
+import com.liftechnology.planalimenticio.model.ui.ModelItemCard
 import org.koin.androidx.compose.koinViewModel
 
 /**
- * Pantalla de splash de la aplicación.
+ * Pantalla de submenú que muestra los alimentos de una categoría específica.
  *
- * @param splashViewModel El ViewModel para esta pantalla.
- * @param onNavigateToMain Lambda que se invoca para navegar a la pantalla principal.
+ * @param categoria Nombre de la categoría de alimentos a mostrar
+ * @param subMenuViewModel El ViewModel para esta pantalla
  */
 @Composable
 fun SubMenuScreen(
-    splashViewModel: SplashViewModel = koinViewModel(),
-    onNavigateToMain: () -> Unit
+    categoria: String,
+    subMenuViewModel: SubMenuViewModel = koinViewModel(),
 ) {
 
+    val uiState by subMenuViewModel.uiState.collectAsStateWithLifecycle()
 
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ){
-        Image(
-            painter = painterResource(id = R.drawable.splashscreen),
-            contentDescription = "Logo",
-            modifier = Modifier
-                .wrapContentWidth()
-                .wrapContentHeight()
-                .align(alignment = Alignment.Center)
-        )
+    LaunchedEffect(categoria) {
+        // Aquí puedes usar la categoría para cargar los alimentos específicos
+        subMenuViewModel.getFoodsByCategory(categoria)
+    }
+
+    LazyColumn(
+        modifier = Modifier.wrapContentHeight(),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.margin_16dp))
+    ) {
+        itemsIndexed(
+            items = uiState.categoryList ?: emptyList(),
+            key = { _ , item: ModelItemCard -> item.title }
+        ) { _, item: ModelItemCard ->
+            CategoryCard(
+                item = item,
+                onClick = {  }
+            )
+        }
     }
 }
 
@@ -45,5 +55,5 @@ fun SubMenuScreen(
 @Composable
 private fun SubMenuScreenView()
 {
-    SubMenuScreen( onNavigateToMain = {})
+    SubMenuScreen(categoria = "VERDURAS")
 }

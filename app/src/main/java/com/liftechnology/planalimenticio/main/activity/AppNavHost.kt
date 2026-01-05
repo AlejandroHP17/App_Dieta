@@ -20,13 +20,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.liftechnology.planalimenticio.main.components.ShowCustomAnimated
 import com.liftechnology.planalimenticio.main.menu.MenuScreen
 import com.liftechnology.planalimenticio.main.splash.SplashScreen
+import com.liftechnology.planalimenticio.main.subMenu.SubMenuScreen
 import com.liftechnology.planalimenticio.main.utils.navigation.AppRoutes
 
 /**
@@ -75,13 +78,22 @@ fun AppNavHost(
             // Flujo Principal
             composable(AppRoutes.Main.MENU){
                 MenuScreen(
-                    onNavigateToMain = { navigationController.navigate(AppRoutes.Main.MENU) { popUpTo(AppRoutes.Splash.SPLASH) { inclusive = true } } }  )
+                    onNavigateToMain = { categoria ->
+                        navigationController.navigate("subMenu/$categoria")
+                    }
+                )
             }
-            /*composable(AppRoutes.Main.SUB_MENU){ RegisterUserScreen(
-                navController = navigationController,
-                sharedViewModel = sharedViewModel,
-                ) }
-*/
+            composable(
+                route = AppRoutes.Main.SUB_MENU,
+                arguments = listOf(
+                    navArgument("category") {
+                        type = NavType.StringType
+                    }
+                )){
+                val category = it.arguments?.getString("category") ?: ""
+                SubMenuScreen(categoria = category)
+            }
+
         }
 
         // Toast global que se muestra por encima de toda la navegación

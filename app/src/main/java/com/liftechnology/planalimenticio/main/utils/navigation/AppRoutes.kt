@@ -15,7 +15,7 @@ object AppRoutes {
      */
     object Main {
         const val MENU = "menu"
-        const val SUB_MENU = "subMenu"
+        const val SUB_MENU = "subMenu/{category}"
     }
 
 

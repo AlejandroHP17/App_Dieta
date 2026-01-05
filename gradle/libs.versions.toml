@@ -81,6 +81,8 @@ mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk"}
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 room = {group = "androidx.room", name = "room-runtime", version.ref= "room"}
+room-compiler = {group = "androidx.room", name = "room-compiler", version.ref= "room"}
+room-ktx = {group = "androidx.room", name = "room-ktx", version.ref= "room"}
 
 
 [bundles]
@@ -152,7 +154,7 @@ test = [
 androidx-basic= [
     "androidx-core-ktx"
 ]
-room = ["room"]
+room = ["room", "room-ktx"]
 
 [plugins]
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version = "2.2.21" }

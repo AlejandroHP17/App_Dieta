@@ -22,7 +22,7 @@ import org.koin.androidx.compose.koinViewModel
  * @author Pelkidev
  * @version 1.0.0
  */
-class SplashActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     /**
      * Se llama cuando la actividad se crea por primera vez. Se encarga de configurar el contenido de la UI.
