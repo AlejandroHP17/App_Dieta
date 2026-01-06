@@ -56,7 +56,7 @@ fun CategoryCard(
         ) {
             Text(
                 text = (item.idCard).toString(),
-                fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
+                fontSize = dimensionResource(id = R.dimen.size_text_card).value.sp,
                 modifier = Modifier
                     .padding(
                         horizontal = dimensionResource(id = R.dimen.margin_8dp),

@@ -1,83 +1,73 @@
-package com.liftechnology.planalimenticio.main.subMenu
+package com.liftechnology.planalimenticio.main.search
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.components.cards.FoodCard
+import com.liftechnology.planalimenticio.main.components.input.TextFieldGeneric
 import com.liftechnology.planalimenticio.main.theme.colorWhite
 import com.liftechnology.planalimenticio.main.theme.onPrimaryContainerLight
+import com.liftechnology.planalimenticio.main.utils.regex.ModelRegex
 import com.liftechnology.planalimenticio.model.ModelSubItemCard
 import com.liftechnology.planalimenticio.model.ui.subMenu.SubMenuState
 import org.koin.androidx.compose.koinViewModel
 
-@Preview
+@Preview(showBackground = true)
 @Composable
-private fun SubMenuScreenView()
-{
-    SubMenuScreen(
-        categoria = "VERDURAS",
-        onNavigateToSearch = {})
+private fun SearchScreenView() {
+
 }
 
-
-/**
- * Pantalla de submenú que muestra los alimentos de una categoría específica.
- *
- * @param categoria Nombre de la categoría de alimentos a mostrar
- * @param subMenuViewModel El ViewModel para esta pantalla
- */
 @Composable
-fun SubMenuScreen(
-    categoria: String,
-    subMenuViewModel: SubMenuViewModel = koinViewModel(),
-    onNavigateToSearch: (String) -> Unit
+fun SearchScreen(
+    categoria: String? = null,  // Ahora es nullable para permitir búsquedas sin categoría
+    searchViewModel: SearchViewModel = koinViewModel(),
 ) {
 
-    val uiState by subMenuViewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by searchViewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(categoria) {
-        // Aquí puedes usar la categoría para cargar los alimentos específicos
-        subMenuViewModel.getFoodsByCategory(categoria)
+       searchViewModel.searchFood(categoria)
     }
 
     Column() {
-        HeaderScreen(
-            title = categoria,
-            onNavigateToSearch = { onNavigateToSearch(categoria) }
+        HeaderSearchScreen(title = categoria)
+        Spacer(modifier = Modifier.padding(8.dp))
+
+        SearchSectionScreen(
+            onWordSearch = { searchQuery ->
+                // Cuando el usuario escribe, buscar por texto
+                searchViewModel.searchByText(searchQuery, categoria)
+            }
         )
 
         Spacer(modifier = Modifier.padding(8.dp))
 
-        TableSubMenuScreen(
+        TableSearchMenuScreen(
             uiState = uiState
         )
     }
 }
 
 @Composable
-private fun TableSubMenuScreen(
+private fun TableSearchMenuScreen(
     uiState: SubMenuState
 ){
     LazyColumn(
@@ -97,32 +87,31 @@ private fun TableSubMenuScreen(
     }
 }
 
+
 @Composable
-private fun HeaderScreen(
-    title: String,
-    onNavigateToSearch: () -> Unit
+private fun HeaderSearchScreen(
+    title: String?,
 ) {
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(onPrimaryContainerLight)
     ) {
         Text(
-            text = title,
+            text = title?.let { it }?: "Todas las Categorias",
             fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
             color = colorWhite,
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(start = 8.dp)
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            painter = painterResource(id = R.drawable.ic_search),
-            contentDescription = "Search",
-            tint = colorWhite,
-            modifier = Modifier
-                .padding(8.dp)
-                .clickable{onNavigateToSearch()}
+            modifier = Modifier.padding(start = 8.dp)
         )
     }
+}
+
+@Composable
+private fun SearchSectionScreen(
+    onWordSearch: (String) -> Unit
+){
+    TextFieldGeneric(
+        regex = ModelRegex.SIMPLE_TEXT,
+        onBoxChanged = {onWordSearch(it)}
+    )
 }

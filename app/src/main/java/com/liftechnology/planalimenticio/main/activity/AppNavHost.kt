@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.liftechnology.planalimenticio.main.components.ShowCustomAnimated
 import com.liftechnology.planalimenticio.main.menu.MenuScreen
+import com.liftechnology.planalimenticio.main.search.SearchScreen
 import com.liftechnology.planalimenticio.main.splash.SplashScreen
 import com.liftechnology.planalimenticio.main.subMenu.SubMenuScreen
 import com.liftechnology.planalimenticio.main.utils.navigation.AppRoutes
@@ -80,6 +81,10 @@ fun AppNavHost(
                 MenuScreen(
                     onNavigateToMain = { categoria ->
                         navigationController.navigate("subMenu/$categoria")
+                    },
+                    onNavigateToSearch = {
+                        // Navegamos sin categoría específica (buscar en toda la base de datos)
+                        navigationController.navigate(AppRoutes.Main.buildSearchRoute(null))
                     }
                 )
             }
@@ -91,7 +96,24 @@ fun AppNavHost(
                     }
                 )){
                 val category = it.arguments?.getString("category") ?: ""
-                SubMenuScreen(categoria = category)
+                SubMenuScreen(
+                    categoria = category,
+                    onNavigateToSearch = {categoria ->
+                        navigationController.navigate("search/$categoria")
+                    }
+                )
+            }
+            composable(
+                route = AppRoutes.Main.SEARCH,
+                arguments = listOf(
+                    navArgument("category") {
+                        type = NavType.StringType
+                    }
+                )){
+                val category = it.arguments?.getString("category") ?: "all"
+                // Si category es "all", significa que no hay categoría específica (buscar en toda la base de datos)
+                val categoria = if (category == "all") null else category
+                SearchScreen(categoria = categoria)
             }
 
         }

@@ -72,13 +72,7 @@ subprojects {
                 productFlavors {
                     create("dev") {
                         versionCode = 5
-                        applicationIdSuffix = ".dev" // Solo aplica para módulos de aplicación
                         versionNameSuffix = "-dev"
-                        dimension = "version"
-                    }
-                    create("qa") {
-                        applicationIdSuffix = ".qa" // Solo aplica para módulos de aplicación
-                        versionNameSuffix = "-qa"
                         dimension = "version"
                     }
                     create("prod") {

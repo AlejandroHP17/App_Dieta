@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.googleServices)
 }
 
 android {
@@ -39,6 +40,7 @@ dependencies {
      * `implementation(project(":..."))` - Declara las dependencias a otros módulos del proyecto, estableciendo la arquitectura modular.
      */
     implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.firebase))
     implementation(libs.bundles.androidx.basic)
 
     implementation(libs.bundles.koin)
