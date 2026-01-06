@@ -17,6 +17,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.theme.colorAzulLink
+import com.liftechnology.planalimenticio.main.theme.colorBgCard
+import com.liftechnology.planalimenticio.main.theme.colorWarningToast
 import com.liftechnology.planalimenticio.model.ui.ModelItemCard
 
 @Preview(showBackground = true)
@@ -47,7 +49,7 @@ fun CategoryCard(
             bottomEnd = 8.dp,
             topStart = 8.dp
         ),
-        colors = CardDefaults.cardColors(containerColor = colorAzulLink),
+        colors = CardDefaults.cardColors(containerColor = colorBgCard),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -55,7 +57,11 @@ fun CategoryCard(
             Text(
                 text = (item.idCard).toString(),
                 fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
-                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.margin_8dp))
+                modifier = Modifier
+                    .padding(
+                        horizontal = dimensionResource(id = R.dimen.margin_8dp),
+                        vertical = dimensionResource(id = R.dimen.margin_8dp)
+                    )
             )
             Text(
                 text = (item.title),

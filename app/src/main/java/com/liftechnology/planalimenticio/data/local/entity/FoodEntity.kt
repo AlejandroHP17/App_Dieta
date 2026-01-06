@@ -17,7 +17,7 @@ import kotlinx.parcelize.Parcelize
 )
 data class FoodEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int = 1,
     @ColumnInfo(name = "category") val category: String,
     val food : String,
     val suggestedQuantity : Float,
@@ -42,7 +42,6 @@ data class FoodEntity(
     val sodiumMg :Float?,
     val cholesterolMg :Float?,
     val seleniumMg :Float?,
-    val seleniumUg :Float?,
     val phosphorusMg :Float?,
     val agSaturatedG :Float?,
     val agMonounsaturatedG :Float?,

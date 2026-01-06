@@ -5,6 +5,7 @@ import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
+import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
 import java.lang.reflect.Type
 
 /**
@@ -219,8 +220,8 @@ data class FoodJsonResponse(
     /**
      * Convierte el modelo JSON a FoodEntity para Room.
      */
-    fun toFoodEntity(): com.liftechnology.planalimenticio.data.local.entity.FoodEntity {
-        return com.liftechnology.planalimenticio.data.local.entity.FoodEntity(
+    fun toFoodEntity(): FoodEntity {
+        return FoodEntity(
             id = 0, // Se auto-genera
             category = categoria,
             food = alimento,
@@ -281,7 +282,6 @@ data class FoodJsonResponse(
             sodiumMg = sodio,
             cholesterolMg = colesterol,
             seleniumMg = selenioMg,
-            seleniumUg = null, // No está en el JSON
             phosphorusMg = fosforo,
             agSaturatedG = agSaturados,
             agMonounsaturatedG = agMonoinsaturados,

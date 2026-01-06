@@ -140,7 +140,6 @@ class DatabaseInitializer(
                 sodiumMg = null,
                 cholesterolMg = null,
                 seleniumMg = null,
-                seleniumUg = null,
                 phosphorusMg = null,
                 agSaturatedG = null,
                 agMonounsaturatedG = null,
@@ -149,4 +148,3 @@ class DatabaseInitializer(
         )
     }
 }
-

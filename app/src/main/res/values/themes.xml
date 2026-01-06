@@ -17,11 +17,6 @@
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Otros atributos del tema -->
     </style>
-
-    <style name="CustomDialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/to_center</item>
-        <item name="android:windowExitAnimation">@anim/from_center</item>
-    </style>
     
     <style name="Button_dialog" parent="TextAppearance.AppCompat.Widget.Button">
         <item name="android:radius">@dimen/radius_generic</item>

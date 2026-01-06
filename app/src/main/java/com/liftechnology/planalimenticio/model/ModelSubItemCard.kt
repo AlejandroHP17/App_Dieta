@@ -1,0 +1,31 @@
+package com.liftechnology.planalimenticio.model
+
+data class ModelSubItemCard(
+    val idCard : Int,
+    val foodTitle: String,
+    val suggestedQuantity : String,
+    val netWeightG: String,
+    val roundedGrossWeightG : String,
+    val energyKcal : String,
+    val proteinG : String?,
+    val lipidsG :String?,
+    val carbohydratesG :String?,
+    val fiverG :String?,
+    val vitaminAUgRe :String?,
+    val ascorbicAcidMg : String?,
+    val folicAcidUg : String?,
+    val ironNoHemMg : String?,
+    val potassiumMg : String?,
+    val hypoglycemicIndex : String?,
+    val hypoglycemicLoad :String?,
+    val sugarPerEquivalentG : String?,
+    val calciumMg: String?,
+    val ironMg :String?,
+    val sodiumMg :String?,
+    val cholesterolMg :String?,
+    val seleniumMg :String?,
+    val phosphorusMg :String?,
+    val agSaturatedG :String?,
+    val agMonounsaturatedG :String?,
+    val agPolyunsaturatedG :String?
+)

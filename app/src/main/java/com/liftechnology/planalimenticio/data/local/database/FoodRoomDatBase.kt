@@ -1,4 +1,4 @@
-package com.liftechnology.planalimenticio.data.local.db
+package com.liftechnology.planalimenticio.data.local.database
 
 import android.content.Context
 import androidx.room.Database

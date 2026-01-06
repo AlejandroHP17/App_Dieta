@@ -17,6 +17,7 @@ val colorFail = Color(0xFFEA7A7A)
 
 val colorBgFirst = Color(0xFFFFDDF0)
 val colorBgSecond = Color(0xFFB8DAFF)
+val colorBgCard = Color(0xFFE8F1BE)
 val colorWhite = Color(0xFFFFFFFF)
 
 val colorDisable = Color(0xFFC4C4C4)

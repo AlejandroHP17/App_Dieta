@@ -2,9 +2,11 @@ package com.liftechnology.planalimenticio.framework
 
 import android.app.Application
 import android.util.Log
-import com.liftechnology.planalimenticio.domain.di.*
 import com.liftechnology.planalimenticio.domain.usecase.InitializeDatabaseUseCase
 import com.liftechnology.planalimenticio.domain.usecase.InitializeResult
+import com.liftechnology.planalimenticio.framework.di.homeModule
+import com.liftechnology.planalimenticio.framework.di.initialModule
+import com.liftechnology.planalimenticio.framework.di.roomModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -30,11 +32,9 @@ class BaseApplication : Application() {
             androidLogger()
             androidContext(this@BaseApplication)
             modules(
-                homeModule,
-                //foodModule,
-                //tableModule,
-                //generatorModule,
-                //buildDietModule
+                initialModule,
+                roomModule,
+                homeModule
             )
         }
         
