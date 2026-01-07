@@ -1,5 +1,6 @@
 package com.liftechnology.planalimenticio.main.search
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.liftechnology.planalimenticio.domain.usecase.GetAllFoodsUseCase
@@ -7,6 +8,7 @@ import com.liftechnology.planalimenticio.domain.usecase.GetFoodsByCategoryUseCas
 import com.liftechnology.planalimenticio.domain.usecase.SearchFoodsUseCase
 import com.liftechnology.planalimenticio.mapper.subMenu.toSubMenuMapper
 import com.liftechnology.planalimenticio.model.ui.subMenu.SubMenuState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,16 +25,19 @@ class SearchViewModel (
     /** El estado de la UI para la pantalla. */
     val uiState: StateFlow<SubMenuState> = _uiState.asStateFlow()
 
+    private val TAG = "SearchViewModel"
+
     /**
      * Carga los alimentos iniciales según la categoría.
      * Si categoria es null, muestra todos los alimentos.
      * Si categoria tiene valor, muestra solo los alimentos de esa categoría.
+     * Espera a que la base de datos esté inicializada antes de cargar los alimentos.
      * 
      * @param categoria Nombre de la categoría o null para buscar en toda la base de datos
      */
     fun searchFood(categoria: String?) {
         viewModelScope.launch {
-            val result = if (categoria == null) {
+            var result = if (categoria == null) {
                 // Si no hay categoría, obtener todos los alimentos
                 getAllFoodsUseCase.invokeSuspend()
             } else {
@@ -40,8 +45,34 @@ class SearchViewModel (
                 getFoodsByCategoryUseCase.invokeSuspend(categoria)
             }
 
-            _uiState.update { 
-                it.copy(foodList = result.toSubMenuMapper(categoria == null))
+            var attempts = 0
+            val maxAttempts = 20 // Máximo 2 segundos (20 * 100ms)
+            val delayMs = 100L // Espera 100ms entre intentos
+
+            // Espera a que la base de datos esté inicializada
+            while (result.isEmpty() && attempts < maxAttempts) {
+                delay(delayMs)
+                result = if (categoria == null) {
+                    getAllFoodsUseCase.invokeSuspend()
+                } else {
+                    getFoodsByCategoryUseCase.invokeSuspend(categoria)
+                }
+                attempts++
+                if (result.isEmpty()) {
+                    Log.d(TAG, "Esperando inicialización de BD... Intento $attempts/$maxAttempts")
+                }
+            }
+
+            if (result.isNotEmpty()) {
+                Log.d(TAG, "✅ Alimentos cargados: ${result.size} alimentos encontrados")
+                _uiState.update { 
+                    it.copy(foodList = result.toSubMenuMapper(categoria == null))
+                }
+            } else {
+                Log.w(TAG, "⚠️ No se encontraron alimentos después de $maxAttempts intentos")
+                _uiState.update { 
+                    it.copy(foodList = emptyList())
+                }
             }
         }
     }
