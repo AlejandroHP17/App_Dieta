@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247360334148",
+    "project_id": "plan-alimenticio-8f6a3",
+    "storage_bucket": "plan-alimenticio-8f6a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247360334148:android:b7b3bc2fa453f250c40f11",
+        "android_client_info": {
+          "package_name": "com.liftechnology.planalimenticio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZciQetIUBFf-TYxhsifrwVRNIzz5EQYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,4 +17,21 @@
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Otros atributos del tema -->
     </style>
+    
+    <style name="Button_dialog" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="android:radius">@dimen/radius_generic</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/size_text_button</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <!-- dialog round corners Transparent-->
+    <style name="AlertDialogRoundBase" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

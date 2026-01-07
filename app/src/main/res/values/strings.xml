@@ -1,14 +1,13 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Plan Alimenticio</string>
 
-    <string name="nav_list">Listado</string>
-    <string name="nav_table">Tabla</string>
-    <string name="nav_generator">Generador</string>
+    <string name="title_menu">Grupos Alimenticios</string>
+    <string name="all_categories">Todas las Categorias</string>
 
-    <string name="toolbar_txt_categories">Categorías</string>
 
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <!-- Content descriptions -->
+    <string name="content_image">Imagen</string>
 
 </resources>

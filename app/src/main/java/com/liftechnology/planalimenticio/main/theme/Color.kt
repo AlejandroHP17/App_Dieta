@@ -1,0 +1,99 @@
+package com.liftechnology.planalimenticio.main.theme
+
+import androidx.compose.ui.graphics.Color
+
+val colorTransparent = Color(0x00000000)
+
+val colorBgCard = Color(0xFFE8F1BE)
+val colorWhite = Color(0xFFFFFFFF)
+val colorDisable = Color(0xFFC4C4C4)
+
+val aceiteYGrasaProteina = Color(0xFFFFE5E5) // Aceite y grasas con proteína - Rosa claro
+val aceiteYGrasas = Color(0xFFFFF4E5) // Aceites y grasas - Naranja claro
+val altoGrasa = Color(0xFFFFE5F0) // Alimentos de origen animal alto aporte de grasa - Rosa pastel
+val bajoGrasa = Color(0xFFE5F5FF) // Alimentos de origen animal bajo aporte de grasa - Azul claro
+val moderadoGrasa = Color(0xFFE8F5E9) // Alimentos de origen animal moderado aporte de grasa - Verde claro
+val muyBajoGrasa = Color(0xFFF0E5FF) // Alimentos de origen animal muy bajo aporte de grasa - Morado claro
+val azucarGrasa = Color(0xFFFFF0E5) // Azúcares con grasa - Melocotón claro
+val azucar = Color(0xFFFFFCE5) // Azúcares sin grasa - Amarillo claro
+val cerealesGrasa = Color(0xFFE0F2E0) // Cereales con grasa - Verde menta
+val cereales = Color(0xFFC8E6C9) // Cereales sin grasa - Verde pastel
+val frutas = Color(0xFFFFE5F5) // Frutas - Rosa suave
+val lecheAzucar = Color(0xFFE3F2FD) // Leche con azúcar - Azul cielo
+val lecheDescremada = Color(0xFFE1F5FE) // Leche descremada - Azul muy claro
+val lecheEntera = Color(0xFFFFF9E6) // Leche entera - Crema
+val lecheSemidescremada = Color(0xFFF3E5F5) // Leche semidescremada - Lavanda claro
+val leguminosas = Color(0xFFFFEBEE) // Leguminosas - Salmón claro
+val verduras = Color(0xFFE8F5E9) // Verduras - Verde claro
+
+
+val colorErrorToast = Color(0xFFEA7A7A)
+val colorSuccessToast = Color(0xFF8BBD7E)
+val colorWarningToast = Color(0xFFE2C470)
+val colorInformativeToast = Color(0xFF72C3DC)
+
+val primaryLight = Color(0xFF365E9D)
+val onPrimaryLight = Color(0xFFFFFFFF)
+val primaryContainerLight = Color(0xFF769CDF)
+val onPrimaryContainerLight = Color(0xFF00326A)
+val secondaryLight = Color(0xFF4E5D70)
+val onSecondaryLight = Color(0xFFFFFFFF)
+val secondaryContainerLight = Color(0xFF67768A)
+val onSecondaryContainerLight = Color(0xFFFDFCFF)
+val tertiaryLight = Color(0xFF705767)
+val onTertiaryLight = Color(0xFFFFFFFF)
+val tertiaryContainerLight = Color(0xFFFFDDF0)
+val onTertiaryContainerLight = Color(0xFF795F6F)
+val errorLight = Color(0xFF664C77)
+val onErrorLight = Color(0xFFFFFFFF)
+val errorContainerLight = Color(0xFF806491)
+val onErrorContainerLight = Color(0xFFFDEEFF)
+val backgroundLight = Color(0xFFF9F9FF)
+val onBackgroundLight = Color(0xFF1A1C20)
+val surfaceLight = Color(0xFFFFF8F9)
+val onSurfaceLight = Color(0xFF1D1B1C)
+val surfaceVariantLight = Color(0xFFDDE2F0)
+val onSurfaceVariantLight = Color(0xFF414752)
+val outlineLight = Color(0xFF717783)
+val outlineVariantLight = Color(0xFFC1C6D4)
+val scrimLight = Color(0xFF000000)
+val surfaceDimLight = Color(0xFFDFD8DA)
+val surfaceBrightLight = Color(0xFFFFF8F9)
+val surfaceContainerLowestLight = Color(0xFFFFFFFF)
+val surfaceContainerLowLight = Color(0xFFF9F2F3)
+val surfaceContainerLight = Color(0xFFF3ECED)
+val surfaceContainerHighLight = Color(0xFFEDE6E8)
+val surfaceContainerHighestLight = Color(0xFFE8E1E2)
+
+val primaryDark = Color(0xFFAAC7FF)
+val onPrimaryDark = Color(0xFF002F64)
+val primaryContainerDark = Color(0xFF769CDF)
+val onPrimaryContainerDark = Color(0xFF00326A)
+val secondaryDark = Color(0xFFB8C8DE)
+val onSecondaryDark = Color(0xFF233143)
+val secondaryContainerDark = Color(0xFF8392A7)
+val onSecondaryContainerDark = Color(0xFF000A18)
+val tertiaryDark = Color(0xFFFFFFFF)
+val onTertiaryDark = Color(0xFF3F2A38)
+val tertiaryContainerDark = Color(0xFFFBD9EC)
+val onTertiaryContainerDark = Color(0xFF775D6D)
+val errorDark = Color(0xFFDBBBED)
+val onErrorDark = Color(0xFF3E264F)
+val errorContainerDark = Color(0xFF806491)
+val onErrorContainerDark = Color(0xFFFDEEFF)
+val backgroundDark = Color(0xFF121317)
+val onBackgroundDark = Color(0xFFE2E2E8)
+val surfaceDark = Color(0xFF151314)
+val onSurfaceDark = Color(0xFFE8E1E2)
+val surfaceVariantDark = Color(0xFF414752)
+val onSurfaceVariantDark = Color(0xFFC1C6D4)
+val outlineDark = Color(0xFF8B919D)
+val outlineVariantDark = Color(0xFF414752)
+val scrimDark = Color(0xFF000000)
+val surfaceDimDark = Color(0xFF151314)
+val surfaceBrightDark = Color(0xFF3C3839)
+val surfaceContainerLowestDark = Color(0xFF100E0F)
+val surfaceContainerLowDark = Color(0xFF1D1B1C)
+val surfaceContainerDark = Color(0xFF221F20)
+val surfaceContainerHighDark = Color(0xFF2C292A)
+val surfaceContainerHighestDark = Color(0xFF373435)
