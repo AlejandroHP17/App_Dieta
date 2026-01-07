@@ -1,6 +1,4 @@
 [versions]
-loggingInterceptor = "5.3.2"
-retrofitVersion = "3.0.0"
 agp = "8.13.2"
 kotlin = "2.3.0"
 coreKtx = "1.17.0"
@@ -10,24 +8,14 @@ espressoCore = "3.7.0"
 material = "1.13.0"
 activity = "1.12.2"
 koin = "4.1.1"
-crypto = "1.1.0"
 splashScreen = "1.2.0"
-lottie = "6.7.1"
-datetime = "0.9.0"
-calendar = "2.9.0"
-mockk = "1.14.7"
 lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.12.2"
 composeBom = "2025.12.01"
-constraintVersion = "1.1.1"
 googleFont = "1.10.0"
 gson = "2.13.2"
 compose = "1.10.0"
-okhttp = "5.3.2"
-coroutineTest= "1.10.2"
 room = "2.8.4"
-firebaseBom = "34.7.0"
-services = "4.4.4"
 
 [libraries]
 gson = {group = "com.google.code.gson", name = "gson", version.ref = "gson"}
@@ -41,29 +29,14 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-constraint-layout = {module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintVersion"}
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version = "1.4.0" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material-icons-extended", version = "1.7.8" }
 androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version = "2.9.6" }
-androidx-compose-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "compose" }
 androidx-compose-koin = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
-androidx-compose-lottie = { group = "com.airbnb.android", name = "lottie-compose", version = "6.7.1" }
-androidx-compose-datetime = { group = "io.github.vanpra.compose-material-dialogs", name = "datetime", version.ref = "datetime"}
-androidx-compose-calendar = { group = "com.kizitonwose.calendar", name = "compose", version.ref = "calendar"}
 
 
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-test-http = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp"}
-coroutine-test = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest"}
-
-
-airbnb-lottie = {group = "com.airbnb.android" , name = "lottie" , version.ref = "lottie"}
-
-retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
-retrofit2-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
-retrofit2-adapter-rxjava2 = { group = "com.squareup.retrofit2", name = "adapter-rxjava2", version.ref = "retrofitVersion" }
-logging-interceptor = {group = "com.squareup.okhttp3" , name = "logging-interceptor", version.ref = "loggingInterceptor"}
 
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
@@ -73,20 +46,15 @@ koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin"
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-android-compat = { group = "io.insert-koin", name = "koin-android-compat", version.ref = "koin" }
 
-androidx-security-crypto-masterkeys = { group = "androidx.security", name = "security-crypto", version.ref = "crypto" }
-
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk"}
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 room = {group = "androidx.room", name = "room-runtime", version.ref= "room"}
 room-compiler = {group = "androidx.room", name = "room-compiler", version.ref= "room"}
 room-ktx = {group = "androidx.room", name = "room-ktx", version.ref= "room"}
-
-firebase = {module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom"}
 
 [bundles]
 gson = [
@@ -99,35 +67,19 @@ compose = [
     "androidx-compose-bom",
     "androidx-compose-ui",
     "androidx-compose-ui-graphics",
-    "constraint-layout",
     "androidx-compose-ui-tooling",
     "androidx-compose-ui-tooling-preview",
     "androidx-compose-material3",
     "androidx-compose-material",
     "androidx-compose-ui-text",
     "androidx-compose-navigation",
-    "androidx-compose-livedata",
     "androidx-compose-koin",
-    "androidx-compose-lottie",
-    "androidx-compose-datetime",
-    "androidx-compose-calendar",
     "androidx-compose-font"
 ]
 
 compose-unit = [
     "androidx-ui-test-manifest",
     "androidx-ui-test-junit4"
-]
-
-animation = [
-    "airbnb-lottie"
-]
-
-retrofit = [
-    "retrofit2",
-    "retrofit2-converter-gson",
-    "retrofit2-adapter-rxjava2",
-    "logging-interceptor"
 ]
 
 androidx-ui = [
@@ -140,25 +92,15 @@ koin = [
     "koin-android",
     "koin-android-compat"
 ]
-androidx-security = [
-    "androidx-security-crypto-masterkeys"
-]
 junit-test = [
     "androidx-junit",
     "androidx-espresso-core"
-
-]
-test = [
-    "junit",
-    "mockk",
-    "test-http",
-    "coroutine-test"
 ]
 androidx-basic= [
     "androidx-core-ktx"
 ]
 room = ["room", "room-ktx"]
-firebase = ["firebase"]
+
 
 [plugins]
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version = "2.2.21" }
@@ -168,4 +110,3 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 dokka = {id = "org.jetbrains.dokka", version = "2.1.0"}
-googleServices = {id = "com.google.gms.google-services", version.ref = "services" }

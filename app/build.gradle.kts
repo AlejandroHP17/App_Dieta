@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dokka)
-    alias(libs.plugins.googleServices)
 }
 
 android {
@@ -40,18 +39,14 @@ dependencies {
      * `implementation(project(":..."))` - Declara las dependencias a otros módulos del proyecto, estableciendo la arquitectura modular.
      */
     implementation(platform(libs.androidx.compose.bom))
-    implementation(platform(libs.firebase))
     implementation(libs.bundles.androidx.basic)
 
     implementation(libs.bundles.koin)
     implementation(libs.bundles.androidx.ui)
     implementation(libs.bundles.junit.test)
-    implementation(libs.bundles.retrofit)
-    implementation(libs.bundles.animation)
     implementation(libs.bundles.compose)
     implementation(libs.bundles.gson)
     implementation(libs.bundles.compose.unit)
-    implementation(libs.bundles.test)
     implementation(libs.bundles.room)
     
     // Room compiler con kapt - necesario para generar las clases *_Impl
