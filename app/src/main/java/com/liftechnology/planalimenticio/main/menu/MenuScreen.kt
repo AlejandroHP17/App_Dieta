@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.components.cards.CategoryCard
+import com.liftechnology.planalimenticio.main.components.common.HeaderScreen
 import com.liftechnology.planalimenticio.main.theme.colorWhite
 import com.liftechnology.planalimenticio.main.theme.onPrimaryContainerLight
 import com.liftechnology.planalimenticio.model.ui.ModelItemCard
@@ -74,6 +75,7 @@ fun MenuScreen(
 
     Column() {
         HeaderScreen(
+            title = "GRUPOS ALIMENTICIOS",
             onNavigateToSearch = {onNavigateToSearch()}
         )
 
@@ -106,34 +108,5 @@ private fun TableMenuScreen(
                 onClick = { onNavigateToMain(it) }
             )
         }
-    }
-}
-
-@Composable
-private fun HeaderScreen(
-    onNavigateToSearch: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(onPrimaryContainerLight)
-    ) {
-        Text(
-            text = "GRUPOS ALIMENTICIOS",
-            fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
-            color = colorWhite,
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(start = 8.dp)
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            painter = painterResource(id = R.drawable.ic_search),
-            contentDescription = "Search",
-            tint = colorWhite,
-            modifier = Modifier
-                .padding(8.dp)
-                .clickable{onNavigateToSearch()}
-        )
     }
 }

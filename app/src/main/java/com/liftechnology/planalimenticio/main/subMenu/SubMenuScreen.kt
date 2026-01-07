@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.components.cards.FoodCard
+import com.liftechnology.planalimenticio.main.components.common.HeaderScreen
 import com.liftechnology.planalimenticio.main.theme.colorWhite
 import com.liftechnology.planalimenticio.main.theme.onPrimaryContainerLight
 import com.liftechnology.planalimenticio.model.ModelSubItemCard
@@ -94,35 +95,5 @@ private fun TableSubMenuScreen(
                 item = item
             )
         }
-    }
-}
-
-@Composable
-private fun HeaderScreen(
-    title: String,
-    onNavigateToSearch: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(onPrimaryContainerLight)
-    ) {
-        Text(
-            text = title,
-            fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
-            color = colorWhite,
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(start = 8.dp)
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Icon(
-            painter = painterResource(id = R.drawable.ic_search),
-            contentDescription = "Search",
-            tint = colorWhite,
-            modifier = Modifier
-                .padding(8.dp)
-                .clickable{onNavigateToSearch()}
-        )
     }
 }

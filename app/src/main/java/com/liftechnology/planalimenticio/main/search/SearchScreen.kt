@@ -1,34 +1,27 @@
 package com.liftechnology.planalimenticio.main.search
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.components.cards.FoodCard
+import com.liftechnology.planalimenticio.main.components.common.HeaderScreen
 import com.liftechnology.planalimenticio.main.components.input.TextFieldGeneric
-import com.liftechnology.planalimenticio.main.theme.colorWhite
-import com.liftechnology.planalimenticio.main.theme.onPrimaryContainerLight
 import com.liftechnology.planalimenticio.main.utils.regex.ModelRegex
 import com.liftechnology.planalimenticio.model.ModelSubItemCard
 import com.liftechnology.planalimenticio.model.ui.subMenu.SubMenuState
@@ -61,7 +54,11 @@ fun SearchScreen(
     }
 
     Column() {
-        HeaderSearchScreen(title = categoria)
+        HeaderScreen(
+            title = categoria ?: "Todas las Categorias",
+            isSearch = false,
+            onNavigateToSearch = {}
+        )
 
         Spacer(modifier = Modifier.padding(8.dp))
 
@@ -102,26 +99,6 @@ private fun TableSearchMenuScreen(
     }
 }
 
-
-@Composable
-private fun HeaderSearchScreen(
-    title: String?,
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(onPrimaryContainerLight)
-    ) {
-        Text(
-            text = title ?: "Todas las Categorias",
-            fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
-            color = colorWhite,
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
-        )
-    }
-}
 
 @Composable
 private fun SearchSectionScreen(
