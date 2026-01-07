@@ -41,7 +41,7 @@ class SearchViewModel (
             }
 
             _uiState.update { 
-                it.copy(foodList = result.toSubMenuMapper()) 
+                it.copy(foodList = result.toSubMenuMapper(categoria == null))
             }
         }
     }
@@ -78,7 +78,7 @@ class SearchViewModel (
             }
 
             _uiState.update { 
-                it.copy(foodList = result.toSubMenuMapper()) 
+                it.copy(foodList = result.toSubMenuMapper(categoria == null))
             }
         }
     }

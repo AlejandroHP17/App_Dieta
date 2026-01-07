@@ -177,6 +177,10 @@ data class FoodJsonResponse(
     @SerializedName("Categoria")
     val categoria: String,
     
+    @SerializedName("idCategory")
+    @JsonAdapter(SafeNumberDeserializer::class)
+    val idCategory: Number?,
+    
     @SerializedName("Azúcar por equivalente (g)")
     @JsonAdapter(SafeFloatDeserializer::class)
     val azucarPorEquivalente: Float?,
@@ -224,6 +228,14 @@ data class FoodJsonResponse(
         return FoodEntity(
             id = 0, // Se auto-genera
             category = categoria,
+            idCategory = when (idCategory) {
+                is Int -> idCategory
+                is Double -> idCategory.toInt()
+                is Float -> idCategory.toInt()
+                is Long -> idCategory.toInt()
+                null -> 0 // Valor por defecto si no existe
+                else -> idCategory.toInt()
+            },
             food = alimento,
             suggestedQuantity = when (cantidadSugerida) {
                 is Float -> cantidadSugerida

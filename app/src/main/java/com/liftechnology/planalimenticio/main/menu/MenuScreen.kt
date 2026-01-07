@@ -38,10 +38,12 @@ private fun MenuScreenView() {
     val list = listOf(
         ModelItemCard(
             idCard = 1,
+            idCategory = 1,
             title = "Prueba"
         ),
         ModelItemCard(
             idCard = 2,
+            idCategory = 2,
             title = "Test"
         )
     )

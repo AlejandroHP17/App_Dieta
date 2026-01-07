@@ -2,6 +2,7 @@ package com.liftechnology.planalimenticio.model
 
 data class ModelSubItemCard(
     val idCard : Int,
+    val idCategory: Int,
     val foodTitle: String,
     val suggestedQuantity : String,
     val netWeightG: String,

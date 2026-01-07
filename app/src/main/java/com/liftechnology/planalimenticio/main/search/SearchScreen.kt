@@ -3,6 +3,7 @@ package com.liftechnology.planalimenticio.main.search
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,6 +51,7 @@ fun SearchScreen(
 
     Column() {
         HeaderSearchScreen(title = categoria)
+
         Spacer(modifier = Modifier.padding(8.dp))
 
         SearchSectionScreen(
@@ -78,7 +81,7 @@ private fun TableSearchMenuScreen(
     ) {
         itemsIndexed(
             items = uiState.foodList ?: emptyList(),
-            key = { _ , item: ModelSubItemCard -> item.foodTitle }
+            key = { _ , item: ModelSubItemCard -> item.idCard }
         ) { _, item: ModelSubItemCard ->
             FoodCard(
                 item = item
@@ -92,7 +95,7 @@ private fun TableSearchMenuScreen(
 private fun HeaderSearchScreen(
     title: String?,
 ) {
-    Column(
+    Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(onPrimaryContainerLight)
@@ -101,7 +104,9 @@ private fun HeaderSearchScreen(
             text = title?.let { it }?: "Todas las Categorias",
             fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
             color = colorWhite,
-            modifier = Modifier.padding(start = 8.dp)
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
         )
     }
 }

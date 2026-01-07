@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.liftechnology.planalimenticio.data.local.dao.FoodDao
 import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
 
-@Database(entities = [FoodEntity::class], version = 2, exportSchema = false)
+@Database(entities = [FoodEntity::class], version = 3, exportSchema = false)
 abstract class FoodRoomDatBase : RoomDatabase() {
 
     abstract  fun FoodDao() : FoodDao

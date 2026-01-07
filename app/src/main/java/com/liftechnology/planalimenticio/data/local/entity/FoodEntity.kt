@@ -11,14 +11,16 @@ import kotlinx.parcelize.Parcelize
 @Entity(
     tableName = "food_table",
     indices = [
-        Index(value = ["category"]),  // Índice para búsquedas por categoría
-        Index(value = ["food"])       // Índice para búsquedas por nombre
+        Index(value = ["category"]),      // Índice para búsquedas por categoría
+        Index(value = ["idCategory"]),    // Índice para búsquedas por ID de categoría
+        Index(value = ["food"])           // Índice para búsquedas por nombre
     ]
 )
 data class FoodEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 1,
     @ColumnInfo(name = "category") val category: String,
+    @ColumnInfo(name = "idCategory") val idCategory: Int,
     val food : String,
     val suggestedQuantity : Float,
     val unit : String,

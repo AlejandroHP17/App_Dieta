@@ -88,7 +88,7 @@ private fun TableSubMenuScreen(
     ) {
         itemsIndexed(
             items = uiState.foodList ?: emptyList(),
-            key = { _ , item: ModelSubItemCard -> item.foodTitle }
+            key = { _ , item: ModelSubItemCard -> item.idCard }
         ) { _, item: ModelSubItemCard ->
             FoodCard(
                 item = item

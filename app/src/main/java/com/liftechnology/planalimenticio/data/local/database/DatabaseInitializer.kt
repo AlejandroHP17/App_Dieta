@@ -117,6 +117,7 @@ class DatabaseInitializer(
             FoodEntity(
                 id = 0,
                 category = "VERDURAS",
+                idCategory = 17, // ID para Verduras
                 food = "Acelga cruda",
                 suggestedQuantity = 2f,
                 unit = "taza",

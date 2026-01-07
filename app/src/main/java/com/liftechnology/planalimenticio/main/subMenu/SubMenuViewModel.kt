@@ -28,7 +28,7 @@ class SubMenuViewModel (
             val result = getFoodsByCategoryUseCase.invokeSuspend(category)
 
             if (result.isNotEmpty()){
-                _uiState.update { it.copy(foodList = result.toSubMenuMapper()) }
+                _uiState.update { it.copy(foodList = result.toSubMenuMapper(category == null)) }
             }
         }
     }
