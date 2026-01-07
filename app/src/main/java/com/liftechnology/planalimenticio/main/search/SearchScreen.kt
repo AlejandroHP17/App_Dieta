@@ -14,8 +14,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,9 +47,17 @@ fun SearchScreen(
 ) {
 
     val uiState by searchViewModel.uiState.collectAsStateWithLifecycle()
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     LaunchedEffect(categoria) {
        searchViewModel.searchFood(categoria)
+    }
+
+    // Solicitar foco y mostrar teclado cuando la pantalla se compone por primera vez
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+        keyboardController?.show()
     }
 
     Column() {
@@ -58,7 +69,8 @@ fun SearchScreen(
             onWordSearch = { searchQuery ->
                 // Cuando el usuario escribe, buscar por texto
                 searchViewModel.searchByText(searchQuery, categoria)
-            }
+            },
+            focusRequester = focusRequester
         )
 
         Spacer(modifier = Modifier.padding(8.dp))
@@ -101,7 +113,7 @@ private fun HeaderSearchScreen(
             .background(onPrimaryContainerLight)
     ) {
         Text(
-            text = title?.let { it }?: "Todas las Categorias",
+            text = title ?: "Todas las Categorias",
             fontSize = dimensionResource(id = R.dimen.size_title_card).value.sp,
             color = colorWhite,
             modifier = Modifier
@@ -113,10 +125,12 @@ private fun HeaderSearchScreen(
 
 @Composable
 private fun SearchSectionScreen(
-    onWordSearch: (String) -> Unit
+    onWordSearch: (String) -> Unit,
+    focusRequester: FocusRequester
 ){
     TextFieldGeneric(
         regex = ModelRegex.SIMPLE_TEXT,
-        onBoxChanged = {onWordSearch(it)}
+        onBoxChanged = {onWordSearch(it)},
+        focusRequester = focusRequester
     )
 }

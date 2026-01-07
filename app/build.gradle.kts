@@ -29,6 +29,11 @@ android {
             pickFirsts.add("META-INF/**")
         }
     }
+    buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
 }
 
 dependencies {

@@ -34,30 +34,22 @@ subprojects {
             defaultConfig {
                 minSdk = 28
                 targetSdk = 36
-                versionCode = 3
-                versionName = "0.0.2"
+                versionCode = 4
+                versionName = "0.1.0"
 
                 testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             }
 
             if (plugins.hasPlugin("com.android.application")) {
                 buildTypes {
-                    getByName("release") {
-                        isMinifyEnabled = false
-                        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-                    }
                     getByName("debug") {
                         isDebuggable = true
-                    }
-                }
-
-                buildTypes {
-                    getByName("debug") {
                         isMinifyEnabled = false
                         buildConfigField("boolean", "LOG_TAG", "true")
                     }
                     getByName("release") {
-                        isMinifyEnabled = false
+                        isMinifyEnabled = true
+                        isShrinkResources = true
                         buildConfigField("boolean", "LOG_TAG", "false")
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),

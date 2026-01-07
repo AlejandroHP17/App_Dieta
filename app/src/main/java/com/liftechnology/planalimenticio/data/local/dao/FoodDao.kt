@@ -39,7 +39,7 @@ interface FoodDao {
      * 
      * @return Flow que emite una lista de todos los alimentos
      */
-    @Query("SELECT * FROM food_table ORDER BY category ASC, food ASC")
+    @Query("SELECT * FROM food_table ORDER BY idCategory ASC, food ASC")
     fun getAllFoods(): Flow<List<FoodEntity>>
 
     /**
@@ -47,7 +47,7 @@ interface FoodDao {
      * 
      * @return Lista de todos los alimentos
      */
-    @Query("SELECT * FROM food_table ORDER BY category ASC, food ASC")
+    @Query("SELECT * FROM food_table ORDER BY idCategory ASC, food ASC")
     suspend fun getAllFoodsSuspend(): List<FoodEntity>
 
     /**
@@ -91,7 +91,7 @@ interface FoodDao {
      * 
      * @return Flow que emite una lista de nombres de categorías
      */
-    @Query("SELECT DISTINCT category FROM food_table ORDER BY category ASC")
+    @Query("SELECT DISTINCT category FROM food_table ORDER BY idCategory ASC")
     fun getAllCategories(): Flow<List<String>>
 
     /**
@@ -99,7 +99,7 @@ interface FoodDao {
      * 
      * @return Lista de nombres de categorías
      */
-    @Query("SELECT DISTINCT category FROM food_table ORDER BY category ASC")
+    @Query("SELECT DISTINCT category FROM food_table ORDER BY idCategory ASC")
     suspend fun getAllCategoriesSuspend(): List<String>
 
     /**
