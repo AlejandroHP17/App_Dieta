@@ -26,7 +26,7 @@ private val categoryToIdMap = mapOf(
     "Verduras" to 17
 )
 
-fun List<String>.toMenuMapper(): List<ModelItemCard>? {
+fun List<String>.toMenuMapper(): List<ModelItemCard> {
     return this.mapIndexed { pos, categoryName ->
         ModelItemCard(
             idCard = pos + 1,

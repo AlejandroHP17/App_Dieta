@@ -11,17 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.liftechnology.planalimenticio.R
-import org.koin.androidx.compose.koinViewModel
 
 /**
  * Pantalla de splash de la aplicación.
  *
- * @param splashViewModel El ViewModel para esta pantalla.
  * @param onNavigateToMain Lambda que se invoca para navegar a la pantalla principal.
  */
 @Composable
 fun SplashScreen(
-    splashViewModel: SplashViewModel = koinViewModel(),
     onNavigateToMain: () -> Unit
 ) {
 

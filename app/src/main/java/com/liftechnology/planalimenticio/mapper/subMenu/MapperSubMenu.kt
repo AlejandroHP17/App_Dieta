@@ -27,8 +27,8 @@ import com.liftechnology.planalimenticio.data.local.entity.getSugarPerEquivalent
 import com.liftechnology.planalimenticio.data.local.entity.getVitaminAFormatted
 import com.liftechnology.planalimenticio.model.ModelSubItemCard
 
-fun List<FoodEntity>.toSubMenuMapper(flag: Boolean): List<ModelSubItemCard>? {
-    return this.mapIndexed { pos, it ->
+fun List<FoodEntity>.toSubMenuMapper(): List<ModelSubItemCard> {
+    return this.mapIndexed { _, it ->
         ModelSubItemCard(
             idCard = it.id, // Usar el ID único de la entidad en lugar de pos + 1 o idCategory
             idCategory = it.idCategory,

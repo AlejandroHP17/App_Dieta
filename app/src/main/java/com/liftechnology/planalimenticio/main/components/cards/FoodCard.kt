@@ -4,12 +4,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,11 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.components.common.getCategoryColor
-import com.liftechnology.planalimenticio.main.theme.colorBgCard
 import com.liftechnology.planalimenticio.main.theme.colorWhite
 import com.liftechnology.planalimenticio.model.ModelSubItemCard
 import com.liftechnology.planalimenticio.model.toNonNullList
@@ -72,7 +67,7 @@ private fun FoodCardView() {
 fun FoodCard(
     item: ModelSubItemCard
 ) {
-    var isExpandable = remember { mutableStateOf(false) }
+    val isExpandable = remember { mutableStateOf(false) }
     val categoryColor = getCategoryColor(item.idCategory)
 
     Card(

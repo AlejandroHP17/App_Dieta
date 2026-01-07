@@ -13,15 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.components.common.getCategoryColor
-import com.liftechnology.planalimenticio.main.theme.colorBgCard
 import com.liftechnology.planalimenticio.model.ui.ModelItemCard
-
-
 
 @Preview(showBackground = true)
 @Composable

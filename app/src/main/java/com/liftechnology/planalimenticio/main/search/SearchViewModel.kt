@@ -66,7 +66,7 @@ class SearchViewModel (
             if (result.isNotEmpty()) {
                 Log.d(TAG, "✅ Alimentos cargados: ${result.size} alimentos encontrados")
                 _uiState.update { 
-                    it.copy(foodList = result.toSubMenuMapper(categoria == null))
+                    it.copy(foodList = result.toSubMenuMapper())
                 }
             } else {
                 Log.w(TAG, "⚠️ No se encontraron alimentos después de $maxAttempts intentos")
@@ -109,7 +109,7 @@ class SearchViewModel (
             }
 
             _uiState.update { 
-                it.copy(foodList = result.toSubMenuMapper(categoria == null))
+                it.copy(foodList = result.toSubMenuMapper())
             }
         }
     }

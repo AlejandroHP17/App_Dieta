@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -53,9 +54,9 @@ fun SearchScreen(
         keyboardController?.show()
     }
 
-    Column() {
+    Column {
         HeaderScreen(
-            title = categoria ?: "Todas las Categorias",
+            title = categoria ?: stringResource(R.string.all_categories),
             isSearch = false,
             onNavigateToSearch = {}
         )

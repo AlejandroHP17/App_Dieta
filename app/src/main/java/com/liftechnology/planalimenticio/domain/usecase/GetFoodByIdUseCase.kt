@@ -29,15 +29,5 @@ class GetFoodByIdUseCase(
         return repository.getFoodById(id)
             .flowOn(dispatcher)
     }
-
-    /**
-     * Ejecuta el caso de uso y retorna el alimento encontrado (versión suspendida).
-     * 
-     * @param id ID del alimento
-     * @return El alimento encontrado o null si no existe
-     */
-    suspend fun invokeSuspend(id: Int): FoodEntity? {
-        return repository.getFoodByIdSuspend(id)
-    }
 }
 

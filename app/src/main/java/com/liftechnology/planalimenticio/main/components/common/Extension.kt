@@ -2,7 +2,24 @@ package com.liftechnology.planalimenticio.main.components.common
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.liftechnology.planalimenticio.main.theme.aceiteYGrasaProteina
+import com.liftechnology.planalimenticio.main.theme.aceiteYGrasas
+import com.liftechnology.planalimenticio.main.theme.altoGrasa
+import com.liftechnology.planalimenticio.main.theme.azucar
+import com.liftechnology.planalimenticio.main.theme.azucarGrasa
+import com.liftechnology.planalimenticio.main.theme.bajoGrasa
+import com.liftechnology.planalimenticio.main.theme.cereales
+import com.liftechnology.planalimenticio.main.theme.cerealesGrasa
 import com.liftechnology.planalimenticio.main.theme.colorBgCard
+import com.liftechnology.planalimenticio.main.theme.frutas
+import com.liftechnology.planalimenticio.main.theme.lecheAzucar
+import com.liftechnology.planalimenticio.main.theme.lecheDescremada
+import com.liftechnology.planalimenticio.main.theme.lecheEntera
+import com.liftechnology.planalimenticio.main.theme.lecheSemidescremada
+import com.liftechnology.planalimenticio.main.theme.leguminosas
+import com.liftechnology.planalimenticio.main.theme.moderadoGrasa
+import com.liftechnology.planalimenticio.main.theme.muyBajoGrasa
+import com.liftechnology.planalimenticio.main.theme.verduras
 
 /**
  * Obtiene el color de la tarjeta según el ID de categoría.
@@ -14,23 +31,23 @@ import com.liftechnology.planalimenticio.main.theme.colorBgCard
 @Composable
 fun getCategoryColor(idCategory: Int): Color {
     return when (idCategory) {
-        1 -> Color(0xFFFFE5E5) // Aceite y grasas con proteína - Rosa claro
-        2 -> Color(0xFFFFF4E5) // Aceites y grasas - Naranja claro
-        3 -> Color(0xFFFFE5F0) // Alimentos de origen animal alto aporte de grasa - Rosa pastel
-        4 -> Color(0xFFE5F5FF) // Alimentos de origen animal bajo aporte de grasa - Azul claro
-        5 -> Color(0xFFE8F5E9) // Alimentos de origen animal moderado aporte de grasa - Verde claro
-        6 -> Color(0xFFF0E5FF) // Alimentos de origen animal muy bajo aporte de grasa - Morado claro
-        7 -> Color(0xFFFFF0E5) // Azúcares con grasa - Melocotón claro
-        8 -> Color(0xFFFFFCE5) // Azúcares sin grasa - Amarillo claro
-        9 -> Color(0xFFE0F2E0) // Cereales con grasa - Verde menta
-        10 -> Color(0xFFC8E6C9) // Cereales sin grasa - Verde pastel
-        11 -> Color(0xFFFFE5F5) // Frutas - Rosa suave
-        12 -> Color(0xFFE3F2FD) // Leche con azúcar - Azul cielo
-        13 -> Color(0xFFE1F5FE) // Leche descremada - Azul muy claro
-        14 -> Color(0xFFFFF9E6) // Leche entera - Crema
-        15 -> Color(0xFFF3E5F5) // Leche semidescremada - Lavanda claro
-        16 -> Color(0xFFFFEBEE) // Leguminosas - Salmón claro
-        17 -> Color(0xFFE8F5E9) // Verduras - Verde claro
+        1 -> aceiteYGrasaProteina // Aceite y grasas con proteína - Rosa claro
+        2 -> aceiteYGrasas // Aceites y grasas - Naranja claro
+        3 -> altoGrasa // Alimentos de origen animal alto aporte de grasa - Rosa pastel
+        4 -> bajoGrasa // Alimentos de origen animal bajo aporte de grasa - Azul claro
+        5 -> moderadoGrasa // Alimentos de origen animal moderado aporte de grasa - Verde claro
+        6 -> muyBajoGrasa // Alimentos de origen animal muy bajo aporte de grasa - Morado claro
+        7 -> azucarGrasa // Azúcares con grasa - Melocotón claro
+        8 -> azucar // Azúcares sin grasa - Amarillo claro
+        9 -> cerealesGrasa // Cereales con grasa - Verde menta
+        10 -> cereales // Cereales sin grasa - Verde pastel
+        11 -> frutas // Frutas - Rosa suave
+        12 -> lecheAzucar // Leche con azúcar - Azul cielo
+        13 -> lecheDescremada // Leche descremada - Azul muy claro
+        14 -> lecheEntera // Leche entera - Crema
+        15 -> lecheSemidescremada // Leche semidescremada - Lavanda claro
+        16 -> leguminosas // Leguminosas - Salmón claro
+        17 -> verduras // Verduras - Verde claro
         else -> colorBgCard // Color por defecto si no coincide
     }
 }

@@ -46,7 +46,7 @@ class SubMenuViewModel (
 
             if (result.isNotEmpty()) {
                 Log.d(TAG, "✅ Alimentos cargados para categoría '$category': ${result.size} alimentos encontrados")
-                _uiState.update { it.copy(foodList = result.toSubMenuMapper(false)) }
+                _uiState.update { it.copy(foodList = result.toSubMenuMapper()) }
             } else {
                 Log.w(TAG, "⚠️ No se encontraron alimentos para la categoría '$category' después de $maxAttempts intentos")
                 _uiState.update { it.copy(foodList = emptyList()) }

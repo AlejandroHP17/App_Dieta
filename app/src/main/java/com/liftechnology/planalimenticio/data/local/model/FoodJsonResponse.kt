@@ -6,6 +6,7 @@ import com.google.gson.JsonElement
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
+import com.liftechnology.planalimenticio.main.utils.regex.ModelRegex.PRIMITIVE_TEXT
 import java.lang.reflect.Type
 
 /**
@@ -32,13 +33,13 @@ class SafeNumberDeserializer : JsonDeserializer<Number?> {
                                 null
                             } else {
                                 // Limpiar: remover caracteres no numéricos excepto punto y signo negativo
-                                var cleaned = str.replace(Regex("[^0-9.\\-]"), "")
+                                var cleaned = str.replace(PRIMITIVE_TEXT, "")
                                 // Si termina con punto, removerlo
                                 cleaned = cleaned.trimEnd('.')
                                 // Si tiene múltiples puntos consecutivos o separados, tomar solo el primero
                                 val dotIndex = cleaned.indexOf('.')
                                 if (dotIndex >= 0) {
-                                    val beforeDot = cleaned.substring(0, dotIndex)
+                                    val beforeDot = cleaned.take(dotIndex)
                                     val afterDot = cleaned.substring(dotIndex + 1).replace(".", "")
                                     cleaned = "$beforeDot.$afterDot"
                                 }
@@ -79,11 +80,11 @@ class SafeFloatDeserializer : JsonDeserializer<Float?> {
                                 null
                             } else {
                                 // Limpiar el string
-                                var cleaned = str.replace(Regex("[^0-9.\\-]"), "")
+                                var cleaned = str.replace(PRIMITIVE_TEXT, "")
                                 cleaned = cleaned.trimEnd('.')
                                 val dotIndex = cleaned.indexOf('.')
                                 if (dotIndex >= 0) {
-                                    val beforeDot = cleaned.substring(0, dotIndex)
+                                    val beforeDot = cleaned.take(dotIndex)
                                     val afterDot = cleaned.substring(dotIndex + 1).replace(".", "")
                                     cleaned = "$beforeDot.$afterDot"
                                 }

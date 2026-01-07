@@ -1,34 +1,24 @@
 package com.liftechnology.planalimenticio.main.menu
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.liftechnology.planalimenticio.R
 import com.liftechnology.planalimenticio.main.components.cards.CategoryCard
 import com.liftechnology.planalimenticio.main.components.common.HeaderScreen
-import com.liftechnology.planalimenticio.main.theme.colorWhite
-import com.liftechnology.planalimenticio.main.theme.onPrimaryContainerLight
 import com.liftechnology.planalimenticio.model.ui.ModelItemCard
 import com.liftechnology.planalimenticio.model.ui.menu.MenuState
 import org.koin.androidx.compose.koinViewModel
@@ -73,9 +63,9 @@ fun MenuScreen(
         menuViewModel.getCategories()
     }
 
-    Column() {
+    Column {
         HeaderScreen(
-            title = "GRUPOS ALIMENTICIOS",
+            title = stringResource(id = R.string.title_menu),
             onNavigateToSearch = {onNavigateToSearch()}
         )
 

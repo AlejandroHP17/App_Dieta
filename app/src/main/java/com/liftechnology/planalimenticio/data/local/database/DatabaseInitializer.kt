@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import com.liftechnology.planalimenticio.data.local.entity.FoodEntity
 import com.liftechnology.planalimenticio.data.local.model.FoodJsonResponse
 import com.liftechnology.planalimenticio.data.local.repository.FoodLocalRepository
+import com.liftechnology.planalimenticio.main.utils.Constants.NAME_JSON
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -45,7 +46,7 @@ class DatabaseInitializer(
             }
 
             // Lee el archivo JSON de assets
-            val jsonString = loadJSONFromAssets("alimentos_smae.json")
+            val jsonString = loadJSONFromAssets()
             if (jsonString == null) {
                 Log.e(TAG, "No se encontró el archivo alimentos_smae.json en assets")
                 // Si no existe el archivo JSON, usa los datos hardcodeados
@@ -87,20 +88,19 @@ class DatabaseInitializer(
 
     /**
      * Lee un archivo JSON desde la carpeta assets.
-     * 
-     * @param fileName Nombre del archivo JSON
+     *
      * @return Contenido del archivo como String o null si no existe
      */
-    private fun loadJSONFromAssets(fileName: String): String? {
+    private fun loadJSONFromAssets(): String? {
         return try {
-            val inputStream: InputStream = context.assets.open(fileName)
+            val inputStream: InputStream = context.assets.open(NAME_JSON)
             val size: Int = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
             inputStream.close()
             String(buffer, Charsets.UTF_8)
         } catch (ex: IOException) {
-            Log.e(TAG, "Error al leer archivo desde assets: $fileName", ex)
+            Log.e(TAG, "Error al leer archivo desde assets: $NAME_JSON", ex)
             null
         }
     }

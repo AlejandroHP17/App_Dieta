@@ -22,7 +22,6 @@ abstract class FoodRoomDatBase : RoomDatabase() {
                     FoodRoomDatBase::class.java,
                     "food_database"
                 )
-                .fallbackToDestructiveMigration() // En desarrollo: recrea la BD si hay cambios de esquema
                 .build()
                 INSTANCE = instance
                 instance

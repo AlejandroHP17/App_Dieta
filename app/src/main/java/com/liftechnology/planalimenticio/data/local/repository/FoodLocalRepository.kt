@@ -129,31 +129,6 @@ class FoodLocalRepository(private val foodDao: FoodDao) {
     }
 
     /**
-     * Inserta un único alimento en la base de datos.
-     * 
-     * @param food Alimento a insertar
-     */
-    suspend fun insertFood(food: FoodEntity) {
-        foodDao.insertFood(food)
-    }
-
-    /**
-     * Elimina todos los alimentos de la base de datos.
-     */
-    suspend fun deleteAllFoods() {
-        foodDao.deleteAllFoods()
-    }
-
-    /**
-     * Elimina todos los alimentos de una categoría específica.
-     * 
-     * @param category Nombre de la categoría
-     */
-    suspend fun deleteFoodsByCategory(category: String) {
-        foodDao.deleteFoodsByCategory(category)
-    }
-
-    /**
      * Método legacy para compatibilidad con código existente.
      * @deprecated Usar getFoodsByCategorySuspend en su lugar
      */

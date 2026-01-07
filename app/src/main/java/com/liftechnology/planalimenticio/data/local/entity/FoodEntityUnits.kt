@@ -11,12 +11,7 @@ enum class FoodUnit(val symbol: String, val displayName: String) {
     MILLIGRAMS("mg", "miligramos"),
     MICROGRAMS_RE("µg RE", "microgramos de retinol equivalente"),
     MICROGRAMS("µg", "microgramos"),
-    UNITLESS("", "sin unidad"),
-    CUP("taza", "taza"),
-    PIECE("pieza", "pieza"),
-    SLICE("rebanada", "rebanada"),
-    TABLESPOON("cucharada", "cucharada"),
-    TEASPOON("cucharadita", "cucharadita")
+    UNITLESS("", "sin unidad")
 }
 
 /**
@@ -117,7 +112,7 @@ private fun formatWithUnit(value: Any?, unit: FoodUnit): String {
                 String.format("%.2f %s", value, unit.symbol).trim()
             }
         }
-        is Int -> "${value} ${unit.symbol}".trim()
+        is Int -> "$value ${unit.symbol}".trim()
         is String -> if (value.isBlank() || value == "0") "N/A" else "$value ${unit.symbol}".trim()
         else -> "$value ${unit.symbol}".trim()
     }
@@ -297,16 +292,3 @@ fun FoodEntity.getHypoglycemicIndexFormatted(): String {
 fun FoodEntity.getHypoglycemicLoadFormatted(): String {
     return formatWithUnit(hypoglycemicLoad, FoodUnit.UNITLESS)
 }
-
-/**
- * Obtiene el valor formateado de suggestedQuantity con su unidad.
- */
-fun FoodEntity.getSuggestedQuantityFormatted(): String {
-    val quantity = if (suggestedQuantity % 1.0f == 0f) {
-        suggestedQuantity.toInt().toString()
-    } else {
-        String.format("%.2f", suggestedQuantity)
-    }
-    return "$quantity $unit".trim()
-}
-

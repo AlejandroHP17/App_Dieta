@@ -16,7 +16,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -42,16 +41,6 @@ import com.liftechnology.planalimenticio.main.utils.navigation.AppRoutes
  * - Maneja la expiración de sesión y redirige al login
  * - Muestra toasts globales
  * - Bloquea la interacción durante transiciones de navegación
- *
- * **Rutas principales:**
- * - **Splash**: Pantalla de inicio
- * - **Auth**: Login, registro, recuperación de contraseña
- * - **Main**: Menú, estudiantes, materias, calendario, perfil, etc.
- *
- * **Funcionalidades especiales:**
- * - Observa el estado de expiración de sesión y redirige automáticamente
- * - Muestra toasts globales que aparecen sobre toda la navegación
- * - Bloquea la interacción del usuario durante transiciones de pantalla
  *
  * @param sharedViewModel El ViewModel compartido para la comunicación entre pantallas y gestión de estado global.
  *
@@ -144,9 +133,7 @@ fun AppNavHost(
     }
 
     DisposableEffect(navigationController) {
-        val listener = NavController.OnDestinationChangedListener { _, _, _ ->
-            isBlocked = true
-        }
+        val listener = NavController.OnDestinationChangedListener { _, _, _ -> }
         navigationController.addOnDestinationChangedListener(listener)
         onDispose { navigationController.removeOnDestinationChangedListener(listener) }
     }
@@ -154,21 +141,8 @@ fun AppNavHost(
     val currentEntry by navigationController.currentBackStackEntryAsState()
 
     DisposableEffect(currentEntry) {
-        isBlocked = currentEntry?.lifecycle?.currentState != Lifecycle.State.RESUMED
-
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_RESUME -> isBlocked = false
-                Lifecycle.Event.ON_CREATE,
-                Lifecycle.Event.ON_START,
-                Lifecycle.Event.ON_PAUSE,
-                Lifecycle.Event.ON_STOP -> isBlocked = true
-                else -> { /* no-op */ }
-            }
-        }
+        val observer = LifecycleEventObserver { _, _ -> }
         currentEntry?.lifecycle?.addObserver(observer)
         onDispose { currentEntry?.lifecycle?.removeObserver(observer) }
     }
-
-
 }
